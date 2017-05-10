@@ -28,8 +28,8 @@ function showPosition(){
 }
 function showMap(position){
     // Get location data
-    lat = position.coords.latitude;
-    long = position.coords.longitude;
+     var lat = position.coords.latitude;
+    var long = position.coords.longitude;
     var latlong = new google.maps.LatLng(lat, long);
     
     var myOptions = {
