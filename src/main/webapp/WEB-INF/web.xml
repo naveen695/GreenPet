@@ -22,6 +22,12 @@
    		<param-value>gree-treepet</param-value>
    		<description>environment dbname</description>
    </context-param>
+   
+   
+   
+   
+   
+   
  <!--  <listener>
   	<listener-class>com.dgree.listener.DateBaseContextListener</listener-class>
   </listener -->
@@ -36,6 +42,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SignUpServlet</servlet-name>
+  	<display-name>SignUpServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.SignUpServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -45,6 +57,10 @@
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SignUpServlet</servlet-name>
+  	<url-pattern>/SignUpServlet</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

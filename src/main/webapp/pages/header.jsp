@@ -40,7 +40,7 @@
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
-        padding: 15px;
+        padding: 50px;
       }
       .row.content {height:auto;} 
     }
@@ -77,7 +77,8 @@
   								<!-- Modal -->
    							</div>
   							<div class="btn-group">
-    							<button type="button" class="btn btn-danger">SING UP</button>
+    							<button type="button" class="btn btn-danger active btn-md" 
+   								data-toggle="modal" data-target="#signUp">SING UP</button>
   							</div>
   		</div>
       
@@ -131,7 +132,7 @@
     </div>
 
 
-
+<%@ include file="SignUp.jsp" %>
   <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
