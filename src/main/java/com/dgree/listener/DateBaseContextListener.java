@@ -32,7 +32,7 @@ public class DateBaseContextListener implements ServletContextListener {
                 MongoClient mongoClient = null;
                 try {
                   mongoClient = new MongoClient();
-                  db = mongoClient.getDatabase(dbName.trim());
+                  db = mongoClient.getDatabase("test");
                   logger.info("*** Getting Connection Local MongoDatabase ***" + db);
                 } catch (Exception e) {
                   logger.info("Exception getDBConnection" + e);

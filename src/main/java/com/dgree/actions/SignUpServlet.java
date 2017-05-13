@@ -48,14 +48,11 @@ public class SignUpServlet extends HttpServlet {
         
         SignUp userSignUp=new UserSignUp();
         Boolean validateUser = userSignUp.validateUser(mongoDatabase,us);
-        if (validateUser.equals("true")) {
-
-        	
-		}else{
-		
-		userSignUp.sendMail(us);
-		logger.info("**** Mail Send succesfully to the user :"+us.getEmail());
-		
+        if (validateUser.equals(true)) {
+        	userSignUp.sendMail(us);
+			logger.info("**** Mail Send succesfully to the user :"+us.getEmail());
+        }else if(validateUser.equals("false")){
+        	logger.info("**** sorry ! .... this user id already register in our Application. please SignIn.");
 		}
         
         

@@ -13,6 +13,8 @@ import javax.mail.internet.MimeMessage;
 
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.UserBean;
+import com.dgree.userDAO.User;
+import com.dgree.userDAO.UserDao;
 import com.mongodb.client.MongoDatabase;
 
 public class UserSignUp implements SignUp{
@@ -62,8 +64,9 @@ public class UserSignUp implements SignUp{
 	}
 @Override
 	public Boolean validateUser(MongoDatabase mongoDatabase,UserBean us) {
-	
-		return false;
+	logger.info("**** validating User New or Old ****");
+		User user=new UserDao();
+		return  user.validateNewUser(mongoDatabase, us);
 	}
 
 }

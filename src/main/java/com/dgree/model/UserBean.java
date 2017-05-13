@@ -7,6 +7,7 @@ public class UserBean {
 	private String email;
 	private String password;
 	private String conformpPssword;
+	private String mobilenumber;
 	public String getUserFirstName() {
 		return userFirstName;
 	}
@@ -41,6 +42,12 @@ public class UserBean {
 	}
 	public void setConformpPssword(String conformpPssword) {
 		this.conformpPssword = conformpPssword;
+	}
+	public String getMobilenumber() {
+		return mobilenumber;
+	}
+	public void setMobilenumber(String mobilenumber) {
+		this.mobilenumber = mobilenumber;
 	}
 
 
