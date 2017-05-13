@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.UserBean;
+import com.dgree.model.ValidateUser;
 import com.dgree.service.SignUp;
 import com.dgree.service.UserSignUp;
 import com.mongodb.client.MongoDatabase;
@@ -47,11 +48,12 @@ public class SignUpServlet extends HttpServlet {
         MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
         
         SignUp userSignUp=new UserSignUp();
-        Boolean validateUser = userSignUp.validateUser(mongoDatabase,us);
-        if (validateUser.equals(true)) {
+        ValidateUser validateUser = userSignUp.validateUser(mongoDatabase,us);
+        if (validateUser.isNewUser() == true) {
+        	us.setUserid(validateUser.getUserid());
         	userSignUp.sendMail(us);
 			logger.info("**** Mail Send succesfully to the user :"+us.getEmail());
-        }else if(validateUser.equals("false")){
+        }else if(validateUser.isNewUser()==false){
         	logger.info("**** sorry ! .... this user id already register in our Application. please SignIn.");
 		}
         

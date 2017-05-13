@@ -13,8 +13,10 @@ import javax.mail.internet.MimeMessage;
 
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.UserBean;
+import com.dgree.model.ValidateUser;
 import com.dgree.userDAO.User;
 import com.dgree.userDAO.UserDao;
+import com.dgree.userDAO.Util;
 import com.mongodb.client.MongoDatabase;
 
 public class UserSignUp implements SignUp{
@@ -25,7 +27,7 @@ public class UserSignUp implements SignUp{
 	@Override
 	public void sendMail(UserBean userBean) {
 		logger.info("**** inside UserSignUP.sendmail() **** ");
-		
+		String hash = Util.prepareRandomString(30);
 		Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -37,7 +39,8 @@ public class UserSignUp implements SignUp{
                       return new PasswordAuthentication("knnaveen695@gmail.com","9494931508");
                   }
                 });	
-		String link = "http://localhost:8000/GreenPet/SignUpServlet";
+		String link = "http://localhost:8000/GreenPet/"
+				+ "SignUpServlet?scope=activation&userId="+userBean.getUserid()+"&hash="+hash;
 		StringBuilder bodyText = new StringBuilder(); 
         bodyText.append("<div>")
              .append("  Dear User<br/><br/>")
@@ -63,7 +66,7 @@ public class UserSignUp implements SignUp{
 
 	}
 @Override
-	public Boolean validateUser(MongoDatabase mongoDatabase,UserBean us) {
+	public ValidateUser validateUser(MongoDatabase mongoDatabase,UserBean us) {
 	logger.info("**** validating User New or Old ****");
 		User user=new UserDao();
 		return  user.validateNewUser(mongoDatabase, us);

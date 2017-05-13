@@ -8,6 +8,8 @@ public class UserBean {
 	private String password;
 	private String conformpPssword;
 	private String mobilenumber;
+	private long userid;
+	
 	public String getUserFirstName() {
 		return userFirstName;
 	}
@@ -48,6 +50,12 @@ public class UserBean {
 	}
 	public void setMobilenumber(String mobilenumber) {
 		this.mobilenumber = mobilenumber;
+	}
+	public long getUserid() {
+		return userid;
+	}
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
 
