@@ -1,5 +1,7 @@
 package com.dgree.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -23,24 +25,25 @@ public class UserSignUp implements SignUp{
 
 	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
 		
-
+	 Map<String, String> properties = new HashMap<>();
+	 
 	@Override
-	public void sendMail(UserBean userBean) {
+	public void sendMail(UserBean userBean,StringBuffer url) {
+		
 		logger.info("**** inside UserSignUP.sendmail() **** ");
 		String hash = Util.prepareRandomString(30);
 		Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", Util.MAIL_SMTP_ATHU);
+        props.put("mail.smtp.starttls.enable",Util.MAIL_SMTP_ENABLE);
+        props.put("mail.smtp.host",Util.MAIL_SMTP_HOST);
+        props.put("mail.smtp.port",Util.MAIL_SMTP_PORT);
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                   protected PasswordAuthentication getPasswordAuthentication() {
-                      return new PasswordAuthentication("knnaveen695@gmail.com","9494931508");
+                      return new PasswordAuthentication(Util.MAIL_USERNAME,Util.MAIL_PASSWORD);
                   }
                 });	
-		String link = "http://localhost:8000/GreenPet/"
-				+ "SignUpServlet?scope=activation&userId="+userBean.getUserid()+"&hash="+hash;
+		String link = url.toString().replace("SignUpServlet", Util.Sign_up_link)+"?scope=activation&userId="+userBean.getUserid()+"&hash="+hash;
 		StringBuilder bodyText = new StringBuilder(); 
         bodyText.append("<div>")
              .append("  Dear User<br/><br/>")
@@ -53,7 +56,7 @@ public class UserSignUp implements SignUp{
              .append("</div>");
         Message message = new MimeMessage(session);
         try {
-			message.setFrom(new InternetAddress("knnaveen695@gmail.com"));
+			message.setFrom(new InternetAddress(Util.MAIL_USERNAME));
 			message.setRecipients(Message.RecipientType.TO,
 		            InternetAddress.parse(userBean.getEmail()));
 			 message.setSubject("Email Registration testing from GreePet");

@@ -19,18 +19,15 @@
    </context-param>
     <context-param>
   	 	<param-name>dbName</param-name>
-   		<param-value>gree-treepet</param-value>
+   		<param-value>dgree-treepet</param-value>
    		<description>environment dbname</description>
    </context-param>
    
+    
    
-   
-   
-   
-   
- <!--  <listener>
+  <listener>
   	<listener-class>com.dgree.listener.DateBaseContextListener</listener-class>
-  </listener -->
+  </listener> 
    <servlet>
   	<servlet-name>Home</servlet-name>
   	<jsp-file>/pages/home.jsp</jsp-file>

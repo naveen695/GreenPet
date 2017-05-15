@@ -1,9 +1,24 @@
 package com.dgree.userDAO;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 public class Util {
-	  private static final char[] symbols;
+	  public static final String MAIL_SMTP_ENABLE= "true";
+	  public static final String MAIL_SMTP_ATHU="true";
+	  public static final String MAIL_SMTP_HOST = "smtp.gmail.com";
+	  public static final String MAIL_SMTP_PORT="587";
+	  public static final String MAIL_REGISTRATION_SITE_LINK="http://localhost:8000/GreenPet/SignUpServle";
+	  public static final String MAIL_USERNAME="knnaveen695@gmail.com";
+	  public static final String MAIL_PASSWORD="9494931508";
+	  public static final String Sign_up_link="SignUpValidationServlet";
+
+		private static final char[] symbols;
 	 
       static {
 	    StringBuilder tmp = new StringBuilder();

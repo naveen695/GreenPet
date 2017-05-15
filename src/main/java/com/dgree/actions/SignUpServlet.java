@@ -1,8 +1,11 @@
 package com.dgree.actions;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.SignUpResponce;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.dgree.service.SignUp;
@@ -27,12 +31,22 @@ public class SignUpServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/home").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String stringurl = null ;
+		String url = request.getHeader("Referer");
+		String[] split = url.split("/");
+		for (int i = 0; i <= split.length; i++) {
+			if(i==split.length){
+				int j=i;
+				stringurl = split[--j];
+			}
+		}
 		logger.info("**** Inside SignUpServlet.Post() ****");
 		UserBean us=new UserBean();
+		SignUpResponce sresponce=new SignUpResponce();
 		String email = request.getParameter("inputEmail");
         String firstName = request.getParameter("inputFirstName");
         String lastName = request.getParameter("inputLastName");
@@ -51,14 +65,23 @@ public class SignUpServlet extends HttpServlet {
         ValidateUser validateUser = userSignUp.validateUser(mongoDatabase,us);
         if (validateUser.isNewUser() == true) {
         	us.setUserid(validateUser.getUserid());
-        	userSignUp.sendMail(us);
-			logger.info("**** Mail Send succesfully to the user :"+us.getEmail());
+        	StringBuffer requestURL = request.getRequestURL();
+        	userSignUp.sendMail(us,requestURL);
+        	sresponce.setStatuscode("0");
+        	sresponce.setStatusMessage("Registation Link Was Sent To Your Mail Successfully. Please Verify Your Email");
+        	logger.info("**** Mail Send succesfully to the user :"+us.getEmail());
         }else if(validateUser.isNewUser()==false){
+        	sresponce.setStatuscode("1");
+        	sresponce.setStatusMessage("sorry ! .... Your user id already register in our Application. please SignIn.");
         	logger.info("**** sorry ! .... this user id already register in our Application. please SignIn.");
 		}
-        
-        
-       
+        request.setAttribute("signupresponce", sresponce);
+        if("GreenPet".equals(stringurl) || "SignUpServlet".equals(stringurl)){
+        	request.getRequestDispatcher("/home").include(request, response);
+        return;
+        }
+        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+        return;
 	}
 
 }

@@ -6,5 +6,5 @@ import com.mongodb.client.MongoDatabase;
 
 public interface SignUp {
 public ValidateUser validateUser(MongoDatabase mongoDatabase,UserBean us);
-public void sendMail(UserBean us);
+public void sendMail(UserBean us,StringBuffer url);
 }
