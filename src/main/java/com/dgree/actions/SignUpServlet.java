@@ -18,6 +18,7 @@ import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.dgree.service.SignUp;
 import com.dgree.service.UserSignUp;
+import com.dgree.userDAO.Util;
 import com.mongodb.client.MongoDatabase;
 
 public class SignUpServlet extends HttpServlet {
@@ -46,21 +47,26 @@ public class SignUpServlet extends HttpServlet {
 		}
 		logger.info("**** Inside SignUpServlet.Post() ****");
 		UserBean us=new UserBean();
+		String hash = Util.prepareRandomString(30);
+	    	
 		SignUpResponce sresponce=new SignUpResponce();
 		String email = request.getParameter("inputEmail");
         String firstName = request.getParameter("inputFirstName");
         String lastName = request.getParameter("inputLastName");
         String password = request.getParameter("inputPassword");
         String password1 = request.getParameter("inputPassword1");
+        String mn = request.getParameter("mobilenumber");
+        
         us.setEmail(email);
         us.setUserFirstName(firstName);
         us.setUserLastName(lastName);
         us.setPassword(password);
         us.setConformpPssword(password1);
-        
+        us.setMobilenumber(mn);
+        us.setHash(hash);
         ServletContext servletContext = request.getServletContext();
         MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
-        
+       
         SignUp userSignUp=new UserSignUp();
         ValidateUser validateUser = userSignUp.validateUser(mongoDatabase,us);
         if (validateUser.isNewUser() == true) {

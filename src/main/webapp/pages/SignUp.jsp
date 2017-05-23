@@ -40,7 +40,7 @@
 			</div>
      		<div class="col-sm-3"></div>
   			<div class="col-sm-6">
-    			<input  pattern="[0-9999999999]" name="mobilenumber" class="form-control" id="mobilenumber" data-match="#mobilenumber" placeholder="Enter mobile number" data-error="It should be number." required>
+    			<input  name="mobilenumber" class="form-control" id="mobilenumber" data-match="#mobilenumber" placeholder="Enter mobile number" data-error="It should be number." required>
     			<div class="help-block with-errors"></div>
   			</div>
   		</div>

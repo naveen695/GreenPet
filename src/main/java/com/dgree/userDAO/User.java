@@ -11,4 +11,6 @@ public interface User {
 
 public long insertNewUser(MongoCollection<Document> collection,UserBean us);
 public ValidateUser validateNewUser(MongoDatabase mongoDatabase,UserBean us);
+public boolean validateUserEmail(MongoDatabase mongoDatabase,UserBean us);
+
 }

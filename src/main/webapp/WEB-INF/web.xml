@@ -45,6 +45,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.SignUpServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EmailVerification</servlet-name>
+  	<display-name>EmailVerification</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.EmailVerification</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -58,6 +64,10 @@
   <servlet-mapping>
   	<servlet-name>SignUpServlet</servlet-name>
   	<url-pattern>/SignUpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EmailVerification</servlet-name>
+  	<url-pattern>/EmailVerification</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

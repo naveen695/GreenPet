@@ -31,7 +31,6 @@ public class UserSignUp implements SignUp{
 	public void sendMail(UserBean userBean,StringBuffer url) {
 		
 		logger.info("**** inside UserSignUP.sendmail() **** ");
-		String hash = Util.prepareRandomString(30);
 		Properties props = new Properties();
         props.put("mail.smtp.auth", Util.MAIL_SMTP_ATHU);
         props.put("mail.smtp.starttls.enable",Util.MAIL_SMTP_ENABLE);
@@ -43,7 +42,7 @@ public class UserSignUp implements SignUp{
                       return new PasswordAuthentication(Util.MAIL_USERNAME,Util.MAIL_PASSWORD);
                   }
                 });	
-		String link = url.toString().replace("SignUpServlet", Util.Sign_up_link)+"?scope=activation&userId="+userBean.getUserid()+"&hash="+hash;
+		String link = url.toString().replace("SignUpServlet", Util.Sign_up_link)+"?scope=activation&userId="+userBean.getUserid()+"&hash="+userBean.getHash();
 		StringBuilder bodyText = new StringBuilder(); 
         bodyText.append("<div>")
              .append("  Dear User<br/><br/>")
@@ -74,5 +73,12 @@ public class UserSignUp implements SignUp{
 		User user=new UserDao();
 		return  user.validateNewUser(mongoDatabase, us);
 	}
+
+@Override
+public boolean validateUserMail(MongoDatabase mongoDatabase, UserBean us) {
+logger.info("**** validating email address.****");
+	User userDao=new UserDao();
+	return	userDao.validateUserEmail(mongoDatabase, us);
+}
 
 }

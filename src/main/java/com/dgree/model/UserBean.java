@@ -5,6 +5,7 @@ public class UserBean {
 	private String userFirstName;
 	private String userLastName;
 	private String email;
+	private String hash;
 	private String password;
 	private String conformpPssword;
 	private String mobilenumber;
@@ -56,6 +57,12 @@ public class UserBean {
 	}
 	public void setUserid(long userid) {
 		this.userid = userid;
+	}
+	public String getHash() {
+		return hash;
+	}
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 
