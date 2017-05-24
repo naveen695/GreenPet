@@ -21,7 +21,7 @@ import com.dgree.userDAO.UserDao;
 import com.dgree.userDAO.Util;
 import com.mongodb.client.MongoDatabase;
 
-public class UserSignUp implements SignUp{
+public class UserSignUp implements UserDetails{
 
 	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
 		

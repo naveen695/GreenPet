@@ -1,11 +1,8 @@
 package com.dgree.actions;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +13,7 @@ import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.SignUpResponce;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
-import com.dgree.service.SignUp;
+import com.dgree.service.UserDetails;
 import com.dgree.service.UserSignUp;
 import com.dgree.userDAO.Util;
 import com.mongodb.client.MongoDatabase;
@@ -67,7 +64,7 @@ public class SignUpServlet extends HttpServlet {
         ServletContext servletContext = request.getServletContext();
         MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
        
-        SignUp userSignUp=new UserSignUp();
+        UserDetails userSignUp=new UserSignUp();
         ValidateUser validateUser = userSignUp.validateUser(mongoDatabase,us);
         if (validateUser.isNewUser() == true) {
         	us.setUserid(validateUser.getUserid());

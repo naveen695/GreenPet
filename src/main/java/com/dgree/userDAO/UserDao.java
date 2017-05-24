@@ -56,7 +56,7 @@ public class UserDao implements User{
 		document.append("lastname",us.getUserLastName());
 		document.append("mobile_number",us.getMobilenumber());
 		document.append("password",us.getPassword());
-		document.append("password",us.getHash());
+		document.append("password",us.getPassword());
 		document.append("status", "not_active");
 		collection.insertOne(document);
 		return count;
