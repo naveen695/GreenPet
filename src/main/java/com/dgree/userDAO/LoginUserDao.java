@@ -32,7 +32,6 @@ public class LoginUserDao implements User {
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.append("_id",us.getEmail());
 		whereQuery.append("password",us.getPassword());
-		whereQuery.append("status","active");
 		/*BasicDBObject whereQuery1 = new BasicDBObject("password",us.getPassword());
 		 BasicDBList or = new BasicDBList();
 		  or.add(whereQuery);
@@ -41,24 +40,20 @@ public class LoginUserDao implements User {
 */				FindIterable<Document> cursor = collection.find(whereQuery);
 				MongoCursor<Document> iterator = cursor.iterator();
 				while(iterator.hasNext()){
-					logger.info("**** mail/pwd is matched in our records with active status****");
+					logger.info("**** mail/pwd is matched in our records ****");
+					Document document = iterator.next();
+					String status =(String) document.get("status");
+				if (status.equals("active")) {
 					vs.setLoginStauts("active");
 					vs.setLoginValid(true);
-					return vs;
+				}else{
+					vs.setLoginStauts("not_active");
+					vs.setLoginValid(true);
+				}
+				return vs;
 				}
 		logger.info("**** mail/pwd is not matched in our records with active status****");
-		BasicDBObject whereQuery1 = new BasicDBObject();
-		whereQuery1.append("_id",us.getEmail());
-		whereQuery1.append("status","active");
-		FindIterable<Document> cursor1 = collection.find(whereQuery1);
-		MongoCursor<Document> iterator1 = cursor1.iterator();
-		while(iterator1.hasNext()){
-			logger.info("**** mail/pwd is   active status****");
-			vs.setLoginStauts("active");
-			vs.setLoginValid(false);
-			return vs;
-		}
-		logger.info("**** mail/pwd is not  active status****");
+		
 		vs.setLoginStauts("not_active");
 		vs.setLoginValid(false);
 		return vs;

@@ -72,6 +72,7 @@
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+<c:if test="${loginUserDetails.login != true }">
      <div class="btn-group btn-group-lg nav navbar-nav navbar-right" >
   							<div class="btn-group">
    								<button type="button" class="btn btn-success active btn-md" 
@@ -82,8 +83,23 @@
     							<button type="button" class="btn btn-danger active btn-md" 
    								data-toggle="modal" data-target="#signUp">SING UP</button>
   							</div>
+	</div>
+</c:if>
+	
+<c:if test="${loginUserDetails.login == true }">
+	<div class="btn-group btn-group-lg nav navbar-nav navbar-right" >
+		 <div class="dropdown">
+   			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+		   		 <span class="glyphicon glyphicon-user"></span> User 
+			</button>
+   			 <ul class="dropdown-menu">
+    		 <li><a href="#">kandhukuri naveen kumar</a></li>
+   			 <li><a href="#">naveenkumar.kandhukuri@gmail.com</a></li>
+    		 <li><a href="#" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></li>
+  		  	 </ul>
   		</div>
-      
+  	</div>
+</c:if>      
     </div>
   </div>
 </div>

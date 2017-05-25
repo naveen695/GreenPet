@@ -1,7 +1,6 @@
 package com.dgree.actions;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
@@ -13,14 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.SignUpResponce;
 import com.dgree.model.UserBean;
-import com.dgree.service.SignUp;
+import com.dgree.service.UserDetails;
 import com.dgree.service.UserSignUp;
-import com.dgree.userDAO.User;
-import com.dgree.userDAO.UserDao;
-import com.dgree.userDAO.Util;
 import com.mongodb.client.MongoDatabase;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  * Servlet implementation class EmailVerification
@@ -51,7 +45,7 @@ public class EmailVerification extends HttpServlet {
 					
 				us.setUserid(userId);
 				us.setHash(hash);
-				SignUp user=new UserSignUp();
+				UserDetails user=new UserSignUp();
 				ServletContext servletContext = request.getServletContext();
 			    MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
 				boolean validateUserMail = user.validateUserMail(mongoDatabase, us);
