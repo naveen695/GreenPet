@@ -148,7 +148,7 @@
       </div>
     </div>  
     </div>
- 
+  
 
 <%@ include file="SignUp.jsp" %>
   <div class="container-fluid text-center">    
