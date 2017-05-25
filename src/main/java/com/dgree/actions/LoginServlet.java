@@ -69,10 +69,11 @@ public class LoginServlet extends HttpServlet {
 		  	loginUserDetails.setLogin(true);
 		  	loginUserDetails.setMessage("succes");
 		  	sresponce.setStatuscode("0");
-		  	 HttpSession session = request.getSession();
-			 session.setAttribute("loginUserDetails", loginUserDetails);
+		  	sresponce.setStatusMessage("login susses !"); 
+		  	
+		  	HttpSession session = request.getSession();
+			session.setAttribute("loginUserDetails", loginUserDetails);
 			  
-		  	sresponce.setStatusMessage("login susses !");
 
 	  }else if(validateUser.isLoginValid()==true && validateUser.getLoginStauts().equals("not_active")){
 		  loginUserDetails.setLogin(false);

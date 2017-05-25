@@ -88,23 +88,38 @@
 	
 <c:if test="${loginUserDetails.login == true }">
 	<div class="btn-group btn-group-lg nav navbar-nav navbar-right" >
-		 <div class="dropdown">
+		<div class="dropdown open">
    			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		   		 <span class="glyphicon glyphicon-user"></span> User 
 			</button>
-   			 <ul class="dropdown-menu">
-    		 <li><a href="#">kandhukuri naveen kumar</a></li>
-   			 <li><a href="#">naveenkumar.kandhukuri@gmail.com</a></li>
-    		 <li><a href="#" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></li>
-  		  	 </ul>
-  		</div>
-  	</div>
-</c:if>      
+   			 
+   			 <div class="dropdown-menu" style="width: 300px;">
+			<table class="table">
+   				 <thead>
+     					
+    			</thead>
+    			<tbody>
+      					<tr>
+        					<td>
+        						<div class="col-xs-6 col-lg-6">       
+									<img style="height: 80px;width: 92px;" src="/GreenPet/images/images.png">
+   								</div>
+  							</td>	
+        					<td><div class="col-xs-6 col-lg-6"><a href="#">kandhukuri naveen kumar</a></div></td>
+    					</tr>
+   						<tr class="info">
+   			 			    <td><div class="col-xs-12 col-lg-12"><a href="#" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></div></td>
+    				 		<td></td>
+    				 	</tr>
+   				 </tbody>
+   			</table>
+		</div>
+     </div>
     </div>
-  </div>
+</c:if>      
 </div>
-
-
+</div>
+</div>
 
 <!-- Sign in popup -->
  <div class="modal fade" id="signIn" role="dialog">
