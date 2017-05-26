@@ -32,7 +32,7 @@ function showMap(position){
     var long = position.coords.longitude;
     var latlong = new google.maps.LatLng(lat, long);
     
-    var myOptions = {
+     var myOptions = {
         center: latlong,
         zoom: 16,
         mapTypeControl: true,
@@ -43,10 +43,33 @@ function showMap(position){
     
     var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
     var marker = new google.maps.Marker({position:google.maps.ControlPosition.TOP_CENTER, map:map, title:"You are here!"});
+    var infowindow = new google.maps.InfoWindow();
+    var locations = [
+  	  ['my ',lat,long,6],
+        ['Bondi Beach',12.952007,77.693199, 4],
+        ['Coogee Beach', 12.954362, 77.698254, 5],
+        ['Cronulla Beach',12.954332, 77.698554, 3],
+        ['Manly Beach', 12.955753, 77.698404, 2],
+        ['Maroubra Beach',12.954906, 77.698887, 1]
+      ];
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+
 
     google.maps.event.addListener(searchBox, 'places_changed', function() {
       searchBox.set('map', null);
       var places = searchBox.getPlaces();
+            var marker, i;
 
       var bounds = new google.maps.LatLngBounds();
       var i, place;
@@ -62,6 +85,8 @@ function showMap(position){
               this.unbindAll();
             }
           });
+
+          
           bounds.extend(place.geometry.location);
 
 
