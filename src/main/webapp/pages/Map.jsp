@@ -40,7 +40,41 @@ function showMap(position){
     }
     
     var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
-    var marker = new google.maps.Marker({position:latlong, map:map, title:"You are here!"});
+    
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+    var marker = new google.maps.Marker({position:google.maps.ControlPosition.TOP_CENTER, map:map, title:"You are here!"});
+
+    google.maps.event.addListener(searchBox, 'places_changed', function() {
+      searchBox.set('map', null);
+      var places = searchBox.getPlaces();
+
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+      for (i = 0; place = places[i]; i++) {
+        (function(place) {
+          var marker = new google.maps.Marker({
+
+            position: place.geometry.location
+          });
+          marker.bindTo('map', searchBox, 'map');
+          google.maps.event.addListener(marker, 'map_changed', function() {
+            if (!this.getMap()) {
+              this.unbindAll();
+            }
+          });
+          bounds.extend(place.geometry.location);
+
+
+        }(place));
+
+      }
+      map.fitBounds(bounds);
+      searchBox.set('map', map);
+      map.setZoom(Math.min(map.getZoom(),12));
+
+    });
+
+
 }
 //Define callback function for failed attempt
 function showError(error){
@@ -87,7 +121,16 @@ $(document).ready( function () {
     padding-right: 0px;
     padding-left: 0px;
 }
+.element.style {
+    height: 25px !important;
+    width: 200px !important;
+    position: absolute;
+    top: 0px;
+    left: 500px;
+    }
 </style>
 <div class="jumbotron text-center">
+
+	<input type="text"  id="pac-input"  placeholder="Search Box">
    <div id="map-canvas"></div>
 </div>

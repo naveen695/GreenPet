@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0&v=3.exp&libraries=places"></script>
    <style>
   
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -102,13 +102,13 @@
       					<tr>
         					<td>
         						<div class="col-xs-6 col-lg-6">       
-									<img style="height: 80px;width: 92px;" src="/GreenPet/images/images.png">
+									<img style="height: 80px;width: 92px;" src="/GreenPet/images/img_avatar3.png">
    								</div>
   							</td>	
         					<td><div class="col-xs-6 col-lg-6"><a href="#">kandhukuri naveen kumar</a></div></td>
     					</tr>
    						<tr class="info">
-   			 			    <td><div class="col-xs-12 col-lg-12"><a href="#" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></div></td>
+   			 			    <td><div class="col-xs-12 col-lg-12"><a  href="LogOutServlet" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></div></td>
     				 		<td></td>
     				 	</tr>
    				 </tbody>
