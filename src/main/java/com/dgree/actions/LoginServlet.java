@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet {
   }
     
 	  	request.setAttribute("signupresponce", sresponce);
-	        if("GreenPet".equals(stringurl) || "LoginServlet".equals(stringurl)){
+	        if("GreenPet".equals(stringurl) || "LoginServlet".equals(stringurl) ||"LogOutServlet".equals(stringurl) ){
 	        	request.getRequestDispatcher("/home").include(request, response);
 	        return;
 	        }

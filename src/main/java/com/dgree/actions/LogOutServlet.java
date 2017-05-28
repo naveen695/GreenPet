@@ -43,7 +43,7 @@ public class LogOutServlet extends HttpServlet {
 			}
 		}
 		}
-		if(!"LogOutServlet".equals(stringurl)){
+		if(!"LogOutServlet".equals(stringurl)&& stringurl != null){
 		       
 		HttpSession session = request.getSession(false);
 			if (session != null) {
@@ -57,5 +57,10 @@ public class LogOutServlet extends HttpServlet {
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
 	        return;
 		}
-		}
+		
+	if(null== stringurl || "LogOutServlet".equals(stringurl)){
+    	request.getRequestDispatcher("/home").include(request, response);
+    return;
+    }
+	}
 }
