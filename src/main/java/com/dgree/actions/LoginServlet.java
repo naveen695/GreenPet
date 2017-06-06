@@ -66,7 +66,8 @@ public class LoginServlet extends HttpServlet {
 	   
 	    logger.info(validateUser.toString());
 	  if (validateUser.isLoginValid()==true && validateUser.getLoginStauts().equals("active")) {
-		  	loginUserDetails.setLogin(true);
+		   	loginUserDetails = validateUser.getLoginUserDetails();
+		   	loginUserDetails.setLogin(true);
 		  	loginUserDetails.setMessage("succes");
 		  	sresponce.setStatuscode("0");
 		  	sresponce.setStatusMessage("login susses !"); 

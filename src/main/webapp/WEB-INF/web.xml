@@ -32,7 +32,18 @@
   	<servlet-name>Home</servlet-name>
   	<jsp-file>/pages/home.jsp</jsp-file>
   </servlet>
-  
+  <servlet>
+  	<servlet-name>about</servlet-name>
+  	<jsp-file>/pages/about.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>contact</servlet-name>
+  	<jsp-file>/pages/contact.jsp</jsp-file>
+  </servlet>
+   <servlet>
+  	<servlet-name>index</servlet-name>
+  	<jsp-file>/pages/index.jsp</jsp-file>
+  </servlet>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -62,6 +73,20 @@
   	<servlet-name>Home</servlet-name>
   	<url-pattern>/home</url-pattern>
   </servlet-mapping>
+<servlet-mapping>
+  	<servlet-name>contact</servlet-name>
+  	<url-pattern>/contact</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>about</servlet-name>
+  	<url-pattern>/about</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>index</servlet-name>
+  	<url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
 
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>

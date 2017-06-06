@@ -10,6 +10,7 @@ private long userid;
 private boolean isNewUser;
 private String LoginStauts;
 private boolean isLoginValid;
+private LoginUserDetails loginUserDetails;
 public long getUserid() {
 	return userid;
 }
@@ -33,5 +34,11 @@ public String getLoginStauts() {
 }
 public void setLoginStauts(String loginStauts) {
 	LoginStauts = loginStauts;
+}
+public LoginUserDetails getLoginUserDetails() {
+	return loginUserDetails;
+}
+public void setLoginUserDetails(LoginUserDetails loginUserDetails) {
+	this.loginUserDetails = loginUserDetails;
 }
 }

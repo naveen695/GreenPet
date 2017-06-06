@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.bson.Document;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.mongodb.BasicDBList;
@@ -46,6 +47,12 @@ public class LoginUserDao implements User {
 				if (status.equals("active")) {
 					vs.setLoginStauts("active");
 					vs.setLoginValid(true);
+					LoginUserDetails loginUserDetails=new com.dgree.model.LoginUserDetails();
+					loginUserDetails.setEmail((String)document.get("email_id"));
+					loginUserDetails.setUserFirstName((String)document.get("firstname"));
+					loginUserDetails.setUserLastName((String)document.get("lastname"));
+					loginUserDetails.setMobilenumber((String)document.get("mobile_number"));
+					vs.setLoginUserDetails(loginUserDetails);
 				}else{
 					vs.setLoginStauts("not_active");
 					vs.setLoginValid(true);

@@ -66,11 +66,11 @@
     
     <div class="collapse navbar-collapse" id="myNavbar" style="padding-top: 20px;">
       <ul class="nav navbar-nav">
-    	<li><a><h4>GreenPet</h4></a></li>
+    	<li><a href="index"><h4>GreenPet</h4></a></li>
     	<li><a>  </a></li>
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li class="active"><a href="home">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="contact">Contact</a></li>
       </ul>
 <c:if test="${loginUserDetails.login != true }">
      <div class="btn-group btn-group-lg nav navbar-nav navbar-right" >
@@ -88,7 +88,7 @@
 	
 <c:if test="${loginUserDetails.login == true }">
 	<div class="btn-group btn-group-lg nav navbar-nav navbar-right" >
-		<div class="dropdown open">
+		<div class="dropdown">
    			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		   		 <span class="glyphicon glyphicon-user"></span> User 
 			</button>
