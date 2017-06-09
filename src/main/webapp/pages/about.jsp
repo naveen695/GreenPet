@@ -309,17 +309,17 @@ please login for details
     	<div class="modal-content">
     	    <div class="modal-header">
        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        		<h4 class="modal-title custom_align" id="Heading">Edit or Add Your pet Detail</h4>
+        		<h4 class="modal-title custom_align" id="Heading">Edit or Update Your pet Detail</h4>
       		</div>
-<div class="modal-body">
- <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="SignUpServlet">
+	<div class="modal-body">
+	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UpdatePetDetails">
+  		
   		<div class="form-group">
 			<div class="col-sm-5">
 			  			<label for="inputFirstName" class="control-label">Name Of Pet</label>
 			</div>
   			<div class="col-sm-6">
-  				<input pattern="[A-Za-z0-9]{1,20}" name="petname" class="form-control" id="petname" placeholder="Enter Pet Name"  required>
-  				<div class="help-block with-errors"></div>
+  				<input  name="petname" class="form-control" id="petname" placeholder="Enter Pet Name"  required>
 			</div>
 		</div>
 		
@@ -394,7 +394,7 @@ please login for details
   			<div class="col-sm-offset-1 col-sm-2">
       		</div>
       		<div class="col-sm-offset-1 col-sm-6">
-      			<button type="submit" class="btn btn-success btn-primary">Upload</button>
+      			<button type="submit" class="btn btn-success btn-primary">Submit</button>
  			</div>
  		</div>
 	</form>
