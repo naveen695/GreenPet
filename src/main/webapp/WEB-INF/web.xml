@@ -68,6 +68,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.LogOutServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UpdateDetails</servlet-name>
+  	<display-name>UpdateDetails</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.UpdateDetails</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -103,6 +109,10 @@
   <servlet-mapping>
   	<servlet-name>LogOutServlet</servlet-name>
   	<url-pattern>/LogOutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UpdateDetails</servlet-name>
+  	<url-pattern>/UpdateDetails</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

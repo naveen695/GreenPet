@@ -234,7 +234,7 @@ please login for details
         		<h4 class="modal-title custom_align" id="Heading">Edit or Add Your Detail</h4>
       		</div>
 <div class="modal-body">
- <form class="form-horizontal" id="updateDetails" data-toggle="validator" method="post" role="form" action="">
+ <form class="form-horizontal" id="updateDetails" data-toggle="validator" method="post" role="form" action="UpdateDetails">
   		<div class="form-group">
 			<div class="col-sm-5">
 			  			<label for="updateName" class="control-label"> First Name : </label>
@@ -254,13 +254,7 @@ please login for details
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
-		
-		
-			
-		
-	
-  		
-  		
+		 
   		
 		<div class="form-group">
       			<label class="col-sm-5" for="emailUpdate">Email:</label>

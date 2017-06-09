@@ -3,6 +3,7 @@ package com.dgree.service;
 import java.util.logging.Logger;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.dgree.userDAO.LoginUserDao;
@@ -29,6 +30,12 @@ public class UserLogin implements UserDetails {
 	@Override
 	public boolean validateUserMail(MongoDatabase mongoDatabase, UserBean us) {
 		return  false;
+	}
+
+	@Override
+	public LoginUserDetails  updateUserDetails(MongoDatabase mongoDatabase, UserBean us) {
+		
+		return null;
 	}
 
 }

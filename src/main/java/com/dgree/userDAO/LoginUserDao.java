@@ -33,12 +33,7 @@ public class LoginUserDao implements User {
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.append("_id",us.getEmail());
 		whereQuery.append("password",us.getPassword());
-		/*BasicDBObject whereQuery1 = new BasicDBObject("password",us.getPassword());
-		 BasicDBList or = new BasicDBList();
-		  or.add(whereQuery);
-		  or.add(whereQuery1);
-		  BasicDBObject query = new BasicDBObject("$or", or);
-*/				FindIterable<Document> cursor = collection.find(whereQuery);
+				FindIterable<Document> cursor = collection.find(whereQuery);
 				MongoCursor<Document> iterator = cursor.iterator();
 				while(iterator.hasNext()){
 					logger.info("**** mail/pwd is matched in our records ****");
@@ -69,6 +64,12 @@ public class LoginUserDao implements User {
 	@Override
 	public boolean validateUserEmail(MongoDatabase mongoDatabase, UserBean us) {
 		return false;
+	}
+
+	@Override
+	public LoginUserDetails updateUserDetails(MongoDatabase mongoDatabase, UserBean us) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

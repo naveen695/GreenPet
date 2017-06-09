@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.dgree.userDAO.User;
@@ -79,6 +80,14 @@ public boolean validateUserMail(MongoDatabase mongoDatabase, UserBean us) {
 logger.info("**** validating email address.****");
 	User userDao=new UserDao();
 	return	userDao.validateUserEmail(mongoDatabase, us);
+}
+@Override
+public LoginUserDetails  updateUserDetails(MongoDatabase mongoDatabase, UserBean us) {
+	logger.info("****  updateUserDetails .****");
+	User userDao=new UserDao();
+	return	userDao.updateUserDetails(mongoDatabase, us);
+
+	
 }
 
 }

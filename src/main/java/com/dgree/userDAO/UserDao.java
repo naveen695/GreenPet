@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.mongodb.BasicDBObject;
@@ -89,4 +90,35 @@ public class UserDao implements User{
 		logger.info("**** already updated email status active");
 		return false;
 	}
+
+	@Override
+	public LoginUserDetails updateUserDetails(MongoDatabase mongoDatabase, UserBean us) {
+		//update
+		LoginUserDetails loginUserDetails=new com.dgree.model.LoginUserDetails();
+		MongoCollection<Document> collection = mongoDatabase.getCollection("dgree_UserInfo");
+		BasicDBObject bd=new BasicDBObject("firstname",us.getUserFirstName());
+		bd.append("lastname",us.getUserLastName());
+		bd.append("mobile_number",us.getMobilenumber());
+		Bson updateOperationDocument = new Document("$set", bd);
+		Bson filter = new Document("_id",us.getEmail());
+		collection.updateOne(filter, updateOperationDocument);
+		// Retrieve
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.put("_id",us.getEmail());
+		FindIterable<Document> cursor = collection.find(whereQuery);
+		MongoCursor<Document> iterator = cursor.iterator();
+		while(iterator.hasNext()){
+			Document document = iterator.next();
+			loginUserDetails.setEmail((String)document.get("email_id"));
+			loginUserDetails.setUserFirstName((String)document.get("firstname"));
+			loginUserDetails.setUserLastName((String)document.get("lastname"));
+			loginUserDetails.setMobilenumber((String)document.get("mobile_number"));
+		}
+		return loginUserDetails;
+		}
 }
+		
+		
+		
+		
+		
