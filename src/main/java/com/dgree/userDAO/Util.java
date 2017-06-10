@@ -17,8 +17,10 @@ public class Util {
 	  public static final String MAIL_USERNAME="knnaveen695@gmail.com";
 	  public static final String MAIL_PASSWORD="9494931508";
 	  public static final String Sign_up_link="EmailVerification";
-
-		private static final char[] symbols;
+	  public static final String LAT_LANG_SERVICE_URL = "https://maps.googleapis.com/maps/api/geocode/json?&";
+	  public static final String GOOGLE_KEY="&key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0";
+	  
+	  private static final char[] symbols;
 	 
       static {
 	    StringBuilder tmp = new StringBuilder();
