@@ -44,7 +44,7 @@ public class GoesLocationLatLong {
 				finalurl1 = finalurl1.concat(zip+"+");
 			if(StringUtils.isNotEmpty(country))
 				finalurl1 = finalurl1.concat(country+"+");
-			
+			 
 			finalurl2 = finalurl1.concat(Key);
 		}		
 		try { 
