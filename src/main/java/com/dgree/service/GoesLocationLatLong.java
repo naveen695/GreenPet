@@ -1,12 +1,16 @@
 package com.dgree.service;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import org.apache.commons.lang3.StringUtils;
-
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.DOMOutputter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import com.dgree.model.PetDetails;
 import com.dgree.userDAO.Util;
 
@@ -43,27 +47,44 @@ public class GoesLocationLatLong {
 			if(StringUtils.isNotEmpty(zip))
 				finalurl1 = finalurl1.concat(zip+"+");
 			if(StringUtils.isNotEmpty(country))
-				finalurl1 = finalurl1.concat(country+"+");
-			 
+				finalurl1 = finalurl1.concat(country);
 			finalurl2 = finalurl1.concat(Key);
 		}		
 		try { 
-			  URL url = new URL(finalurl2.replace(" ", "")); 
+			URL url = new URL(finalurl2.replace(" ", ",")); 
 	        HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 
 	        connection.setDoOutput(true); 
 	        connection.setInstanceFollowRedirects(false); 
 	        connection.setRequestProperty("Content-Type", "application/xml"); 
-
-
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-				(connection.getInputStream())));
-			String output;
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
+			(connection.getInputStream())));
+			  int responseCode = connection.getResponseCode();
+			if (responseCode == 200) {
+				String output;
+				System.out.println("Output from Server .... \n");
+				StringBuilder sb = new StringBuilder();
+				while ((output = br.readLine()) != null) {
+					sb.append(output);
+				}
+				System.out.println(sb.toString());
+		        SAXBuilder builder = new SAXBuilder();
+		         org.jdom2.Document build = builder.build(new ByteArrayInputStream(sb.toString().getBytes()));
+		         Document document = new DOMOutputter().output(build);
+		         NodeList nodes = document.getElementsByTagName("location");
+		         for (int i = 0; i < 1; i++) {
+		        	 if (nodes.item(i) !=null) {
+			        	 NodeList nodeList = nodes.item(i).getChildNodes();
+			        	 for (int j = 0; j < nodeList.getLength(); j++) {
+			                 Node childNode = nodeList.item(j);
+			                 if ("lat".equals(childNode.getNodeName())) 
+			                	 petDetails.setLatitude(nodeList.item(j).getTextContent().trim());
+			                 if("lng".equals(childNode.getNodeName()))
+			                	 petDetails.setLongiute(nodeList.item(j).getTextContent().trim());
+			             }
+					}	      
+		        }	        
+		        connection.disconnect(); 	
 			}
-	        int responseCode = connection.getResponseCode();
-	        connection.disconnect(); 
 	    } catch(Exception e) { 
 	        throw new RuntimeException(e); 
 	    }
