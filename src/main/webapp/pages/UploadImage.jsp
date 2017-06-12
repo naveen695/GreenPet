@@ -1,17 +1,4 @@
-<!-- <div class="jumbotron">
-  <div class="row">
-    <div class="col-sm-12">
-     Upload new Images For Pet
-    </div>
-    <div class="col-sm-12">
-      test
-    </div>
-    <div class="col-sm-12">
-      test
-    </div>
-  </div>
-</div>
- -->
+
  <style>
 
 .container .jumbotron, .container-fluid .jumbotron {
@@ -32,24 +19,24 @@
     <div class="panel-heading "><h4>Upload New Pet details </h4></div>
     <div class="panel-body " style="    padding-top: 0px;  padding-right: 0px;    padding-left: 0px;    padding-bottom: 0px;">
 	
-	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UpdatePetDetails">
+	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UplodePetDetails">
   		
   		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="inputFirstName" class="control-label">Name Of Pet</label>
+			  			<label for="petname1" class="control-label">Name Of Pet</label>
 			</div>
   			<div class="col-sm-6">
-  				<input  name="petname" class="form-control" id="petname" placeholder="Enter Pet Name"  required>
+  				<input  name="petname1" class="form-control" id="petname1" placeholder="Enter Pet Name"  required>
 			</div>
 		</div>
 		
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="address1" class="control-label">Address1 (house/street)</label>
+			  			<label for="address11" class="control-label">Address1 (house/street)</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="address1" class="form-control" id="address1" placeholder="Enter Address Name"  required>
+  				<input name="address11" class="form-control" id="address11" placeholder="Enter Address Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
@@ -57,68 +44,64 @@
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="address2" class="control-label">Address2 (street/*)</label>
+			  			<label for="address21" class="control-label">Address2 (street/*)</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="address2" class="form-control" id="address2" placeholder="Enter Address Name"  required>
+  				<input name="address21" class="form-control" id="address21" placeholder="Enter Address Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
 		  
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="city" class="control-label">City</label>
+			  			<label for="city1" class="control-label">City</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="city" class="form-control" id="city" placeholder="Enter city Name"  required>
+  				<input name="city1" class="form-control" id="city1" placeholder="Enter city Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="county" class="control-label">County</label>
+			  			<label for="county1" class="control-label">County</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="county" class="form-control" id="county" placeholder="Enter county Name"  required>
+  				<input name="county1" class="form-control" id="county1" placeholder="Enter county Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="zip" class="control-label">Post Code</label>
+			  			<label for="zip1" class="control-label">Post Code</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="zip" class="form-control" id="zip" placeholder="Enter Address Name"  required>
+  				<input name="zip1" class="form-control" id="zip1" placeholder="Enter Address Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="inputFirstName" class="control-label">Country</label>
+			  			<label for="country1" class="control-label">Country</label>
 			</div>
   			<div class="col-sm-6">
-  				<input name="country" class="form-control" id="country" placeholder="Enter city Name"  required>
+  				<input name="country1" class="form-control" id="country1" placeholder="Enter city Name"  required>
   				<div class="help-block with-errors"></div>
 			</div>
 		</div>
 		
-		
 		<div class="form-group">
 			<div class="col-sm-5">
-					<label for="inputFirstName" class="control-label ">Pet Image</label>
+					<label for="imageId1" class="control-label ">Pet Image</label>
 			</div>
   			<div class="col-sm-6">
-    			<input type="file" name="imageId" class="form-control" id="imageId" 
+    			<input type="file" name="imageId1" class="form-control" id="imageId1" 
     			placeholder="Upload image . . . " required accept="image/*">
   	 			<div class="help-block with-errors"></div>
  			</div>
   		</div>
-  	
-  	
-  	
   		<div class="form-group">
   			<div class="col-sm-offset-1 col-sm-2">
       		</div>

@@ -80,6 +80,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.UpdatePetDetails</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UplodePetDetails</servlet-name>
+  	<display-name>UplodePetDetails</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.UplodePetDetails</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -123,6 +129,10 @@
   <servlet-mapping>
   	<servlet-name>UpdatePetDetails</servlet-name>
   	<url-pattern>/UpdatePetDetails</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UplodePetDetails</servlet-name>
+  	<url-pattern>/UplodePetDetails</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

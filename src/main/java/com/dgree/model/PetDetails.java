@@ -6,6 +6,7 @@ private String address1;
 private String address2;
 private String state;
 private String city;
+private String county;
 private String country;
 private String zip;
 
@@ -15,8 +16,9 @@ private Integer loongitudeInt;
 @Override
 public String toString() {
 	return "PetDetails [petname=" + petname + ", address1=" + address1 + ", address2=" + address2 + ", state=" + state
-			+ ", city=" + city + ", country=" + country + ", zip=" + zip + ", latitude=" + latitude + ", longiute="
-			+ longiute + ", loongitudeInt=" + loongitudeInt + ", lattitudeInt=" + lattitudeInt + "]";
+			+ ", city=" + city + ", county=" + county + ", country=" + country + ", zip=" + zip + ", latitude="
+			+ latitude + ", longiute=" + longiute + ", loongitudeInt=" + loongitudeInt + ", lattitudeInt="
+			+ lattitudeInt + "]";
 }
 public String getPetname() {
 	return petname;
@@ -83,6 +85,12 @@ public Integer getLattitudeInt() {
 }
 public void setLattitudeInt(Integer lattitudeInt) {
 	this.lattitudeInt = lattitudeInt;
+}
+public String getCounty() {
+	return county;
+}
+public void setCounty(String county) {
+	this.county = county;
 }
 private Integer lattitudeInt;
 
