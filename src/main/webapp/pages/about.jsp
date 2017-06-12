@@ -22,16 +22,22 @@ $(document).ready(function () {
 
 
 </script>
+<style>
+.table-responsive {
+    min-height: .01%;
+    overflow-x: overlay;
+}
+</style>
 <c:if test="${loginUserDetails.login != true }">
 please login for details
 </c:if>
 <c:if test="${loginUserDetails.login == true }">
 <div>
   <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
 		<div>
         <h4>Your Details</h4>
-        <div class="table-responsive">
+        <div class="table-responsive" style=" padding-bottom: 20px;">
               <table id="mytable" class="table table-bordred table-striped">
                 <thead>
                 	<th>First Name</th>
@@ -61,7 +67,7 @@ please login for details
 
 
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
     
         <h4>Your  Pet Details </h4>
         <div class="table-responsive">
@@ -69,9 +75,10 @@ please login for details
                <thead>
                <tr>
                 	<th>Name of Pet</th>
-                    <th>Address1 (house/street)</th>
+                    <th>Address1 (house)</th>
+                   	<th>Address1 (street)</th>
                     <th>City</th>
-                    <th>State</th>
+                     <th>County</th>
                     <th>Zip Code</th>
                     <th>Country</th>
                     <th>Pet Image</th>
@@ -81,46 +88,18 @@ please login for details
    				<tbody id="mytab">
 			    	<tr>
 				    	<td>Alian </td>
-    					<td>Marathahalli, 560037</td>
+    					<td>Marathahalli, </td>
+    					<td>tulasi theater</td>
     					<td>Bangalore </td>
     					<td>KA</td>
-   						<td>60037</td>
+   						<td>560037</td>
    						<td>india</td>
-    					<td>----</td>
+   						<td></td>
     					<td>	
     							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
     							<span class="glyphicon glyphicon-pencil"></span></button>
     					</td>
     				</tr>
-
-  					<tr>
-				    	<td>Alian </td>
-    					<td>Marathahalli, 560037</td>
-    					<td>Bangalore </td>
-    					<td>KA</td>
-   						<td>60037</td>
-   						<td>india</td>
-    					<td>----</td>
-    					<td>	
-    							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
-    							<span class="glyphicon glyphicon-pencil"></span></button>
-    					</td>
-    				</tr>
-				  	<tr>
-				    	<td>Alian </td>
-    					<td>Marathahalli, 560037</td>
-    					<td>Bangalore </td>
-    					<td>KA</td>
-   						<td>60037</td>
-   						<td>india</td>
-    					<td>----</td>
-    					<td>	
-    							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
-    							<span class="glyphicon glyphicon-pencil"></span></button>
-    					</td>
-    				</tr>
-
-
 				</tbody>        
 		</table>
 
@@ -210,10 +189,7 @@ please login for details
 	$(document).ready(function(){
 	  $('#mytab').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:3});
 	});
-	
-	
-	
- </script>
+	</script>
 
 	<div class="col-md-12 text-center">
     	  <ul class="pagination pagination-lg pager" id="myPager"></ul>
@@ -355,10 +331,19 @@ please login for details
 			</div>
 		</div>
 		
+		<div class="form-group">
+			<div class="col-sm-5">
+			  			<label for="county" class="control-label">County</label>
+			</div>
+  			<div class="col-sm-6">
+  				<input name="county" class="form-control" id="county" placeholder="Enter county Name"  required>
+  				<div class="help-block with-errors"></div>
+			</div>
+		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="zip" class="control-label">Zip Code</label>
+			  			<label for="zip" class="control-label">Post Code</label>
 			</div>
   			<div class="col-sm-6">
   				<input name="zip" class="form-control" id="zip" placeholder="Enter Address Name"  required>
@@ -402,7 +387,7 @@ please login for details
        </div>
   	</div>
 </div>
-    
+    <!-- 
     
     
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -422,6 +407,12 @@ please login for details
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
       </div>
         </div>
-    </div></div>
+    </div></div> -->
     </c:if>
+    </div>
+<div class="col-sm-4 sidenav">
+      <%@ include file="UploadImage.jsp" %>
+    </div>
+  </div>
+</div>
 <%@ include file="/pages/footer.jsp" %>

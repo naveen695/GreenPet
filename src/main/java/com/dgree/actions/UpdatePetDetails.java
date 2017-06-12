@@ -6,7 +6,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.dgree.model.PetDetails;
+import com.dgree.model.SignUpResponce;
+import com.dgree.service.GoesLocationLatLong;
 
 /**
  * Servlet implementation class UpdatePetDetails
@@ -49,34 +53,38 @@ public class UpdatePetDetails extends HttpServlet {
 		petDetails.setPetname(request.getParameter("petname"));
 		petDetails.setAddress1(request.getParameter("address1"));
 		petDetails.setAddress2(request.getParameter("address2"));
-        petDetails.setCity(request.getParameter("city"));
+		petDetails.setCity(request.getParameter("county"));
+		petDetails.setCity(request.getParameter("city"));
 		petDetails.setCountry(request.getParameter("country"));
 		petDetails.setZip(request.getParameter("zip"));
-
-        
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		doGet(request, response);
+		GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
+		goesLocationLatLong.findLatitudeLongitude(petDetails);
+		String latitude = petDetails.getLatitude();
+		String longiute = petDetails.getLongiute();
+		if (StringUtils.isEmpty(longiute) || StringUtils.isEmpty(longiute)){
+			 SignUpResponce sresponce=new SignUpResponce();
+		    	sresponce.setStatuscode("0");
+			  	sresponce.setStatusMessage("not updated sussesfully !"); 
+			  	request.setAttribute("signupresponce", sresponce);
+				
+	        if("UpdatePetDetails".equals(stringurl)){
+	        	request.getRequestDispatcher("/home").include(request, response);
+	        return;
+	        }
+	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	        return;
+		}
+		 SignUpResponce sresponce=new SignUpResponce();
+	    	sresponce.setStatuscode("0");
+		  	sresponce.setStatusMessage("updated sussesfully !"); 
+		  	request.setAttribute("signupresponce", sresponce);
+			
+		if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl)){
+			request.getRequestDispatcher("/home").include(request, response);
+        return;
+        }
+        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+        return;
 	}
 
 }
