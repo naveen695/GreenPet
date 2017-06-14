@@ -1,5 +1,8 @@
 package com.dgree.model;
 
+import java.util.List;
+import java.util.Map;
+
 public class PetDetails {
 private String petname;
 private String address1;
@@ -9,7 +12,29 @@ private String city;
 private String county;
 private String country;
 private String zip;
+private Image image;
+private List<Image> imageList;
 
+private Map<Object,Image> imageMap;
+
+public Image getImage() {
+	return image;
+}
+public void setImage(Image image) {
+	this.image = image;
+}
+public List<Image> getImageList() {
+	return imageList;
+}
+public void setImageList(List<Image> imageList) {
+	this.imageList = imageList;
+}
+public Map<Object, Image> getImageMap() {
+	return imageMap;
+}
+public void setImageMap(Map<Object, Image> imageMap) {
+	this.imageMap = imageMap;
+}
 private String latitude;
 private String longiute;
 private Integer loongitudeInt;

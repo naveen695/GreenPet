@@ -19,7 +19,7 @@
     <div class="panel-heading "><h4>Upload New Pet details </h4></div>
     <div class="panel-body " style="    padding-top: 0px;  padding-right: 0px;    padding-left: 0px;    padding-bottom: 0px;">
 	
-	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UplodePetDetails">
+	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" enctype="multipart/form-data" action="UplodePetDetails">
   		
   		<div class="form-group">
 			<div class="col-sm-5">
