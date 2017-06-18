@@ -25,11 +25,10 @@ public class DateBaseContextListener implements ServletContextListener {
     	String environment =(String) servletContext.getInitParameter("environment");
     	String dbURL = (String)servletContext.getInitParameter("dbURL");
     	String  dbName = (String)servletContext.getInitParameter("dbName");
-    	
+    	MongoClient mongoClient = null;
     	MongoDatabase db = null;
         if (StringUtils.isNotEmpty(environment)&& StringUtils.isNotEmpty(dbURL)&& StringUtils.isNotEmpty(dbName)) {
             if (environment.trim().equals("dev")) {
-                MongoClient mongoClient = null;
                 try {
                   mongoClient = new MongoClient();
                   db = mongoClient.getDatabase("test");
@@ -38,10 +37,11 @@ public class DateBaseContextListener implements ServletContextListener {
                   logger.info("Exception getDBConnection" + e);
                 }
               } else if (environment.trim().equals("prod")){
-                MongoClient mongoClient = null;
+                
                 try {
                   mongoClient = new MongoClient(new MongoClientURI(dbURL.trim()));
                   db = mongoClient.getDatabase(dbName.trim());
+                  
                   logger.info("*** Getting Connection from remote MongoDatabase ***" + db);
                 } catch (Exception e) {
                   logger.info("Exception getDBConnection" + e);
@@ -50,9 +50,9 @@ public class DateBaseContextListener implements ServletContextListener {
 		}else{
 			logger.info("*** DB connection values are null . please check in web.xml. ***");
 		}
+        servletContext.setAttribute("mongoClient", mongoClient);
     	servletContext.setAttribute("MongoDatabase", db);
-    	
-    }
+    	}
 	//destroy will call before destroy application
     public void contextDestroyed(ServletContextEvent servletContextEvent)  {
     }

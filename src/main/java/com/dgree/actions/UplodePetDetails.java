@@ -1,20 +1,13 @@
 package com.dgree.actions;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -26,8 +19,10 @@ import com.dgree.model.Image;
 import com.dgree.model.PetDetails;
 import com.dgree.model.SignUpResponce;
 import com.dgree.service.GoesLocationLatLong;
-import com.mongodb.gridfs.GridFS;
-import com.mongodb.gridfs.GridFSInputFile;
+import com.dgree.service.PetDetailsService;
+import com.dgree.service.PetDetailsServiceImpl;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Servlet implementation class UplodePetDetails
@@ -115,50 +110,44 @@ public class UplodePetDetails extends HttpServlet {
 	                  }
 	        	}
 	        petDetails.setImage(image);
-//	    	// create a "photo" namespace
-//			GridFS gfsPhoto = new GridFS(db, "photo");
-//
-//			// get image file from local drive
-//			GridFSInputFile gfsFile = gfsPhoto.createFile(imageFile);
-//
-//			// set a new filename for identify purpose
-//			gfsFile.setFilename(newFileName);
-//
-//			// save the image file into mongoDB
-//			gfsFile.save();
+	    
+	        ServletContext servletContext = request.getServletContext();
+      	    MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
+      	  MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
 
+      	 
+	        GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
+	        PetDetails petDetailsWithLatLong = goesLocationLatLong.findLatitudeLongitude(petDetails);
 		
-		GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
-		PetDetails petDetailsWithLatLong = goesLocationLatLong.findLatitudeLongitude(petDetails);
-		
-		String latitude = petDetails.getLatitude();
-		String longiute = petDetails.getLongiute();
-		if (StringUtils.isEmpty(latitude) || StringUtils.isEmpty(longiute)){
+	        String latitude = petDetailsWithLatLong.getLatitude();
+	        String longiute = petDetailsWithLatLong.getLongittude();
+	        
+	        if (StringUtils.isEmpty(latitude) || StringUtils.isEmpty(longiute)){
 			 SignUpResponce sresponce=new SignUpResponce();
 		    	sresponce.setStatuscode("0");
 			  	sresponce.setStatusMessage("not updated sussesfully !"); 
 			  	request.setAttribute("signupresponce", sresponce);
-				
-	        if("UploadPetDetails".equals(stringurl)){
-	        	request.getRequestDispatcher("/home").include(request, response);
-	        return;
+			  	if("UploadPetDetails".equals(stringurl)){
+	        		request.getRequestDispatcher("/home").include(request, response);
+	        	return;
+	        	}
+	        	getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	        	return;
+	        }else{
+	        	
+	        	PetDetailsService petDeailsService =new PetDetailsServiceImpl();
+	        	petDeailsService.insertPetDeails(petDetailsWithLatLong,mongoClient);
+	        	
+	        	SignUpResponce sresponce=new SignUpResponce();
+	        	sresponce.setStatuscode("0");
+	        	sresponce.setStatusMessage("updated sussesfully !"); 
+	        	request.setAttribute("signupresponce", sresponce);
+	        	if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl)){
+	        		request.getRequestDispatcher("/home").include(request, response);
+	        	return;
+	        	}
+	        	getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	        	return;
 	        }
-	        
-	        
-	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
-	        return;
-		}
-		 SignUpResponce sresponce=new SignUpResponce();
-	    	sresponce.setStatuscode("0");
-		  	sresponce.setStatusMessage("updated sussesfully !"); 
-		  	request.setAttribute("signupresponce", sresponce);
-			
-		if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl)){
-			request.getRequestDispatcher("/home").include(request, response);
-        return;
-        }
-        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
-        return;
 	}
-
 }

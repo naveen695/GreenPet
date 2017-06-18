@@ -36,13 +36,13 @@ public void setImageMap(Map<Object, Image> imageMap) {
 	this.imageMap = imageMap;
 }
 private String latitude;
-private String longiute;
-private Integer loongitudeInt;
+private String longittude;
+private Integer longittudeInt;
 @Override
 public String toString() {
 	return "PetDetails [petname=" + petname + ", address1=" + address1 + ", address2=" + address2 + ", state=" + state
 			+ ", city=" + city + ", county=" + county + ", country=" + country + ", zip=" + zip + ", latitude="
-			+ latitude + ", longiute=" + longiute + ", loongitudeInt=" + loongitudeInt + ", lattitudeInt="
+			+ latitude + ", longiute="  + ", loongitudeInt="  + ", lattitudeInt="
 			+ lattitudeInt + "]";
 }
 public String getPetname() {
@@ -93,18 +93,7 @@ public String getLatitude() {
 public void setLatitude(String latitude) {
 	this.latitude = latitude;
 }
-public String getLongiute() {
-	return longiute;
-}
-public void setLongiute(String longiute) {
-	this.longiute = longiute;
-}
-public Integer getLoongitudeInt() {
-	return loongitudeInt;
-}
-public void setLoongitudeInt(Integer loongitudeInt) {
-	this.loongitudeInt = loongitudeInt;
-}
+
 public Integer getLattitudeInt() {
 	return lattitudeInt;
 }
@@ -116,6 +105,18 @@ public String getCounty() {
 }
 public void setCounty(String county) {
 	this.county = county;
+}
+public Integer getLongittudeInt() {
+	return longittudeInt;
+}
+public void setLongittudeInt(Integer longittudeInt) {
+	this.longittudeInt = longittudeInt;
+}
+public String getLongittude() {
+	return longittude;
+}
+public void setLongittude(String longittude) {
+	this.longittude = longittude;
 }
 private Integer lattitudeInt;
 
