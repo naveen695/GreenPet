@@ -48,6 +48,7 @@ public class GoesLocationLatLong {
 				finalurl1 = finalurl1.concat(zip+"+");
 			if(StringUtils.isNotEmpty(country))
 				finalurl1 = finalurl1.concat(country);
+			if(StringUtils.isNotBlank(finalurl1))
 			finalurl2 = finalurl1.concat(Key);
 		}		
 		try { 
@@ -79,7 +80,7 @@ public class GoesLocationLatLong {
 			                 if ("lat".equals(childNode.getNodeName())) 
 			                	 petDetails.setLatitude(nodeList.item(j).getTextContent().trim());
 			                 if("lng".equals(childNode.getNodeName()))
-			                	 petDetails.setLongiute(nodeList.item(j).getTextContent().trim());
+			                	 petDetails.setLongittude(nodeList.item(j).getTextContent().trim());
 			             }
 					}	      
 		        }	        

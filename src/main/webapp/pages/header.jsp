@@ -48,7 +48,7 @@
     }
   </style>
 </head>
-<body>
+<body >
 
 <div class="navbar">
   <div class="container-fluid">
@@ -170,5 +170,5 @@
   <div class="row content">
     <div class="col-sm-1 sidenav">
     </div>
-   <div class="col-sm-7 text-left"> 
+   <div class="col-sm-7 text-left" > 
     

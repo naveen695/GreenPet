@@ -410,8 +410,10 @@ please login for details
     </div></div> -->
     </c:if>
     </div>
-<div class="col-sm-4 sidenav">
-      <%@ include file="UploadImage.jsp" %>
+	<div class="col-sm-4 sidenav">
+		<c:if test="${loginUserDetails.login == true }">
+    		<%@ include file="UploadImage.jsp" %>
+    	</c:if>
     </div>
   </div>
 </div>

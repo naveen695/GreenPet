@@ -2,12 +2,14 @@ package com.dgree.actions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -15,9 +17,12 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 
+import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.Image;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.PetDetails;
 import com.dgree.model.SignUpResponce;
+import com.dgree.model.UserBean;
 import com.dgree.service.GoesLocationLatLong;
 import com.dgree.service.PetDetailsService;
 import com.dgree.service.PetDetailsServiceImpl;
@@ -42,28 +47,18 @@ public class UplodePetDetails extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.getRequestDispatcher("/home").forward(request, response);
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		logger.info("inside upload pet details");
 		PetDetails petDetails=new PetDetails();
-		petDetails.setPetname(request.getParameter("petname1"));
-		petDetails.setAddress1(request.getParameter("address11"));
-		petDetails.setAddress2(request.getParameter("address21"));
-		petDetails.setCity(request.getParameter("county1"));
-		petDetails.setCity(request.getParameter("city1"));
-		petDetails.setCountry(request.getParameter("country1"));
-		petDetails.setZip(request.getParameter("zip1"));
-		
 		
 		String stringurl = null ;
 		String url = request.getHeader("Referer");
@@ -112,13 +107,17 @@ public class UplodePetDetails extends HttpServlet {
 	        petDetails.setImage(image);
 	    
 	        ServletContext servletContext = request.getServletContext();
-      	    MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
-      	  MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
+      	 //   MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
+      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
 
       	 
 	        GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
 	        PetDetails petDetailsWithLatLong = goesLocationLatLong.findLatitudeLongitude(petDetails);
-		
+	        HttpSession session = request.getSession();
+	        if (session!=null) {
+	        	LoginUserDetails loginUserDetails = (LoginUserDetails)session.getAttribute("loginUserDetails");
+	        	petDetailsWithLatLong.setLoginUserDetails(loginUserDetails);
+			}
 	        String latitude = petDetailsWithLatLong.getLatitude();
 	        String longiute = petDetailsWithLatLong.getLongittude();
 	        

@@ -43,15 +43,6 @@ public class Test
 		BufferedImage bImageFromConvert = ImageIO.read(in);
 		OutputStream out1 = null;
 
-		try {
-		     out1 = new BufferedOutputStream(new FileOutputStream("d://test.png"));
-		     
-		    out1.write(byteArray);
-		} finally {
-		    if (out != null) out.close();
-		}
-		ImageIO.write(bImageFromConvert, "jpg", new File("d://test.jpg"));
-				
 	GridFS fs=new GridFS(db);
 	
 	String newFileName = "IMG_20140122_132026.JPG";

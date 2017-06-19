@@ -14,7 +14,8 @@ private String country;
 private String zip;
 private Image image;
 private List<Image> imageList;
-
+private UserBean userBean;
+private LoginUserDetails loginUserDetails;
 private Map<Object,Image> imageMap;
 
 public Image getImage() {
@@ -117,6 +118,18 @@ public String getLongittude() {
 }
 public void setLongittude(String longittude) {
 	this.longittude = longittude;
+}
+public UserBean getUserBean() {
+	return userBean;
+}
+public void setUserBean(UserBean userBean) {
+	this.userBean = userBean;
+}
+public LoginUserDetails getLoginUserDetails() {
+	return loginUserDetails;
+}
+public void setLoginUserDetails(LoginUserDetails loginUserDetails) {
+	this.loginUserDetails = loginUserDetails;
 }
 private Integer lattitudeInt;
 

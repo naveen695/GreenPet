@@ -2,6 +2,7 @@
 package com.dgree.actions;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
@@ -13,13 +14,17 @@ import javax.servlet.http.HttpSession;
 
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.LoginUserDetails;
+import com.dgree.model.PetDetails;
 import com.dgree.model.SignUpResponce;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
+import com.dgree.service.PetDetailsService;
+import com.dgree.service.PetDetailsServiceImpl;
 import com.dgree.service.UserDetails;
 import com.dgree.service.UserLogin;
 import com.dgree.service.UserSignUp;
 import com.dgree.userDAO.Util;
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,6 +77,16 @@ public class LoginServlet extends HttpServlet {
 		  	sresponce.setStatuscode("0");
 		  	sresponce.setStatusMessage("login susses !"); 
 		  	
+		  	
+		  	
+		  	
+		  	// getting data from db
+      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
+		  	
+		  	loadUserPetInfo(loginUserDetails,mongoClient);
+		  	
+		  	
+		  	
 		  	HttpSession session = request.getSession();
 			session.setAttribute("loginUserDetails", loginUserDetails);
 			  
@@ -97,6 +112,15 @@ public class LoginServlet extends HttpServlet {
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
 	        return;
 
+	}
+
+
+
+	private void loadUserPetInfo(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+		PetDetailsService detailsService=new PetDetailsServiceImpl();
+		List<PetDetails> loadPetDeails = detailsService.loadPetDeails(loginUserDetails,mongoClient);
+		
+		
 	}
 
 }

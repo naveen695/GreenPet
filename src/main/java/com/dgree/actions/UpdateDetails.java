@@ -86,7 +86,7 @@ public class UpdateDetails extends HttpServlet {
 		  	sresponce.setStatusMessage("updated sussesfully !"); 
 	        request.setAttribute("signupresponce", sresponce);
 	        if("GreenPet".equals(stringurl) ||"UpdateDetails".equals(stringurl) ){
-	        	request.getRequestDispatcher("/home").include(request, response);
+	        	request.getRequestDispatcher("/about").include(request, response);
 	        return;
 	        }
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);

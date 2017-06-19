@@ -60,7 +60,7 @@ public class UpdatePetDetails extends HttpServlet {
 		GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
 		goesLocationLatLong.findLatitudeLongitude(petDetails);
 		String latitude = petDetails.getLatitude();
-		String longiute = petDetails.getLongiute();
+		String longiute = petDetails.getLongittude();
 		if (StringUtils.isEmpty(longiute) || StringUtils.isEmpty(longiute)){
 			 SignUpResponce sresponce=new SignUpResponce();
 		    	sresponce.setStatuscode("0");

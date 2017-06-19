@@ -1,8 +1,10 @@
 package com.dgree.service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.model.LoginUserDetails;
 import com.dgree.model.PetDetails;
 import com.dgree.userDAO.PetDetailsDao;
 import com.dgree.userDAO.PetDetailsDaoImpl;
@@ -32,10 +34,14 @@ public class PetDetailsServiceImpl implements PetDetailsService {
 		
 	}
 
+ 
 	@Override
-	public PetDetails loadPetDeails( MongoDatabase mongoDatabase) {
-		// TODO Auto-generated method stub
+	public List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+		PetDetailsDao detailsDao=new PetDetailsDaoImpl();
+		detailsDao.loadPetDeails(loginUserDetails, mongoClient);
+		
 		return null;
+		
 	}
 
 
