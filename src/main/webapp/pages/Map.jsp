@@ -1,23 +1,6 @@
+<p id="demo"></p>
 <script type="text/javascript">
 var center = new google.maps.LatLng(59.76522, 18.35002);
-
-/* function initialize() {
-
-   var mapOptions = {
-       zoom: 7,
-       mapTypeId: google.maps.MapTypeId.ROADMAP,
-       center: center
-   };
-
-   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-   var marker = new google.maps.Marker({
-       map: map,
-       position: center
-   });
-} */
-
-
 
 function showPosition(){
     if(navigator.geolocation){
@@ -29,9 +12,33 @@ function showPosition(){
 function showMap(position){
     // Get location data
      var lat = position.coords.latitude;
-    var long = position.coords.longitude;
-    var latlong = new google.maps.LatLng(lat, long);
-    
+    var longitude = position.coords.longitude;
+    var latlong = new google.maps.LatLng(lat, longitude);
+    var myObj=${petDetails};
+   var count= myObj.perdetails.length;
+   var count1=1;
+   var size=count+count1;
+    var locations = new Array(size)
+	locations [0] = new Array(4)
+
+    locations[0][0]= "my"
+	locations[0][1]= lat
+	locations[0][2]= longitude
+	locations[0][3]= 0
+
+
+
+    	//[ ['my ',lat,longitude,6]];
+    var  i, x = "";
+    	for(var i=1;i<locations.length;i++){
+    		locations [i] = new Array(4)
+			var k=i-count1;
+    		locations[i][0]= myObj.perdetails[k].petName
+    		locations[i][1]= 	myObj.perdetails[k].latitude
+    		locations[i][2]= 	myObj.perdetails[k].longittude
+    		locations[i][3]= i
+        
+    }
      var myOptions = {
         center: latlong,
         zoom: 16,
@@ -44,14 +51,7 @@ function showMap(position){
     var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
     var marker = new google.maps.Marker({position:google.maps.ControlPosition.TOP_CENTER, map:map, title:"You are here!"});
     var infowindow = new google.maps.InfoWindow();
-    var locations = [
-  	  ['my ',lat,long,6],
-        ['Bondi Beach',12.952007,77.693199, 4],
-        ['Coogee Beach', 12.954362, 77.698254, 5],
-        ['Cronulla Beach',12.954332, 77.698554, 3],
-        ['Manly Beach', 12.955753, 77.698404, 2],
-        ['Maroubra Beach',12.954906, 77.698887, 1]
-      ];
+    
     for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),

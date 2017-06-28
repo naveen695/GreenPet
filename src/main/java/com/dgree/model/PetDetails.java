@@ -1,10 +1,13 @@
 package com.dgree.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class PetDetails {
 private String petname;
+
+private String id;
 private String address1;
 private String address2;
 private String state;
@@ -17,6 +20,10 @@ private List<Image> imageList;
 private UserBean userBean;
 private LoginUserDetails loginUserDetails;
 private Map<Object,Image> imageMap;
+private String contentType;
+private String insertedDate;
+private Date date;
+private String petDesc;
 
 public Image getImage() {
 	return image;
@@ -130,6 +137,36 @@ public LoginUserDetails getLoginUserDetails() {
 }
 public void setLoginUserDetails(LoginUserDetails loginUserDetails) {
 	this.loginUserDetails = loginUserDetails;
+}
+public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
+public String getInsertedDate() {
+	return insertedDate;
+}
+public void setInsertedDate(String insertedDate) {
+	this.insertedDate = insertedDate;
+}
+public Date getDate() {
+	return date;
+}
+public void setDate(Date date) {
+	this.date = date;
+}
+public String getContentType() {
+	return contentType;
+}
+public void setContentType(String contentType) {
+	this.contentType = contentType;
+}
+public String getPetDesc() {
+	return petDesc;
+}
+public void setPetDesc(String petDesc) {
+	this.petDesc = petDesc;
 }
 private Integer lattitudeInt;
 

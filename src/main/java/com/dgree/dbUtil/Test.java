@@ -10,9 +10,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.dgree.model.PetDetails;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -21,6 +28,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.util.JSON;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 public class Test
 {
@@ -28,8 +37,30 @@ public class Test
   
   public static void main(String[] args) throws IOException
   {	
+	
+	  MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://treepet:treepet@ds131151.mlab.com:31151/dgree-treepet"));
+		DB db = new DB(mongoClient, "dgree-treepet");
+	  List<PetDetails> petDetails = new ArrayList<>();
+	  PetDetails cartMap=new PetDetails();
+	  cartMap.setAddress1("hi");
+	  petDetails.add(cartMap);
 	  
-    MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://treepet:treepet@ds131151.mlab.com:31151/dgree-treepet"));
+		
+		 JSONObject responseDetailsJson = new JSONObject();
+		    JSONArray jsonArray = new JSONArray();
+
+		    for(PetDetails p : petDetails) {
+		        JSONObject formDetailsJson = new JSONObject();
+		        
+		        Field[] fields = p.getAddress1().getClass().getFields();
+		        
+		        formDetailsJson.put("p",p.getAddress1());
+		       jsonArray.add(formDetailsJson);
+		    }
+		    responseDetailsJson.put("perdetails", jsonArray);//Here you can see the data in json format
+
+	  
+ /*   MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://treepet:treepet@ds131151.mlab.com:31151/dgree-treepet"));
 	DB db = new DB(mongoClient, "dgree-treepet");
 	DBCollection collection = db.getCollection("Dgree_PetDetails");
 	DBCursor find = collection.find();
@@ -54,6 +85,6 @@ public class Test
 		e.printStackTrace();
 	}
 
-  
+*/  
   }
 }

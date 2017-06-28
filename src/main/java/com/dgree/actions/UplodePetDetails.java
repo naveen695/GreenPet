@@ -96,6 +96,8 @@ public class UplodePetDetails extends HttpServlet {
 	                	   petDetails.setCountry(item.getString().trim());
 	                   } else if("zip1".equalsIgnoreCase(item.getFieldName().trim())){
 	                	   petDetails.setZip(item.getString().trim());
+	                   } else if("petDesc".equalsIgnoreCase(item.getFieldName().trim())){
+	                	   petDetails.setPetDesc(item.getString().trim());
 	                   }
 	                   
 	                   }

@@ -30,6 +30,14 @@
 			</div>
 		</div>
 		
+		<div class="form-group">
+			<div class="col-sm-5">
+			  			<label for="petDesc" class="control-label">Desc Of Pet</label>
+			</div>
+  			<div class="col-sm-6">
+  				<textarea placeholder="What are you doing right now ?" id="petDesc"  name="petDesc" class="form-control" required></textarea>
+			</div>
+		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">

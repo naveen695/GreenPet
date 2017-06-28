@@ -38,10 +38,7 @@ public class PetDetailsServiceImpl implements PetDetailsService {
 	@Override
 	public List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
 		PetDetailsDao detailsDao=new PetDetailsDaoImpl();
-		detailsDao.loadPetDeails(loginUserDetails, mongoClient);
-		
-		return null;
-		
+		return detailsDao.loadPetDeails(loginUserDetails, mongoClient);
 	}
 
 

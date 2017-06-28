@@ -81,11 +81,11 @@ public class LoginServlet extends HttpServlet {
 		  	
 		  	
 		  	// getting data from db
-      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
+      	  /*  MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
 		  	
 		  	loadUserPetInfo(loginUserDetails,mongoClient);
 		  	
-		  	
+		  */	
 		  	
 		  	HttpSession session = request.getSession();
 			session.setAttribute("loginUserDetails", loginUserDetails);
@@ -105,7 +105,7 @@ public class LoginServlet extends HttpServlet {
   }
     
 	  	request.setAttribute("signupresponce", sresponce);
-	        if("GreenPet".equals(stringurl) || "LoginServlet".equals(stringurl) ||"LogOutServlet".equals(stringurl) ){
+	        if("GreenPet".equals(stringurl) || "LoginServlet".equals(stringurl) ||"LogOutServlet".equals(stringurl) ||  "HomeServlet".equals(stringurl) ){
 	        	request.getRequestDispatcher("/home").include(request, response);
 	        return;
 	        }
