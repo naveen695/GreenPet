@@ -84,14 +84,6 @@ var infowindow = new google.maps.InfoWindow({
         title:'hi'
       });
       
-    /*   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    } */
-
     marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
