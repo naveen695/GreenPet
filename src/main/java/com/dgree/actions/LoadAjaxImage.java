@@ -18,7 +18,7 @@ public class LoadAjaxImage extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void  doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MongoClient mongoClient = (MongoClient)request.getServletContext().getAttribute("mongoClient");
 		 MongoDatabase mongoDatabase = (MongoDatabase)request.getServletContext().getAttribute("MongoDatabase");
 		
