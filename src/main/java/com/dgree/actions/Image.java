@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.dgree.model.PetDetails;
 
 /**
@@ -34,7 +32,6 @@ public class Image extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String[] ids = request.getPathInfo().substring(1).split("/");
-		
 		ArrayList<PetDetails> attribute = (ArrayList<PetDetails>)request.getSession().getAttribute("petDeails");
 		for (Iterator iterator = attribute.iterator(); iterator.hasNext();) {
 			PetDetails petDetails = (PetDetails) iterator.next();

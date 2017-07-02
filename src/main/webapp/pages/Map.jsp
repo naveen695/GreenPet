@@ -19,25 +19,23 @@ function showMap(position){
    var count1=1;
    var size=count+count1;
     var locations = new Array(size)
-	locations [0] = new Array(4)
-
-    locations[0][0]= "my"
+	locations [0] = new Array(6)
+    locations[0][0]= 0
 	locations[0][1]= lat
 	locations[0][2]= longitude
-	locations[0][3]= 0
+    locations[0][3]= "my location"
+    locations[0][3]= "Hi !"
 
-
-
-    	//[ ['my ',lat,longitude,6]];
     var  i, x = "";
     	for(var i=1;i<locations.length;i++){
     		locations [i] = new Array(4)
 			var k=i-count1;
-    		locations[i][0]= myObj.perdetails[k].petName
+    		locations[i][0]= i
     		locations[i][1]= 	myObj.perdetails[k].latitude
     		locations[i][2]= 	myObj.perdetails[k].longittude
-    		locations[i][3]= i
-        
+    		locations[i][3]= myObj.perdetails[k].petName
+    		locations[i][4]= myObj.perdetails[k].petDesc
+    		locations[i][5]= myObj.perdetails[k].id
     }
      var myOptions = {
         center: latlong,
@@ -51,50 +49,30 @@ function showMap(position){
     var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
     var marker = new google.maps.Marker({position:google.maps.ControlPosition.TOP_CENTER, map:map, title:"You are here!"});
     
-    
-    var contentString = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-    '<div id="bodyContent">'+
-    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-    'sandstone rock formation in the southern part of the '+
-    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-    'south west of the nearest large town, Alice Springs; 450&#160;km '+
-    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-    'Aboriginal people of the area. It has many springs, waterholes, '+
-    'rock caves and ancient paintings. Uluru is listed as a World '+
-    'Heritage Site.</p>'+
-    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-    '(last visited June 22, 2009).</p>'+
-    '</div>'+
-    '</div>';
-
-var infowindow = new google.maps.InfoWindow({
-  content: contentString
-});
+var infowindow = new google.maps.InfoWindow();
     
     for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        title:'hi'
+        title:locations[i][3]
       });
-      
-    marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
-	}
+
+		google.maps.event.addListener(marker, 'click', (function (marker, i) {
+			return function () {
+					infowindow.setContent('<div class="media"><div class="media-left"> <img src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" style="width:160px">   </div>  <div class="media-body"><h4 class="media-heading">Pet Details</h4> <p><b> Name : '+locations[i][3]+"<br/> desc :  "+locations[i][4]+"<br/>."+'</b>.</p> </div> </div>');
+					infowindow.open(map, marker);
+			}
+		})(marker, i));
+    }
+    
     google.maps.event.addListener(searchBox, 'places_changed', function() {
       searchBox.set('map', null);
       var places = searchBox.getPlaces();
             var marker, i;
 
       var bounds = new google.maps.LatLngBounds();
-      var i, place;
+      var i, place;	
       for (i = 0; place = places[i]; i++) {
         (function(place) {
           var marker = new google.maps.Marker({
@@ -107,13 +85,8 @@ var infowindow = new google.maps.InfoWindow({
               this.unbindAll();
             }
           });
-
-          
           bounds.extend(place.geometry.location);
-
-
         }(place));
-
       }
       map.fitBounds(bounds);
       searchBox.set('map', map);
@@ -146,7 +119,21 @@ $(document).ready( function () {
        map.setCenter(center);
    });
 });
-
+		
+	/* $(document).ready(function () {
+	    $("#imageload").onload(function () {
+	        $.ajax({
+	            type: "GET",
+	            url: "LoadAjaxImage",
+	            data: {
+	                "qrtext": "www.mypage.com"
+	            },
+	            success: function (result) {
+	                $("#content").html('<img src="'+result+'" >'); //changed here
+	            }
+	        });
+    });
+}); */
 </script>
 <style>
 		body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top, .modal-open .modal-container {

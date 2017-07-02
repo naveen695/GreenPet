@@ -104,6 +104,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.IndexServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LoadAjaxImage</servlet-name>
+  	<display-name>LoadAjaxImage</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.LoadAjaxImage</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -163,6 +169,10 @@
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
   	<url-pattern>/IndexServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoadAjaxImage</servlet-name>
+  	<url-pattern>/LoadAjaxImage/*</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

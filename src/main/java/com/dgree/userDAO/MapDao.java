@@ -1,20 +1,27 @@
 package com.dgree.userDAO;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.Image;
 import com.dgree.model.PetDetails;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
 
 public class MapDao {
 	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
@@ -48,7 +55,25 @@ public class MapDao {
 		
 		return list;
 	}
-	
+	public Image loadImage( MongoClient mongoClient,String ID){
+		DB db = new DB(mongoClient, "dgree-treepet");
+		GridFS gfsPhoto = new GridFS(db, "images");
+		BasicDBObject whereQueryImage = new BasicDBObject();
+		whereQueryImage.append("_id",new ObjectId(ID));
+		GridFSDBFile imageForOutput = gfsPhoto.findOne(whereQueryImage);
+		Image image=new Image();
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			imageForOutput.writeTo(baos);
+			byte[] bytes = baos.toByteArray();
+			image.setName(imageForOutput.getFilename());
+			image.setContentType(imageForOutput.getContentType());
+			image.setFileByte(bytes);
+		} catch (IOException e) {
+			logger.info("inside load images for user ."+imageForOutput);
+		}		return image;
+		
+	}
 	
 	
 }

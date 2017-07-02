@@ -37,9 +37,24 @@ public class Test
   
   public static void main(String[] args) throws IOException
   {	
-	
-	  MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://treepet:treepet@ds131151.mlab.com:31151/dgree-treepet"));
-		DB db = new DB(mongoClient, "dgree-treepet");
+	  
+	  int width = 963;    //width of the image
+	    int height = 640;   //height of the image
+	    BufferedImage image = null;
+	    File f = null;
+
+	    //read image
+	    
+	    		BufferedImage originalImage =
+	    	                              ImageIO.read(new File("D:/Pizigani_1367_Chart_10MB.jpg"));
+
+	    		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    		ImageIO.write( originalImage, "jpg", baos );
+	    		baos.flush();
+	    		byte[] imageInByte = baos.toByteArray();
+	    		baos.close();
+	      System.out.println("Reading complete.");
+	    	/*
 	  List<PetDetails> petDetails = new ArrayList<>();
 	  PetDetails cartMap=new PetDetails();
 	  cartMap.setAddress1("hi");
@@ -58,7 +73,7 @@ public class Test
 		       jsonArray.add(formDetailsJson);
 		    }
 		    responseDetailsJson.put("perdetails", jsonArray);//Here you can see the data in json format
-
+*/
 	  
  /*   MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://treepet:treepet@ds131151.mlab.com:31151/dgree-treepet"));
 	DB db = new DB(mongoClient, "dgree-treepet");
