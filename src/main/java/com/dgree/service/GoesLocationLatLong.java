@@ -11,12 +11,16 @@ import org.jdom2.output.DOMOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.PetDetails;
 import com.dgree.userDAO.Util;
+import com.mongodb.diagnostics.logging.Logger;
 
 public class GoesLocationLatLong {
 
-	
+	private static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DBConnectionImpl.class.getName());
+    
 	public PetDetails findLatitudeLongitude(PetDetails petDetails){
 		
 		String latLangServiceUrl = Util.LAT_LANG_SERVICE_URL;
@@ -50,8 +54,10 @@ public class GoesLocationLatLong {
 				finalurl1 = finalurl1.concat(country);
 			if(StringUtils.isNotBlank(finalurl1))
 			finalurl2 = finalurl1.concat(Key);
+			logger.info("::::"+finalurl1);
 		}		
 		try { 
+			logger.info(finalurl2+"::::");
 			URL url = new URL(finalurl2.replace(" ", ",")); 
 	        HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 
 	        connection.setDoOutput(true); 

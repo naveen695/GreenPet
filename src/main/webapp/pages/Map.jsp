@@ -1,6 +1,22 @@
 <p id="demo"></p>
 <script type="text/javascript">
-var center = new google.maps.LatLng(59.76522, 18.35002);
+
+function loadimages(locations) {
+	var dataRequestObject= {}; 
+    dataRequestObject= {id:locations};
+
+	 	 $.ajax({
+	         type : "post",
+	         url : "LoadMultipleImages",
+	         data : dataRequestObject,
+	         success : function(responseText) {
+	        	 $('#msg1').html(responseText);
+	         },
+	         error : function(xhr, ajaxOptions, thrownError) {
+	             $('#msg1').html(" <div class='jumbotron'> ERROR Loading images. </div>");
+	         }
+	    });
+}
 
 function showPosition(){
     if(navigator.geolocation){
@@ -60,7 +76,7 @@ var infowindow = new google.maps.InfoWindow();
 
 		google.maps.event.addListener(marker, 'click', (function (marker, i) {
 			return function () {
-					infowindow.setContent('<div class="media"><div class="media-left"> <img src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" style="width:160px">   </div>  <div class="media-body"><h4 class="media-heading">Pet Details</h4> <p><b> Name : '+locations[i][3]+"<br/> desc :  "+locations[i][4]+"<br/>."+'</b>.</p> </div> </div>');
+					infowindow.setContent('<div class="panel panel-primary"><div class="panel-heading"><h4 class="modal-title">Pet Details</h4></div><div class="panel-body"><div class="col-sm-12"><div class="col-sm-8"><img src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" height="160px" width="160px"></div><div class="col-sm-4"><div class="title h5">  <button id="loadimages1" type="submit"  onclick="loadimages(\''+locations[i][5]+'\')" >'+locations[i][3]+'</button></div></div></div></div></div>');
 					infowindow.open(map, marker);
 			}
 		})(marker, i));

@@ -99,6 +99,7 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		basicDBObject.put("_id",-1);
 				
 				DBCursor cursor = collection.find(whereQuery).sort(basicDBObject);
+		try{
 				while (cursor.hasNext()) {
 				
 					PetDetails details=new PetDetails();
@@ -141,7 +142,10 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 					}
 				list.add(details);
 				}
-
+		}finally {
+			cursor.close();
+		}
+			
 	return list;
 	}
 

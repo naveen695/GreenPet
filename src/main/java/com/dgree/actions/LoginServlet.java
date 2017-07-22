@@ -80,17 +80,14 @@ public class LoginServlet extends HttpServlet {
 		  	
 		  	
 		  	
-		  	// getting data from db
-      	  /*  MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
+		 // getting data from db
+      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
 		  	
-		  	loadUserPetInfo(loginUserDetails,mongoClient);
-		  	
-		  */	
-		  	
+		  	List<PetDetails> loadUserPetInfo = loadUserPetInfo(loginUserDetails,mongoClient);
 		  	HttpSession session = request.getSession();
 			session.setAttribute("loginUserDetails", loginUserDetails);
-			  
-
+			session.setAttribute("petDeails", loadUserPetInfo);
+			
 	  }else if(validateUser.isLoginValid()==true && validateUser.getLoginStauts().equals("not_active")){
 		  loginUserDetails.setLogin(false);
 		  loginUserDetails.setMessage("not_activate");
@@ -116,11 +113,9 @@ public class LoginServlet extends HttpServlet {
 
 
 
-	private void loadUserPetInfo(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+	private List<PetDetails> loadUserPetInfo(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
 		PetDetailsService detailsService=new PetDetailsServiceImpl();
-		List<PetDetails> loadPetDeails = detailsService.loadPetDeails(loginUserDetails,mongoClient);
-		
-		
+		return  detailsService.loadPetDeails(loginUserDetails,mongoClient);
 	}
 
 }

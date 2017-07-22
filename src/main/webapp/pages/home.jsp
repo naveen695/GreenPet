@@ -151,7 +151,8 @@
                   
                     <div class="pull-left meta">
                         <div class="title h5">
-                            <a href="#"><b>${user.petname}</b></a>
+                            <a href="ImageUpdateServlet?inputName=${user.id}" ><b>${user.petname}</b>
+                            </a>
                         </div>
                  	</div>  
                     

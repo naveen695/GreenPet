@@ -81,26 +81,28 @@ please login for details
                      <th>County</th>
                     <th>Zip Code</th>
                     <th>Country</th>
-                    <th>Pet Image</th>
                     <th>edit</th>
                 	</tr>
                 </thead>
    				<tbody id="mytab">
+   				
+        		<c:forEach var="user" items="${petDeails}">
 			    	<tr>
-				    	<td>Alian </td>
-    					<td>Marathahalli, </td>
-    					<td>tulasi theater</td>
-    					<td>Bangalore </td>
-    					<td>KA</td>
-   						<td>560037</td>
-   						<td>india</td>
+				    	<td>${user.petname} </td>
+    					<td>${user.address1}</td>
+    					<td>${user.address2}</td>
+    					<td>${user.city}</td>
+    					<td>${user.county}</td>
+   						<td>${user.zip}</td>
+   						<td>${user.country}</td>
    						<td></td>
     					<td>	
     							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
     							<span class="glyphicon glyphicon-pencil"></span></button>
     					</td>
     				</tr>
-				</tbody>        
+    			</c:forEach>
+     				</tbody>        
 		</table>
 
  <script type="text/javascript">

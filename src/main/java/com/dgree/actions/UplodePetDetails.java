@@ -143,7 +143,7 @@ public class UplodePetDetails extends HttpServlet {
 	        	sresponce.setStatuscode("0");
 	        	sresponce.setStatusMessage("updated sussesfully !"); 
 	        	request.setAttribute("signupresponce", sresponce);
-	        	if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl)){
+	        	if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl) || "UplodePetDetails".equals(stringurl)){
 	        		request.getRequestDispatcher("/home").include(request, response);
 	        	return;
 	        	}

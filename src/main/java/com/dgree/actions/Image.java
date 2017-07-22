@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.dgree.model.PetDetails;
 
 /**
@@ -29,13 +31,17 @@ public class Image extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String[] ids = request.getPathInfo().substring(1).split("/");
-		ArrayList<PetDetails> attribute = (ArrayList<PetDetails>)request.getSession().getAttribute("petDeails");
+	protected void doGet(HttpServletRequest request1, HttpServletResponse response) throws ServletException, IOException {
+		
+		String[] ids = request1.getPathInfo().substring(1).split("/");
+		
+		if (ids.length==1) {
+		ArrayList<PetDetails> attribute = (ArrayList<PetDetails>)request1.getSession().getAttribute("petDeails");
+		if (attribute != null) {
+		
 		for (Iterator iterator = attribute.iterator(); iterator.hasNext();) {
 			PetDetails petDetails = (PetDetails) iterator.next();
-			if (petDetails != null && petDetails.getPetname().equals(ids[0])) {
+			if ((petDetails != null && petDetails.getPetname().equals(ids[0]))|| petDetails.getImage().getName().equalsIgnoreCase(ids[0])) {
 				byte[] fileByte = petDetails.getImage().getFileByte();
 				response.setContentType("image/jpeg");
 				ServletOutputStream outputStream = response.getOutputStream();
@@ -45,7 +51,10 @@ public class Image extends HttpServlet {
 				return;
 			}
 		}
-			response.getWriter().append("Served at: ").append(request.getContextPath());
+		}
+		}
+		 
+		 
 	}
 
 	/**
