@@ -10,15 +10,6 @@ $(document).ready(function () {
 	});	
 
 
-$(document).ready(function () {
-	$("td", this).on("click", function () {
-	    var tds = $(this).parents("tr").find("td");
-	    $.each(tds, function (i, v) {
-	        $($(".data-form1 input")[i]).val($(v).text());
-	    });
-	});
-	});	
-
 
 
 </script>
@@ -81,7 +72,6 @@ please login for details
                      <th>County</th>
                     <th>Zip Code</th>
                     <th>Country</th>
-                    <th>edit</th>
                 	</tr>
                 </thead>
    				<tbody id="mytab">
@@ -95,11 +85,11 @@ please login for details
     					<td>${user.county}</td>
    						<td>${user.zip}</td>
    						<td>${user.country}</td>
-   						<td></td>
+   						<!-- <td></td>
     					<td>	
     							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
     							<span class="glyphicon glyphicon-pencil"></span></button>
-    					</td>
+    					</td> -->
     				</tr>
     			</c:forEach>
      				</tbody>        
@@ -270,146 +260,8 @@ please login for details
 </div>
     
     
- 
+
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-<div class="modal fade data-form1" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-    	<div class="modal-content">
-    	    <div class="modal-header">
-       			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        		<h4 class="modal-title custom_align" id="Heading">Edit or Update Your pet Detail</h4>
-      		</div>
-	<div class="modal-body">
-	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UpdatePetDetails">
-  		
-  		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="inputFirstName" class="control-label">Name Of Pet</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input  name="petname" class="form-control" id="petname" placeholder="Enter Pet Name"  required>
-			</div>
-		</div>
-		
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="address1" class="control-label">Address1 (house/street)</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="address1" class="form-control" id="address1" placeholder="Enter Address Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="address2" class="control-label">Address2 (street/*)</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="address2" class="form-control" id="address2" placeholder="Enter Address Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		  
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="city" class="control-label">City</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="city" class="form-control" id="city" placeholder="Enter city Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="county" class="control-label">County</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="county" class="form-control" id="county" placeholder="Enter county Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="zip" class="control-label">Post Code</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="zip" class="form-control" id="zip" placeholder="Enter Address Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-			  			<label for="inputFirstName" class="control-label">Country</label>
-			</div>
-  			<div class="col-sm-6">
-  				<input name="country" class="form-control" id="country" placeholder="Enter city Name"  required>
-  				<div class="help-block with-errors"></div>
-			</div>
-		</div>
-		
-		
-		<div class="form-group">
-			<div class="col-sm-5">
-					<label for="inputFirstName" class="control-label ">Pet Image</label>
-			</div>
-  			<div class="col-sm-6">
-    			<input type="file" name="imageId" class="form-control" id="imageId" 
-    			placeholder="Upload image . . . " required accept="image/*">
-  	 			<div class="help-block with-errors"></div>
- 			</div>
-  		</div>
-  	
-  	
-  	
-  		<div class="form-group">
-  			<div class="col-sm-offset-1 col-sm-2">
-      		</div>
-      		<div class="col-sm-offset-1 col-sm-6">
-      			<button type="submit" class="btn btn-success btn-primary">Submit</button>
- 			</div>
- 		</div>
-	</form>
-      		</div>
-       </div>
-  	</div>
-</div>
-    <!-- 
-    
-    
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-      </div>
-          <div class="modal-body">
-       
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-       
-      </div>
-        <div class="modal-footer ">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
-        </div>
-    </div></div> -->
     </c:if>
     </div>
 	<div class="col-sm-4 sidenav">

@@ -22,7 +22,7 @@ import com.mongodb.client.MongoDatabase;
 public class EmailVerification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	private static Logger logger = Logger.getLogger("com.dgree.actions");
 	   
     public EmailVerification() {
         super();

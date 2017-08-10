@@ -127,6 +127,18 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.ImageUpdateServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UploadMultipleImages</servlet-name>
+  	<display-name>UploadMultipleImages</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.UploadMultipleImages</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Images</servlet-name>
+  	<display-name>Images</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.Images</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -202,6 +214,14 @@
   <servlet-mapping>
   	<servlet-name>ImageUpdateServlet</servlet-name>
   	<url-pattern>/ImageUpdateServlet/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UploadMultipleImages</servlet-name>
+  	<url-pattern>/UploadMultipleImages</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Images</servlet-name>
+  	<url-pattern>/Images/*</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

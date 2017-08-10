@@ -36,13 +36,14 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 	public PetDetailsDaoImpl() {
 	}	
 	
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	private static Logger logger = Logger.getLogger(PetDetailsDaoImpl.class.getName());
 
 
 	@Override
 	public void insertPetDeails(PetDetails petDetails,MongoClient mongoClient) {
 		DB db = new DB(mongoClient, "dgree-treepet");
 		DBCollection collection = db.getCollection("Dgree_PetDetails");
+		DBCollection dgreeImageMap = db.getCollection("dgree_ImageMap");
 			
 		GridFS fs=new GridFS(db,"images");
 		GridFSInputFile createFile = fs.createFile(petDetails.getImage().getFileByte());
@@ -55,7 +56,6 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		basicDBObject.put("_id", id);
 		basicDBObject.put("user_id",petDetails.getLoginUserDetails().getEmail());
 		basicDBObject.put("petName",petDetails.getPetname());
-
 		basicDBObject.put("address1",petDetails.getAddress1());
 		basicDBObject.put("address2", petDetails.getAddress2());
 		basicDBObject.put("city", petDetails.getCity());
@@ -63,14 +63,17 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		basicDBObject.put("country", petDetails.getCountry());
 		basicDBObject.put("zip", petDetails.getZip());
 		basicDBObject.put("image_name", petDetails.getImage().getName());
-		//basicDBObject.put("content_type",  petDetails.getImage().getContentType());
 		basicDBObject.put("latitude", petDetails.getLatitude());
 		basicDBObject.put("longittude", petDetails.getLongittude());
 		basicDBObject.put("petDesc", petDetails.getPetDesc());
 		
-		Date date=new Date();
-	//	basicDBObject.put("insert_date", date);
 		collection.insert(basicDBObject);
+
+		BasicDBObject dgreeImageMapObject=new BasicDBObject();
+		dgreeImageMapObject.put("petId", id);
+		dgreeImageMapObject.put("imageId", id);
+		dgreeImageMapObject.put("homePage", 1);
+		dgreeImageMap.insert(dgreeImageMapObject);
 	
 	}		
 

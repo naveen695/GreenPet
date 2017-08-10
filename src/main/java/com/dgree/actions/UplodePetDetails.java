@@ -47,7 +47,7 @@ public class UplodePetDetails extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+    private static Logger logger = Logger.getLogger(UplodePetDetails.class.getName());
 
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			request.getRequestDispatcher("/home").forward(request, response);
@@ -57,7 +57,7 @@ public class UplodePetDetails extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("inside upload pet details");
+		logger.info("inside -> UplodePetDetails.doPpost() for uploading pet details with image  initilly.");
 		PetDetails petDetails=new PetDetails();
 		
 		String stringurl = null ;
@@ -103,7 +103,7 @@ public class UplodePetDetails extends HttpServlet {
 	                   }
 	                  } 
 	                  catch (Exception e){
-	                    request.setAttribute("message", "File Upload Failed due to " + e);
+	                    request.setAttribute("message", "File Upload Failed due to ");
 	                  }
 	        	}
 	        petDetails.setImage(image);

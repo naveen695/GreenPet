@@ -61,7 +61,7 @@ public class UpdatePetDetails extends HttpServlet {
 		goesLocationLatLong.findLatitudeLongitude(petDetails);
 		String latitude = petDetails.getLatitude();
 		String longiute = petDetails.getLongittude();
-		if (StringUtils.isEmpty(longiute) || StringUtils.isEmpty(longiute)){
+		if (StringUtils.isEmpty(longiute) || StringUtils.isEmpty(latitude)){
 			 SignUpResponce sresponce=new SignUpResponce();
 		    	sresponce.setStatuscode("0");
 			  	sresponce.setStatusMessage("not updated sussesfully !"); 
