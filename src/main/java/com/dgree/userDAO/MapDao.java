@@ -4,17 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.Image;
 import com.dgree.model.PetDetails;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -24,9 +23,7 @@ import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 
 public class MapDao {
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
-    
-	  
+	public static Logger logger= LogManager.getLogger();
 	public List<PetDetails> getPetDetails(MongoDatabase mongoDatabase){
 		logger.info("  ----> mapDao.getPetDetails");
 		List<PetDetails> list=new ArrayList<>();

@@ -73,7 +73,7 @@ public class IndexServlet extends HttpServlet {
 		        jsonArray.add(formDetailsJson);
 		    }
 		    responseDetailsJson.put("perdetails", jsonArray);//Here you can see the data in json format
-			return responseDetailsJson.toJSONString();
+			return responseDetailsJson.toJSONString(); 
 	}
 
 }

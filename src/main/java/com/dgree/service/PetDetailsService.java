@@ -13,7 +13,7 @@ public interface PetDetailsService {
 
 
 
-	void insertPetDeails(PetDetails petDetails, MongoClient MongoClient);
+	public void insertPetDeails(PetDetails petDetails, MongoClient MongoClient);
 
 	public java.util.List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient);
 }

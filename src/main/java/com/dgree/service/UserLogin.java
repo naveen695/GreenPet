@@ -1,18 +1,17 @@
 package com.dgree.service;
 
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
 import com.dgree.userDAO.LoginUserDao;
 import com.dgree.userDAO.User;
-import com.dgree.userDAO.UserDao;
 import com.mongodb.client.MongoDatabase;
 
 public class UserLogin implements UserDetails {
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	public static Logger logger= LogManager.getLogger();
 	
 	@Override
 	public ValidateUser validateUser(MongoDatabase mongoDatabase, UserBean us) {

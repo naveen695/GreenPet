@@ -51,58 +51,51 @@ public class LoadMultipleImages extends HttpServlet {
 		StringBuilder outputResponce=new StringBuilder();
 		StringBuilder html= new StringBuilder("<div class='jumbotron'>");
 		
-		String nextNum = request.getParameter("nextNum");
-		String backNum = request.getParameter("backNum");
-		
-		int next = 0 ;
-		int back = 0 ;
-
-		if (StringUtils.isNotBlank(nextNum) || StringUtils.isNotBlank(backNum)) {
-		try{
-				next = Integer.parseInt(nextNum);
-				back = Integer.parseInt(backNum);
-		}catch(Exception e){
-				
-		}
-		if ("next".equals(type)) {
-			if (loadMultipleImage.size()>next) {
-				back=next;
-				next = next+1;
-				if (next==loadMultipleImage.size()) {
-					next=0;
-				}
-			}else{
-				//load
+		String pageIndex = request.getParameter("pageIndex");
+		Integer page=1;
+		 
+		if (StringUtils.isNotBlank(pageIndex)) {
+			int pageNum = 0;
+			try{
+				pageNum = Integer.parseInt(pageIndex);
+			}catch(Exception e){
 			}
-		}else if("back".equals(type)){
-			if (loadMultipleImage.size()>back) {
-			next=back;
-			if(back==0)
-				//do load im
-				back=loadMultipleImage.size()-1;
-			else
-				//2
-				back=back-1;
-			}else{
-				//load
-			}
-		}
-	
-		
-
-		}
-		
-				
-
 			
-		for (String idString : loadMultipleImage) {
-			outputResponce.append("<img src=\"LoadAjaxImage/"+idString+"\" style=\"width : 100px\" ><br/></br>"
-					+ "<br>  <input type=\"hidden\" id=\"nextNum\" value=\""+next+"\"> </br>"
-							+ " <input type=\"hidden\" id=\"backNum\" value=\""+back+"\">  "
+			if ("next".equals(type)) {
+				if (loadMultipleImage.size()==pageNum) {
+					page=1;
+				}else{
+					page = ++pageNum;
+				}
+			
+			}else if("back".equals(type)){
+				if (loadMultipleImage.size()==1) {
+					page = loadMultipleImage.size();
+				}else{
+					page = --pageNum;
+				}
+			}	
+		}
+		String loadingImageID = null;
+			int pageCount;
+		if (page==0) {
+			  loadingImageID = loadMultipleImage.get(page);
+			  pageCount=page+1;
+		} else if(page<0){
+			  loadingImageID = loadMultipleImage.get(0);
+			  pageCount=1;
+		}else{
+		  loadingImageID = loadMultipleImage.get(page-1);
+		  pageCount=page;
+
+		}
+		
+		
+			
+			outputResponce.append("<a onclick=\"zoom1();\"   data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"image1\" src=\"LoadAjaxImage/"+loadingImageID+"\" style=\"width: 250px;height: 340px;\"></a><br/></br>"
+					+ "<br>"+pageCount+"/"+loadMultipleImage.size()+"<input type=\"hidden\" id=\"pageIndex\" value=\""+page+"\"> </br>"
 							+ "<input type=\"submit\" value=\"back\" onclick=\"loadajaximages(\'"+id+"\','back')\"> "
 									+ "<input type=\"submit\" value=\"next\" onclick=\"loadajaximages(\'"+id+"\','next')\"> </form>");
-			break;
-		}
 	
 		response.getWriter().write(html.append(outputResponce.toString()).append("</div>").toString());
 	}

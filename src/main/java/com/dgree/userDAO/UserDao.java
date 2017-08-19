@@ -1,12 +1,12 @@
 package com.dgree.userDAO;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
@@ -16,10 +16,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.UpdateResult;
-import com.sun.javafx.collections.MappingChange.Map;
 
 public class UserDao implements User{
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	public static Logger logger= LogManager.getLogger();
 
 	@Override
 	public ValidateUser validateNewUser(MongoDatabase mongoDatabase,UserBean us) {

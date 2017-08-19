@@ -137,34 +137,43 @@
 	
 <div style="height: 500px; overflow: scroll;">
 	<c:forEach var="user" items="${petDeails}">
-        		<div class="col-sm-12">
-        	    <div class="panel panel-white post panel-shadow">
-        	   <div class="col-sm-4">  
-                <div class="post-heading">
-                	
-                 
+        	<div class="col-sm-12">
+        		<div class="panel panel-white post panel-shadow">
+        	   	<div class="col-sm-4"> 
+               		<div class="post-heading">
                     <div class="pull-left image">
 						<a href="#" data-image="small/Image" data-zoom-image="large/Image"> 
 							<img src="Image/${user.petname}" height="100px" width="100px" class="img-circle avatar" ></img>
 						</a>
                     </div>
-                  
-                    <div class="pull-left meta">
-                        <div class="title h5">
-                            <a href="ImageUpdateServlet?inputName=${user.id}" ><b>${user.petname}</b>
-                            </a>
-                        </div>
-                 	</div>  
-                    
-                  </div>
-              </div> 
-              <div class="col-sm-8">
-                <div class="post-description"> 
-                        <div class="title h5">
-                            <a href="#"><b>${user.petDesc}</b></a>
-                        </div>
-                
-                	<textarea placeholder="What are you doing right now?" ></textarea>
+                	</div>
+	           	</div> 
+	            <div class="col-sm-8">
+              		  
+              		  
+              		 <table class="table">
+  						 <tbody>
+    							<tr>
+        							<th>TreeName :</th>
+       								<td><a href="ImageUpdateServlet?inputName=${user.id}" ><b>${user.petname}</b></a></td>
+      							</tr>
+      							<tr>
+        							<th>Pet Desc :</th>
+       								<td><textarea  placeholder="What are you doing right now?"  readonly="readonly">${user.petDesc}</textarea></td>
+      							</tr>
+						</tbody>
+					</table>
+             	
+             		<%-- <div class="post-description"> 
+                        <div>
+                       		<div class="title h5">
+                       			PetName :
+                            	<a href="ImageUpdateServlet?inputName=${user.id}" ><b>${user.petname}</b></a>
+                        	</div>
+                 		</div>
+                 	
+                	PetDesc :
+                	<textarea  placeholder="What are you doing right now?" >${user.petDesc}</textarea>
                     <div class="stats">
                         <a href="#" class="btn btn-default stat-item">
                             <i class="fa fa-thumbs-up icon"></i>2
@@ -173,7 +182,7 @@
                             <i class="fa fa-thumbs-down icon"></i>12
                         </a>
                     </div>
-                </div>
+                </div> --%>
               </div>
               
 	            </div>

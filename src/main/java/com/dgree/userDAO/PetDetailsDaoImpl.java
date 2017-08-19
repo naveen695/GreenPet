@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.dgree.dbUtil.DBConnectionImpl;
@@ -28,6 +30,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.UpdateResult;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
@@ -36,7 +39,7 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 	public PetDetailsDaoImpl() {
 	}	
 	
-	private static Logger logger = Logger.getLogger(PetDetailsDaoImpl.class.getName());
+	public static Logger logger= LogManager.getLogger();
 
 
 	@Override
@@ -79,8 +82,29 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 
 	@Override
 	public void updatePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase) {
-		// TODO Auto-generated method stub
-		
+
+		MongoCollection<Document> collection = mongoDatabase.getCollection("Dgree_PetDetails");
+			
+		 		
+		BasicDBObject basicDBObject=new BasicDBObject();
+		basicDBObject.put("petDesc", petDetails.getPetDesc());
+		basicDBObject.put("petName",petDetails.getPetname());
+		basicDBObject.put("address1",petDetails.getAddress1());
+		basicDBObject.put("address2", petDetails.getAddress2());
+		basicDBObject.put("city", petDetails.getCity());
+		basicDBObject.put("county", petDetails.getCounty());
+		basicDBObject.put("country", petDetails.getCountry());
+		basicDBObject.put("zip", petDetails.getZip());
+		basicDBObject.put("latitude", petDetails.getLatitude());
+		basicDBObject.put("longittude", petDetails.getLongittude());
+
+		Bson filter = new Document("_id",petDetails.getId());
+		Bson updateOperationDocument = new Document("$set", basicDBObject);
+		UpdateResult updateOne = collection.updateOne(filter, updateOperationDocument);
+				
+
+		 
+			
 	}
 
 	@Override
@@ -152,4 +176,10 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 	return list;
 	}
 
+	@Override
+	public void updatePetDeails(PetDetails petDetails, MongoClient mongoClient) {
+		// TODO Auto-generated method stub
+		
+	}
+ 
 }

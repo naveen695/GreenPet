@@ -3,7 +3,6 @@ package com.dgree.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -13,7 +12,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.dgree.dbUtil.DBConnectionImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
@@ -24,7 +25,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class UserSignUp implements UserDetails{
 
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	public static Logger logger= LogManager.getLogger();
 		
 	 Map<String, String> properties = new HashMap<>();
 	 

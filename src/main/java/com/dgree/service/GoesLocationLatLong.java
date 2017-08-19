@@ -5,24 +5,26 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.DOMOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.PetDetails;
 import com.dgree.userDAO.Util;
-import com.mongodb.diagnostics.logging.Logger;
 
 public class GoesLocationLatLong {
+	public static Logger logger= LogManager.getLogger();
 
-	private static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DBConnectionImpl.class.getName());
     
 	public PetDetails findLatitudeLongitude(PetDetails petDetails){
-		
+		logger.info(" -> Inside find Latitude Longitude for pet details .");
+
 		String latLangServiceUrl = Util.LAT_LANG_SERVICE_URL;
 		String address="address=";
 		String Key=Util.GOOGLE_KEY;
@@ -68,7 +70,6 @@ public class GoesLocationLatLong {
 			  int responseCode = connection.getResponseCode();
 			if (responseCode == 200) {
 				String output;
-				System.out.println("Output from Server .... \n");
 				StringBuilder sb = new StringBuilder();
 				while ((output = br.readLine()) != null) {
 					sb.append(output);
@@ -92,8 +93,10 @@ public class GoesLocationLatLong {
 		        }	        
 		        connection.disconnect(); 	
 			}
+		       logger.info(" - > longitude/lattitude values :"+petDetails.getLatitude() +":"+petDetails.getLatitude()); 
+
 	    } catch(Exception e) { 
-	        throw new RuntimeException(e); 
+	       logger.info(" - > Exception in finding longitude/lattitude ", e); 
 	    }
 		return petDetails; 
 	}

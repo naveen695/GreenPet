@@ -2,6 +2,8 @@
 <script type="text/javascript">
 
 function loadimages(locations) {
+	
+	
 	var dataRequestObject= {}; 
     dataRequestObject= {id:locations};
 
@@ -35,7 +37,7 @@ function showMap(position){
    var count1=1;
    var size=count+count1;
     var locations = new Array(size)
-	locations [0] = new Array(6)
+	locations [0] = new Array(7)
     locations[0][0]= 0
 	locations[0][1]= lat
 	locations[0][2]= longitude
@@ -52,6 +54,7 @@ function showMap(position){
     		locations[i][3]= myObj.perdetails[k].petName
     		locations[i][4]= myObj.perdetails[k].petDesc
     		locations[i][5]= myObj.perdetails[k].id
+    		locations[i][6]=myObj.perdetails[k].address1
     }
      var myOptions = {
         center: latlong,
@@ -73,14 +76,16 @@ var infowindow = new google.maps.InfoWindow();
         map: map,
         title:locations[i][3]
       });
-
+      
 		google.maps.event.addListener(marker, 'click', (function (marker, i) {
 			return function () {
-					infowindow.setContent('<div class="panel panel-primary"><div class="panel-heading"><h4 class="modal-title">Pet Details</h4></div><div class="panel-body"><div class="col-sm-12"><div class="col-sm-8"><img src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" height="160px" width="160px"></div><div class="col-sm-4"><div class="title h5">  <button id="loadimages1" type="submit"  onclick="loadimages(\''+locations[i][5]+'\')" >'+locations[i][3]+'</button></div></div></div></div></div>');
+					$('#msg1').html(" <div class='jumbotron'> click on load images .... </div>");
+					infowindow.setContent('<div class="panel panel-primary"><div class="panel-heading" style="padding-top: 3px; padding-bottom: 3px; padding-right: 3px; padding-left: 3px;"><h4 class="modal-title">	Pet Details</h4></div><div class="panel-body" style="padding-top: 5px; padding-left: 2px;padding-right: 2px;padding-bottom: 5px;"><div class="col-sm-12" style="padding-left: 2px;padding-right: 2px"><div class="col-sm-6" style="padding-left: 3px;padding-right: 3px"><a onclick=\"zoom(path);\"   data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"path\" src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" height="120px" width="120px"></a></div><div class="col-sm-6"><table class="table"><tbody><tr class="info"><th>TreeName</th><td>\''+locations[i][3]+'\'</td></tr></tbody></table><div class="title h5">  <button id="loadimages1" type="submit"  onclick="loadimages(\''+locations[i][5]+'\')" > Click for more Images </button></div></div></div></div></div>');
 					infowindow.open(map, marker);
 			}
 		})(marker, i));
-    }
+    }/* 
+    <tr class="info"><th>Place</th><td>\''+locations[i][6]+'\'</td></tr> */
     
     google.maps.event.addListener(searchBox, 'places_changed', function() {
       searchBox.set('map', null);

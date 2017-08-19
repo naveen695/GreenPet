@@ -1,14 +1,13 @@
 package com.dgree.userDAO;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Util {
+	public static Logger logger= LogManager.getLogger();
+
 	  public static final String MAIL_SMTP_ENABLE= "true";
 	  public static final String MAIL_SMTP_ATHU="true";
 	  public static final String MAIL_SMTP_HOST = "smtp.gmail.com";

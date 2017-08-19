@@ -10,7 +10,12 @@ $(document).ready(function () {
 	    });
 	});
 	});	
+function setIdValue(){
+	var path = document.getElementById("petId2").value;
 
+	document.getElementById("petId1").value=path;
+	alert(document.getElementById("petId1").value);
+}
 
 
 </script>
@@ -36,10 +41,14 @@ $(document).ready(function () {
      							 </tr>
     						</thead>
    							<tbody>
+   								 
     							<tr class="info">
         							<th>TreeName</th>
-        							
        								<td>${user.petname}</td>
+      							</tr>
+      							<tr class="info">
+        							<th>Description Of Pet</th>
+       								<td>${user.petDesc}</td>
       								</tr>
       							<tr class="info">
         							<th>Address</th>
@@ -65,10 +74,15 @@ $(document).ready(function () {
         							<th>Zip</th>
        								<td>${user.zip}</td>
       							</tr>
-      							<tr class="warning">
+      							<tr class="info" style="display: none;">
+        							<th> id </th>
+       								<td>${user.id}</td>
+      							</tr>
+      							<tr class="warning ">
       								<th>Edit & Upadte</th>	
       								<td>	
-    									<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
+      							 
+    									<button class="btn btn-primary btn-xs" data-title="Edit"  data-toggle="modal" data-target="#edit" >
     									<span class="glyphicon glyphicon-pencil"></span></button>
     								</td>
     							</tr>
@@ -111,15 +125,25 @@ $(document).ready(function () {
 	<div class="modal-body">
 	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="UpdatePetDetails">
   		
+  	 
   		<div class="form-group">
 			<div class="col-sm-5">
 			  			<label for="inputFirstName" class="control-label">Name Of Pet</label>
 			</div>
   			<div class="col-sm-6">
+			
   				<input  name="petname" class="form-control" id="petname" placeholder="Enter Pet Name"  required>
 			</div>
 		</div>
 		
+		<div class="form-group">
+			<div class="col-sm-5">
+			  			<label for="inputFirstName" class="control-label">Desc Of Pet</label>
+			</div>
+  			<div class="col-sm-6">
+  				<input  name="petdesc" class="form-control" id="petdesc" placeholder="Enter Pet Name"  required>
+			</div>
+		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-5">
@@ -193,14 +217,24 @@ $(document).ready(function () {
   	 			<div class="help-block with-errors"></div>
  			</div>
   		</div> -->
-  	
-  	
-  	
+  	 <div class="form-group" style="display: none;">
+			<div class="col-sm-5">
+			  			<label for="zip" class="control-label"> </label>
+			</div>
+  			<div class="col-sm-6">
+      				<input  name="petId1" class="form-control" id="petId1"  placeholder="Enter Pet Name"  required>
+  				<div class="help-block with-errors"></div>
+			</div>
+		</div>
+		
+			
   		<div class="form-group">
   			<div class="col-sm-offset-1 col-sm-2">
       		</div>
       		<div class="col-sm-offset-1 col-sm-6">
-      			<button type="submit" class="btn btn-success btn-primary">Submit</button>
+      			<button type="submit" class="btn btn-success btn-primary">
+      			Submit
+  				</button>
  			</div>
  		</div>
 	</form>

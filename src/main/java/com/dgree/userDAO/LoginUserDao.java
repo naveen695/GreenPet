@@ -1,23 +1,20 @@
 package com.dgree.userDAO;
 
-import java.util.logging.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 
-import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 public class LoginUserDao implements User {
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	public static Logger logger= LogManager.getLogger();
 
 	@Override
 	public long insertNewUser(MongoCollection<Document> collection, UserBean us) {
