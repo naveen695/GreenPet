@@ -10,8 +10,26 @@ also userid as sizeof table +1
 email is email
 
 _id	 		user_id		 email_id   		firstname	 lastname	 mobilenumber	 password    status
-
-Test@gmail.com		1 	 	test@gmail.com		naveen		 kumar	 	 9591594753	 may@2017.     active/block 
-
+ 
+ 
+ 
+ Steps for deploy
+ 
+ 1) DB configuration .
+    
+    Verify DB Connection ->   we have  file to configure db url and username and password.
+ 
+ 2) Email 
+  
+    Email address -> configure original email address for sending email for register and contact.
+  
+ 3) server 
+ 
+  tomacat -> install tomact 8.xxxx 
+  java ->    java 8 
+  
+  
+ 
+ 
 
 
