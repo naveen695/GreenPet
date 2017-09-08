@@ -13,7 +13,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0&v=3.exp&libraries=places"></script>
    <style>
   
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0px;
       border-radius: 0;
@@ -21,24 +20,20 @@
     }
     
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
     
-    /* Set gray background color and 100% height */
     .sidenav {
       padding-top:0px;
       background-image: url("/GreenPet/images/BG_image.jpg");
       height: 100%;
     }
     
-    /* Set black background color, white text and some padding */
     footer {
       background-color:  	#F0FFF0;
       color: white;
       padding: 15px;
     }
     
-    /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
@@ -68,8 +63,11 @@
       <ul class="nav navbar-nav">
     	<li><a href="IndexServlet"><h4>GreenPet</h4></a></li>
     	<li><a>  </a></li>
-        <li class="active"><a href="HomeServlet">Home</a></li>
-        <li><a href="about">About</a></li>
+        <li class="active"><a href="HomeServlet">
+        										<input type="hidden" id="homeIndex" value="1">
+        										Home
+        										</a></li>
+        <li><a href="AboutServlet">About</a></li>
         <li><a href="contact">Contact</a></li>
       </ul>
 <c:if test="${loginUserDetails.login != true }">
@@ -81,7 +79,7 @@
    							</div>
   							<div class="btn-group">
     							<button type="button" class="btn btn-danger active btn-md" 
-   								data-toggle="modal" data-target="#signUp">SING UP</button>
+   								data-toggle="modal" data-target="#signUp">SIGN UP</button>
   							</div>
 	</div>
 </c:if>
@@ -105,7 +103,7 @@
 									<img style="height: 80px;width: 92px;" src="/GreenPet/images/img_avatar3.png">
    								</div>
   							</td>	
-        					<td><div class="col-xs-6 col-lg-6"><a href="#">kandhukuri naveen kumar</a></div></td>
+        					<td><div class="col-xs-6 col-lg-6"><a href="#">${loginUserDetails.userFirstName} ${loginUserDetails.userLastName} </a></div></td>
     					</tr>
    						<tr class="info">
    			 			    <td><div class="col-xs-12 col-lg-12"><a  href="LogOutServlet" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-off"></span>logout</a></div></td>
@@ -164,7 +162,21 @@
     </div>  
     </div>
   
-
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+       
+        <div id="img" class="modal-body">
+         <div  style="margin-bottom: 0px;padding-bottom: 0px;">
+         		<img id="test" src="" class="img-responsive" style="width: 600px;height: 350px;">
+         </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
 <%@ include file="SignUp.jsp" %>
   <div class="container-fluid text-center">    
   <div class="row content">

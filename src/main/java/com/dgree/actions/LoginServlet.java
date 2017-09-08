@@ -2,6 +2,8 @@
 package com.dgree.actions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +25,7 @@ import com.dgree.service.PetDetailsServiceImpl;
 import com.dgree.service.UserDetails;
 import com.dgree.service.UserLogin;
 import com.dgree.service.UserSignUp;
+import com.dgree.userDAO.MapDao;
 import com.dgree.userDAO.Util;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -75,18 +78,18 @@ public class LoginServlet extends HttpServlet {
 		   	loginUserDetails.setLogin(true);
 		  	loginUserDetails.setMessage("succes");
 		  	sresponce.setStatuscode("0");
-		  	sresponce.setStatusMessage("login susses !"); 
+		  	sresponce.setStatusMessage("login success !"); 
 		  	
 		  	
 		  	
 		  	
 		 // getting data from db
-      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
+//      	    MongoClient mongoClient = (MongoClient)servletContext.getAttribute("mongoClient");
 		  	
-		  	List<PetDetails> loadUserPetInfo = loadUserPetInfo(loginUserDetails,mongoClient);
 		  	HttpSession session = request.getSession();
 			session.setAttribute("loginUserDetails", loginUserDetails);
-			session.setAttribute("petDeails", loadUserPetInfo);
+			//List<PetDetails> loadUserPetInfo = loadUserPetInfo(loginUserDetails,mongoClient);
+			//	session.setAttribute("petDeails", loadUserPetInfo);
 			
 	  }else if(validateUser.isLoginValid()==true && validateUser.getLoginStauts().equals("not_active")){
 		  loginUserDetails.setLogin(false);
@@ -103,7 +106,11 @@ public class LoginServlet extends HttpServlet {
     
 	  	request.setAttribute("signupresponce", sresponce);
 	        if("GreenPet".equals(stringurl) || "LoginServlet".equals(stringurl) ||"LogOutServlet".equals(stringurl) ||  "HomeServlet".equals(stringurl) ){
-	        	request.getRequestDispatcher("/home").include(request, response);
+	        	MapDao mapDao=new MapDao();
+	    		List<PetDetails> petDetails = mapDao.getPetDetails(mongoDatabase);
+	    		String json = IndexServlet.getJson(petDetails);
+	    		request.setAttribute("petDetails", json);
+	        	request.getRequestDispatcher("/index").include(request, response);
 	        return;
 	        }
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
@@ -115,7 +122,7 @@ public class LoginServlet extends HttpServlet {
 
 	private List<PetDetails> loadUserPetInfo(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
 		PetDetailsService detailsService=new PetDetailsServiceImpl();
-		return  detailsService.loadPetDeails(loginUserDetails,mongoClient);
+		return  detailsService.loadPetDeails(new HashMap<>(),loginUserDetails,mongoClient);
 	}
 
 }

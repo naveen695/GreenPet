@@ -37,17 +37,7 @@ $("td", this).on("click", function () {
       </form>
 	  
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+   
   
    </div>
 	<div class="col-sm-4 sidenav">

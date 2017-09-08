@@ -207,16 +207,7 @@ function setIdValue(){
 			</div>
 		</div>
 		
-	<!-- 	<div class="form-group">
-			<div class="col-sm-5">
-					<label for="inputFirstName" class="control-label ">Pet Image</label>
-			</div>
-  			<div class="col-sm-6">
-    			<input type="file" name="imageId" class="form-control" id="imageId" 
-    			placeholder="Upload image . . . " required accept="image/*">
-  	 			<div class="help-block with-errors"></div>
- 			</div>
-  		</div> -->
+	 
   	 <div class="form-group" style="display: none;">
 			<div class="col-sm-5">
 			  			<label for="zip" class="control-label"> </label>

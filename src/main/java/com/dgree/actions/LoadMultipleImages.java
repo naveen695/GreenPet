@@ -79,8 +79,8 @@ public class LoadMultipleImages extends HttpServlet {
 		String loadingImageID = null;
 			int pageCount;
 		if (page==0) {
-			  loadingImageID = loadMultipleImage.get(page);
-			  pageCount=page+1;
+			  loadingImageID = loadMultipleImage.get(loadMultipleImage.size()-1);
+			  pageCount=loadMultipleImage.size();
 		} else if(page<0){
 			  loadingImageID = loadMultipleImage.get(0);
 			  pageCount=1;
@@ -93,7 +93,7 @@ public class LoadMultipleImages extends HttpServlet {
 		
 			
 			outputResponce.append("<a onclick=\"zoom1();\"   data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"image1\" src=\"LoadAjaxImage/"+loadingImageID+"\" style=\"width: 250px;height: 340px;\"></a><br/></br>"
-					+ "<br>"+pageCount+"/"+loadMultipleImage.size()+"<input type=\"hidden\" id=\"pageIndex\" value=\""+page+"\"> </br>"
+					+ "<br>"+pageCount+"/"+loadMultipleImage.size()+"<input type=\"hidden\" id=\"pageIndex\" value=\""+pageCount+"\"> </br>"
 							+ "<input type=\"submit\" value=\"back\" onclick=\"loadajaximages(\'"+id+"\','back')\"> "
 									+ "<input type=\"submit\" value=\"next\" onclick=\"loadajaximages(\'"+id+"\','next')\"> </form>");
 	

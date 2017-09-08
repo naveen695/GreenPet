@@ -1,6 +1,7 @@
 package com.dgree.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,9 +39,9 @@ public class PetDetailsServiceImpl implements PetDetailsService {
 
  
 	@Override
-	public List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+	public List<PetDetails> loadPetDeails(Map<String, Object> parameters,LoginUserDetails loginUserDetails, MongoClient mongoClient) {
 		PetDetailsDao detailsDao=new PetDetailsDaoImpl();
-		return detailsDao.loadPetDeails(loginUserDetails, mongoClient);
+		return detailsDao.loadPetDeails(parameters,loginUserDetails, mongoClient);
 	}
 
 

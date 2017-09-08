@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
@@ -114,7 +115,7 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 	}
 
 	@Override
-	public List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+	public List<PetDetails> loadPetDeails(Map<String, Object> parameters,LoginUserDetails loginUserDetails, MongoClient mongoClient) {
 		logger.info("**** loadPetDeails user loadPetDeails ****");
 		DB db = new DB(mongoClient, "dgree-treepet");
 		DBCollection collection = db.getCollection("Dgree_PetDetails");
@@ -125,7 +126,7 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		BasicDBObject basicDBObject = new BasicDBObject();
 		basicDBObject.put("_id",-1);
 				
-				DBCursor cursor = collection.find(whereQuery).sort(basicDBObject);
+				DBCursor cursor = collection.find(whereQuery).skip((Integer)parameters.get("skipRows")).limit((Integer)parameters.get("pageLimit")).sort(basicDBObject);
 		try{
 				while (cursor.hasNext()) {
 				
@@ -181,5 +182,51 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		// TODO Auto-generated method stub
 		
 	}
- 
+	@Override
+	public Integer findUserPetCount(LoginUserDetails loginUserDetails, MongoDatabase mongoDatabase) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("Dgree_PetDetails");
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.append("user_id",loginUserDetails.getEmail());
+
+		return ((Long)collection.count(whereQuery)).intValue();
+	}
+	@Override
+	public List<PetDetails> loadPetDeailsWithOutImage(LoginUserDetails loginUserDetails, MongoClient mongoClient) {
+		logger.info("**** Load PetDeails With OutImage ****");
+		DB db = new DB(mongoClient, "dgree-treepet");
+		DBCollection collection = db.getCollection("Dgree_PetDetails");
+		
+		List<PetDetails> list=new ArrayList<>();
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.append("user_id",loginUserDetails.getEmail());
+					
+				DBCursor cursor = collection.find(whereQuery);
+		try{
+				while (cursor.hasNext()) {
+				
+					PetDetails details=new PetDetails();
+					
+					DBObject dbObject = (DBObject) cursor.next();
+					String id =(String) dbObject.get("_id");
+					details.setId(id);
+					details.setPetname((String) dbObject.get("petName"));
+					details.setAddress1((String) dbObject.get("address1"));
+					details.setAddress2((String) dbObject.get("address2"));
+					details.setCity((String) dbObject.get("city"));
+					details.setCounty((String) dbObject.get("county"));
+					details.setCountry((String) dbObject.get("country"));
+					details.setZip((String) dbObject.get("zip"));
+					details.setLatitude((String) dbObject.get("latitude"));
+					details.setLongittude((String) dbObject.get("longittude"));
+					//details.setInsertedDate((String) dbObject.get("insert_date"));
+					details.setPetDesc((String)dbObject.get("petDesc"));
+					
+				list.add(details);
+				}
+		}finally {
+			cursor.close();
+		}
+			
+	return list;
+	}
 }

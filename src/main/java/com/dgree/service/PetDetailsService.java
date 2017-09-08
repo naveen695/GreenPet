@@ -1,5 +1,7 @@
 package com.dgree.service;
 
+import java.util.Map;
+
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.PetDetails;
 import com.mongodb.MongoClient;
@@ -15,5 +17,5 @@ public interface PetDetailsService {
 
 	public void insertPetDeails(PetDetails petDetails, MongoClient MongoClient);
 
-	public java.util.List<PetDetails> loadPetDeails(LoginUserDetails loginUserDetails, MongoClient mongoClient);
+	public java.util.List<PetDetails> loadPetDeails(Map<String, Object> pagination,LoginUserDetails loginUserDetails, MongoClient mongoClient);
 }

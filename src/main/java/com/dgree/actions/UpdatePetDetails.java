@@ -104,7 +104,7 @@ public class UpdatePetDetails extends HttpServlet {
 					request.getRequestDispatcher("/home").include(request, response);
 		        return;
 		        }
-		        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+		        getServletContext().getRequestDispatcher("/HomeServlet").include(request, response);
 		        return;
 		}
 		

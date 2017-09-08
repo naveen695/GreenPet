@@ -139,6 +139,18 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.Images</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AboutServlet</servlet-name>
+  	<display-name>AboutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.AboutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Contact</servlet-name>
+  	<display-name>Contact</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.Contact</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -222,6 +234,14 @@
   <servlet-mapping>
   	<servlet-name>Images</servlet-name>
   	<url-pattern>/Images/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AboutServlet</servlet-name>
+  	<url-pattern>/AboutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Contact</servlet-name>
+  	<url-pattern>/Contact</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  

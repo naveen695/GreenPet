@@ -85,11 +85,7 @@ please login for details
     					<td>${user.county}</td>
    						<td>${user.zip}</td>
    						<td>${user.country}</td>
-   						<!-- <td></td>
-    					<td>	
-    							<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
-    							<span class="glyphicon glyphicon-pencil"></span></button>
-    					</td> -->
+   						 
     				</tr>
     			</c:forEach>
      				</tbody>        

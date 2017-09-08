@@ -13,8 +13,8 @@ public class Util {
 	  public static final String MAIL_SMTP_HOST = "smtp.gmail.com";
 	  public static final String MAIL_SMTP_PORT="587";
 	  public static final String MAIL_REGISTRATION_SITE_LINK="http://localhost:8000/GreenPet/EmailVerification";
-	  public static final String MAIL_USERNAME="knnaveen695@gmail.com";
-	  public static final String MAIL_PASSWORD="9494931508";
+	  public static final String MAIL_USERNAME="info@dgree.com";
+	  public static final String MAIL_PASSWORD="greenpet";
 	  public static final String Sign_up_link="EmailVerification";
 	  public static final String LAT_LANG_SERVICE_URL = "https://maps.googleapis.com/maps/api/geocode/xml?&";
 	  public static final String GOOGLE_KEY="&key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0";

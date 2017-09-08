@@ -43,7 +43,7 @@ public class UploadMultipleImages extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/home").include(request, response);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class UploadMultipleImages extends HttpServlet {
 	   		    	sresponce.setStatuscode("0");
 	   			  	sresponce.setStatusMessage("Updated Sussesfully !");
 	   			  	request.setAttribute("signupresponce", sresponce);
-	   			  	if("UploadPetDetails".equals(stringurl)){
+	   			  	if("UploadPetDetails".equals(stringurl) || "UploadMultipleImages".equals(stringurl)){
 	   	        		request.getRequestDispatcher("/home").include(request, response);
 	   	        	return;
 	   	        	}
@@ -108,6 +108,9 @@ public class UploadMultipleImages extends HttpServlet {
 	                	request.setAttribute("message", "File Upload Failed due to ");
 	                	logger.info("inside upload multtiple pet details",e);
 					}
+	         }else{
+	        		request.getRequestDispatcher("/home").include(request, response);
+
 	         }
 	 }
 }

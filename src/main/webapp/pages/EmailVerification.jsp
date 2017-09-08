@@ -13,32 +13,27 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA37598NOPeHttg0t75EozEBNF_JpT4vZ0"></script>
    <style>
   
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
+     .navbar {
       margin-bottom: 0px;
       border-radius: 0;
       background-color:  	#F0FFF0;
     }
     
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+     .row.content {height: 450px}
     
-    /* Set gray background color and 100% height */
-    .sidenav {
+      .sidenav {
       padding-top:0px;
       background-image: url("/GreenPet/images/BG_image.jpg");
       height: 100%;
     }
     
-    /* Set black background color, white text and some padding */
-    footer {
+      footer {
       background-color:  	#F0FFF0;
       color: white;
       padding: 15px;
     }
     
-    /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
@@ -104,10 +99,7 @@
     <a href="/GreenPet/">Please Login</a>
     </p>
     </div>
-<!--     <div class="col-sm-3">
-		<img src="/GreenPet/images/images.jpg" class="img-rounded" alt="Cinque Terre" > 
-  	</div>    
- -->  </div>
+   </div>
 </div>    	
   	    	
 <%@ include file="footer.jsp" %>

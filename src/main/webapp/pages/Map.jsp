@@ -141,20 +141,7 @@ $(document).ready( function () {
    });
 });
 		
-	/* $(document).ready(function () {
-	    $("#imageload").onload(function () {
-	        $.ajax({
-	            type: "GET",
-	            url: "LoadAjaxImage",
-	            data: {
-	                "qrtext": "www.mypage.com"
-	            },
-	            success: function (result) {
-	                $("#content").html('<img src="'+result+'" >'); //changed here
-	            }
-	        });
-    });
-}); */
+	
 </script>
 <style>
 		body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top, .modal-open .modal-container {

@@ -51,7 +51,7 @@ public class IndexServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	public String getJson(List<PetDetails> petDetails){
+	public static String getJson(List<PetDetails> petDetails){
 
 		 JSONObject responseDetailsJson = new JSONObject();
 		    JSONArray jsonArray = new JSONArray();

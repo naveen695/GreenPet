@@ -34,25 +34,25 @@
  </script>
 <%@ include file="Map.jsp" %>
 </div>
-<!-- Modal -->
+<!--   Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-      <!-- Modal content-->
+      Modal content
       <div class="modal-content">
        
         <div id="img" class="modal-body">
          <div  style="margin-bottom: 0px;padding-bottom: 0px;">
-         		<img id="test" src="" class="img-responsive" style="width: 600px;height: 650px;">
+         		<img id="test" src="" class="img-responsive" style="width: 600px;height: 350px;">
          </div>
       </div>
       
     </div>
   </div>
-  </div>
+  </div>  
 <div  class="col-sm-4 sidenav">
 
  <div id="msg1">
- kkkkk
+  
  </div>
 </div>
   </div>

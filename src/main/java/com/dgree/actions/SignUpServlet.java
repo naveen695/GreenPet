@@ -1,7 +1,6 @@
 package com.dgree.actions;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dgree.dbUtil.DBConnectionImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.dgree.model.SignUpResponce;
 import com.dgree.model.UserBean;
 import com.dgree.model.ValidateUser;
@@ -20,7 +21,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class SignUpServlet extends HttpServlet {
 
-	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
+	private static Logger logger = LogManager.getLogger();
 	
 	private static final long serialVersionUID = 1L;
        
