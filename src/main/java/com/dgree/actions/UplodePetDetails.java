@@ -126,7 +126,7 @@ public class UplodePetDetails extends HttpServlet {
 	        if (StringUtils.isEmpty(latitude) || StringUtils.isEmpty(longiute)){
 			 SignUpResponce sresponce=new SignUpResponce();
 		    	sresponce.setStatuscode("0");
-			  	sresponce.setStatusMessage("not updated sussesfully !"); 
+			  	sresponce.setStatusMessage("not uploaded PetDetails, please provide valid address ."); 
 			  	request.setAttribute("signupresponce", sresponce);
 			  	if("UploadPetDetails".equals(stringurl)){
 	        		request.getRequestDispatcher("/home").include(request, response);
