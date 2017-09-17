@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.dgree.model.SignUpResponce;
@@ -57,16 +58,29 @@ public class Contact extends HttpServlet {
         MailService ms=new MailService();
         
         StringBuffer requestURL = request.getRequestURL();
-    	ms.sendMail(details,requestURL);
-    	//save data in db
-        ServletContext servletContext = request.getServletContext();
-        MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
-        SignUpResponce sresponce=new SignUpResponce();
-        sresponce.setStatuscode("0");
-	  	sresponce.setStatusMessage("Mail sent Successfully. Thanks !"); 
-	  	request.setAttribute("signupresponce", sresponce);
-        request.getRequestDispatcher("contact").forward(request, response);
-        
+        if(StringUtils.isNotBlank(details.get(Constants.EMAIL))&& StringUtils.isNotBlank(details.get(Constants.MOBILE))&&StringUtils.isNotBlank(details.get(Constants.NAME))){
+        	if (ms.sendMail(details,requestURL)) {
+            ServletContext servletContext = request.getServletContext();
+            MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
+            SignUpResponce sresponce=new SignUpResponce();
+            sresponce.setStatuscode("0");
+    	  	sresponce.setStatusMessage("Mail sent Successfully. Thanks !"); 
+    	  	request.setAttribute("signupresponce", sresponce);
+            request.getRequestDispatcher("contact").forward(request, response);
+        	}else{
+        		ServletContext servletContext = request.getServletContext();
+                MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
+                SignUpResponce sresponce=new SignUpResponce();
+                sresponce.setStatuscode("0");
+        	  	sresponce.setStatusMessage("Failed to sent mail Please try again. Thanks !"); 
+        	  	request.setAttribute("signupresponce", sresponce);
+                request.getRequestDispatcher("contact").forward(request, response);
+            	
+        	}
+        }else{
+    		request.getServletContext().getRequestDispatcher("/home").forward(request, response);
+        }
+    	        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
