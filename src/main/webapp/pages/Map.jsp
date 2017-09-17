@@ -35,19 +35,19 @@ function showMap(position){
     var myObj=${petDetails};
    var count= myObj.perdetails.length;
    var count1=1;
-   var size=count+count1;
-    var locations = new Array(size)
-	locations [0] = new Array(7)
+   var size=count;
+ var locations = new Array(size)
+ /*   	locations [0] = new Array(7)
     locations[0][0]= 0
 	locations[0][1]= lat
 	locations[0][2]= longitude
     locations[0][3]= "my location"
     locations[0][3]= "Hi !"
-
+ */
     var  i, x = "";
-    	for(var i=1;i<locations.length;i++){
+    	for(var i=0;i<locations.length;i++){
     		locations [i] = new Array(4)
-			var k=i-count1;
+			var k=i;
     		locations[i][0]= i
     		locations[i][1]= 	myObj.perdetails[k].latitude
     		locations[i][2]= 	myObj.perdetails[k].longittude
