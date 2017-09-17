@@ -10,6 +10,8 @@ public class UserBean {
 	private String conformpPssword;
 	private String mobilenumber;
 	private long userid;
+
+	private String subject;
 	
 	public String getUserFirstName() {
 		return userFirstName;
@@ -63,6 +65,12 @@ public class UserBean {
 	}
 	public void setHash(String hash) {
 		this.hash = hash;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 

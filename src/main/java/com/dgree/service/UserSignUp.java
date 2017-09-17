@@ -33,17 +33,13 @@ public class UserSignUp implements UserDetails{
 	public void sendMail(UserBean userBean,StringBuffer url) {
 		
 		logger.info("**** inside UserSignUP.sendmail() **** ");
-		Properties props = new Properties();
-        props.put("mail.smtp.auth", Util.MAIL_SMTP_ATHU);
-        props.put("mail.smtp.starttls.enable",Util.MAIL_SMTP_ENABLE);
-        props.put("mail.smtp.host",Util.MAIL_SMTP_HOST);
-        props.put("mail.smtp.port",Util.MAIL_SMTP_PORT);
-        Session session = Session.getInstance(props,
+	
+		          /* Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                   protected PasswordAuthentication getPasswordAuthentication() {
                       return new PasswordAuthentication(Util.MAIL_USERNAME,Util.MAIL_PASSWORD);
                   }
-                });	
+                });	*/
 		String link = url.toString().replace("SignUpServlet", Util.Sign_up_link)+"?scope=activation&userId="+userBean.getUserid()+"&hash="+userBean.getHash();
 		StringBuilder bodyText = new StringBuilder(); 
         bodyText.append("<div>")
@@ -55,19 +51,60 @@ public class UserSignUp implements UserDetails{
              .append("  Thanks,<br/>")
              .append("  GreenPet Team")
              .append("</div>");
+        userBean.setSubject("Email Registration testing from GreePet");
+        sendMail(userBean, bodyText);
+
+	}
+	public static boolean sendMail(UserBean userBean, StringBuilder bodyText) {
+		// Create a Properties object to contain connection configuration information.
+    	Properties props = System.getProperties();
+    	props.put("mail.transport.protocol", "smtp");
+    	props.put("mail.smtp.port", Util.MAIL_SMTP_PORT); 
+    	props.put("mail.smtp.ssl.enable", Util.MAIL_SMTP_ENABLE);
+    	props.put("mail.smtp.auth",Util.MAIL_SMTP_ATHU);
+
+        // Create a Session object to represent a mail session with the specified properties. 
+    	Session session = Session.getDefaultInstance(props);
+
+
+    
         Message message = new MimeMessage(session);
         try {
-			message.setFrom(new InternetAddress(Util.MAIL_USERNAME));
+			message.setFrom(new InternetAddress(Util.FROM));    
 			message.setRecipients(Message.RecipientType.TO,
 		            InternetAddress.parse(userBean.getEmail()));
-			 message.setSubject("Email Registration testing from GreePet");
+			message.setSubject(userBean.getSubject());
 		        message.setContent(bodyText.toString(), "text/html; charset=utf-8");
 		logger.info("**** sending email to : "+userBean.getEmail()+".");
-		        Transport.send(message);        
+		   Transport transport = session.getTransport("smtps");
+		     			   // Send the message.
+	        try
+	        {
+	            System.out.println("Sending...");
+	            
+	            // Connect to Amazon SES using the SMTP username and password you specified above.
+	            transport.connect(Util.MAIL_SMTP_HOST, Util.SMTP_USERNAME, Util.SMTP_PASSWORD);
+	        	
+	            // Send the email.
+	            transport.sendMessage(message,message.getAllRecipients());
+	            System.out.println("Email sent!");
+	            return true;
+	        }
+	        catch (Exception ex) {
+	            System.out.println("The email was not sent.");
+	            System.out.println("Error message: " + ex.getMessage());
+	        }
+	        finally
+	        {
+	            // Close and terminate the connection.
+	            transport.close();
+	        }
+			
+		      //s  Transport.send(message);        
         } catch (MessagingException e) {
 			logger.info("**** Unable to send mail for Activation Link :"+e);
 		}
-
+		return false;
 	}
 @Override
 	public ValidateUser validateUser(MongoDatabase mongoDatabase,UserBean us) {
