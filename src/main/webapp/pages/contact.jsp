@@ -1,11 +1,26 @@
 <%@ include file="/pages/header.jsp" %>
 
+<script type="text/javascript">
+
+	function validate() {
+		var inputEmailID = document.getElementById("inputEmailID").value;
+		var inputFirstName1 = document.getElementById("inputFirstName1").value;
+		var mobilenumber1 = document.getElementById("mobilenumber1").value;
+		var heading = document.getElementById("heading").value;
+		var comments = document.getElementById("comments").value;
+		if(inputFirstName1 == null || inputFirstName1 == "" ||  inputEmailID == null || inputEmailID == "" || mobilenumber1.trim() == null ||  mobilenumber1.trim() == "" || heading== null || heading == "" || comments == null || comments==""){
+			alert("Please enter manditory values.");
+			return false;
+		}
+	}
+	</script>
  <H3>Welcome to ....</H3>
  <br/>
   	 
 	<div class="well" style="background-color:white">
    		<div class="row">
    		
+<c:if test="${loginUserDetails.login == true }">
     		<div class="col-sm-6" >
     			<form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="Contact">
   					<div class="form-group">
@@ -53,11 +68,12 @@
   					<div class="form-group">
   						<div class="col-sm-offset-1 col-sm-2"></div>
       					<div class="col-sm-offset-1 col-sm-6">
-      						<button type="submit" class="btn btn-success btn-primary">Submit</button>
+      						<button type="submit" onclick="validate();" class="btn btn-success btn-primary">Submit</button>
  						</div>
  					</div>
 				</form>
 	   		</div>
+	   		</c:if>
 
     		<div class="col-sm-6">
 	            <div>

@@ -1,5 +1,6 @@
 package com.dgree.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -16,17 +17,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.dgree.model.UserBean;
-import com.dgree.userDAO.Util;
 
 public class MailService {
 	private static Logger logger = LogManager.getLogger();
+	private Map<String, String> prop=new HashMap<>();
 
 	public boolean sendMail(Map<String, String> details,StringBuffer url){
 
 	logger.info("**** inside UserSignUP.sendmail() **** ");
- 
 	StringBuilder bodyText = new StringBuilder(); 
     bodyText.append("<div>")
+
 
     .append("RE ::  "+details.get(Constants.COMMENTS)+"<br/><br/>")
     .append("<br/><br/>")
@@ -40,8 +41,16 @@ public class MailService {
      bean.setEmail(details.get(Constants.EMAIL));
      bean.setSubject(details.get(Constants.HEADING));
      
-     return UserSignUp.sendMail(bean, bodyText);
+     return UserSignUp.sendMail(bean, bodyText,this.prop);
      
       
 }
+
+	public Map<String, String> getProp() {
+		return prop;
+	}
+
+	public void setProp(Map<String, String> prop) {
+		this.prop = prop;
+	}
 }

@@ -5,6 +5,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -21,13 +23,14 @@ import com.dgree.userDAO.Util;
 public class GoesLocationLatLong {
 	public static Logger logger= LogManager.getLogger();
 
-    
+
+	private Map<String, String> prop=new HashMap<>();
 	public PetDetails findLatitudeLongitude(PetDetails petDetails){
-		logger.info(" -> Inside find Latitude Longitude for pet details .");
+		logger.info(" -> Inside find Latitude Longitude for pet details .GOOGLEKEY"+prop.get("GOOGLEKEY"));
 
 		String latLangServiceUrl = Util.LAT_LANG_SERVICE_URL;
 		String address="address=";
-		String Key=Util.GOOGLE_KEY;
+		String Key=prop.get("GOOGLEKEY");
 		String finalurl2=null;
 		
 		String address1 = petDetails.getAddress1();
@@ -103,6 +106,14 @@ public class GoesLocationLatLong {
 
 	private boolean validteFields(String latLangServiceUrl, String Key ) {
 		return StringUtils.isNotBlank(latLangServiceUrl) && StringUtils.isNotBlank(Key);
+	}
+
+	public Map<String, String> getProp() {
+		return prop;
+	}
+
+	public void setProp(Map<String, String> prop) {
+		this.prop = prop;
 	}
 	
 	

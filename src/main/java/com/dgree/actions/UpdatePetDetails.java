@@ -1,6 +1,7 @@
 package com.dgree.actions;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -46,6 +47,7 @@ public class UpdatePetDetails extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(" ->inside updating pet details .");
 		ServletContext servletContext = request.getServletContext();
@@ -73,6 +75,7 @@ public class UpdatePetDetails extends HttpServlet {
 		petDetails.setCountry(request.getParameter("country"));
 		petDetails.setZip(request.getParameter("zip"));
 		GoesLocationLatLong goesLocationLatLong= new GoesLocationLatLong();
+		goesLocationLatLong.setProp((Map<String, String>) getServletContext().getAttribute("prop"));
 		PetDetails petDetails2 = goesLocationLatLong.findLatitudeLongitude(petDetails);
 		
 		String latitude = petDetails2.getLatitude();

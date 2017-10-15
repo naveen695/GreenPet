@@ -1,6 +1,7 @@
 package com.dgree.actions;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,6 +34,7 @@ public class SignUpServlet extends HttpServlet {
 		request.getRequestDispatcher("/home").forward(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String stringurl = null ;
 		String url = request.getHeader("Referer");
@@ -65,7 +67,8 @@ public class SignUpServlet extends HttpServlet {
         ServletContext servletContext = request.getServletContext();
         MongoDatabase mongoDatabase = (MongoDatabase)servletContext.getAttribute("MongoDatabase");
        
-        UserDetails userSignUp=new UserSignUp();
+        UserSignUp userSignUp=new UserSignUp();
+        userSignUp.setProp((Map<String, String>) getServletContext().getAttribute("prop"));
         ValidateUser validateUser = userSignUp.validateUser(mongoDatabase,us);
         if (validateUser.isNewUser() == true) {
         	us.setUserid(validateUser.getUserid());

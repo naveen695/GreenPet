@@ -34,13 +34,17 @@ public class Contact extends HttpServlet {
 
 		String stringurl = null ;
 		String url = request.getHeader("Referer");
-		String[] split = url.split("/");
-		for (int i = 0; i <= split.length; i++) {
-			if(i==split.length){
-				int j=i;
-				stringurl = split[--j];
+		if (url !=null) {
+			
+			String[] split = url.split("/");
+			for (int i = 0; i <= split.length; i++) {
+				if(i==split.length){
+					int j=i;
+					stringurl = split[--j];
+				}
 			}
-		}
+	
+		
 		logger.info("**** Inside contact.get() ****");
 		String hash = Util.prepareRandomString(30);
 		String email = request.getParameter("inputEmailID");
@@ -56,7 +60,7 @@ public class Contact extends HttpServlet {
         details.put(Constants.HEADING, heading);
            
         MailService ms=new MailService();
-        
+        ms.setProp((Map<String, String>) getServletContext().getAttribute("prop"));
         StringBuffer requestURL = request.getRequestURL();
         if(StringUtils.isNotBlank(details.get(Constants.EMAIL))&& StringUtils.isNotBlank(details.get(Constants.MOBILE))&&StringUtils.isNotBlank(details.get(Constants.NAME))){
         	if (ms.sendMail(details,requestURL)) {
@@ -80,7 +84,9 @@ public class Contact extends HttpServlet {
         }else{
     		request.getServletContext().getRequestDispatcher("/home").forward(request, response);
         }
-    	        
+		}    else{
+    		request.getServletContext().getRequestDispatcher("/home").forward(request, response);
+        } 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
