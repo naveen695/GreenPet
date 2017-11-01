@@ -20,6 +20,13 @@
 </c:if>
   
 <style>
+ #Container {
+        position:relative;
+        width:250px;
+        height:61px;
+        overflow:hidden;
+      }
+
 .panel-shadow {
 	box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 }
@@ -144,12 +151,34 @@
 	margin-left: 50px;
 }
 
-.post .post-footer .comments-list .comment>.comments-list {
+.post .post-footer .comments-list .comment>.comments-list { 
 	margin-left: 50px;
 }
 </style>
 
 
+
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      Modal content
+      <div class="modal-content">
+       
+        <div id="img" class="modal-body">
+         <div  style="margin-bottom: 0px;padding-bottom: 0px;">
+         		<img id="test" src="" class="img-responsive" >
+         </div>
+      </div>
+      
+    </div>
+  </div>
+  </div> 
+<script type="text/javascript">
+
+function resizeImg(img){
+ $('#test').attr('src',img.src);
+} 
+
+    </script>
 
 <c:if test="${loginUserDetails.login == true }">
 
@@ -159,8 +188,8 @@
 			<tbody id="mytab1">
 				<c:forEach var="user" items="${petDeails}">
 					<tr>
-						<td><img src="Image/${user.petname}" height="150px"
-							width="140px" style="padding-top: 10px;"></img>
+						<td><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
+							width="140px" style="padding-top: 10px;"></img></a>
 						<td>
 						<td>
 							<table class="table">

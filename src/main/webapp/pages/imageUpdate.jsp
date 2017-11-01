@@ -19,6 +19,30 @@ function setIdValue(){
 
 
 </script>
+
+
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      Modal content
+      <div class="modal-content">
+       
+        <div id="img" class="modal-body">
+         <div  style="margin-bottom: 0px;padding-bottom: 0px;">
+         		<img id="test" src="" class="img-responsive" >
+         </div>
+      </div>
+      
+    </div>
+  </div>
+  </div> 
+<script type="text/javascript">
+
+function resizeImg(img){
+ $('#test').attr('src',img.src);
+} 
+
+    </script>
+	
 	<c:forEach var="user" items="${petDeails}">
 		<c:if test="${user.id == images}">
 			<div class="well" style="min-height: 500px;">
@@ -27,8 +51,8 @@ function setIdValue(){
         	   		<div class="col-sm-4">  
         				<div class="panel-heading "><h4> Pet Details </h4></div>
         			         <div class="pull-left image">
-								<a href="#" data-image="small/Image" data-zoom-image="large/Image"> 
-									<img src="Image/${user.petname}" height="100px" width="100px" class="img-circle avatar" ></img>
+								<a href="#" data-image="small/Image" data-zoom-image="large/Image" data-toggle="modal" data-target="#myModal"> 
+									<img src="Image/${user.petname}" onclick="resizeImg(this)" height="100px" width="100px" class="img-circle avatar" ></img>
 								</a>
                 		    </div>
                     </div>
@@ -100,7 +124,7 @@ function setIdValue(){
   		
     						<input type="file" name="imageId2" class="form-control" id="imageId2" 
     						placeholder="Upload image . . . " required accept="image/*">
-  	 						<div class="help-block with-errors"></div>
+  	 						<div class="help-block wit	h-errors"></div>
  						</div>
  						<div class="col-sm-offset-1 col-sm-4">
       						<button type="submit" class="btn btn-success btn-primary">Submit</button>

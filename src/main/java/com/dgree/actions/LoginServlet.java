@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.dgree.dbUtil.DBConnectionImpl;
 import com.dgree.model.LoginUserDetails;
 import com.dgree.model.PetDetails;
@@ -60,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String email = request.getParameter("email");
         String pwd = request.getParameter("pwd");
-
+        if(StringUtils.isNotBlank(email) && StringUtils.isNotBlank(pwd)){
         UserBean us=new UserBean();
 		us.setEmail(email);
 	    us.setPassword(pwd);
@@ -115,6 +117,8 @@ public class LoginServlet extends HttpServlet {
 	        }
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
 	        return;
+        }
+        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
 
 	}
 
