@@ -52,7 +52,7 @@ public class EmailVerification extends HttpServlet {
 				
 				if (validateUserMail == true ) {
 					sresponce.setStatuscode("0");
-					sresponce.setStatusMessage("Congratulations ! you have successfully verified your E-Mail address .");
+					sresponce.setStatusMessage("Congratulation ! you have successfully verified your E-Mail address .");
 					logger.info("validated succfully.");
 				}else{
 					sresponce.setStatuscode("1");

@@ -24,7 +24,6 @@
     
       .sidenav {
       padding-top:0px;
-      background-image: url("/GreenPet/images/BG_image.jpg");
       height: 100%;
     }
     
@@ -54,8 +53,7 @@
         <span class="icon-bar"></span>                        
       </button>
       <a class="navbar-brand" href="#">
-      <img src="/GreenPet/images/images.png" class="img-rounded" 
-          			 alt="image not found" width="50" height="50">
+			GeenPet
     	    			</a>
     </div>
     

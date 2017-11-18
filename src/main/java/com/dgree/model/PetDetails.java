@@ -24,7 +24,7 @@ private String contentType;
 private String insertedDate;
 private Date date;
 private String petDesc;
-
+private Number totalLikes;
 public Image getImage() {
 	return image;
 }
@@ -167,6 +167,12 @@ public String getPetDesc() {
 }
 public void setPetDesc(String petDesc) {
 	this.petDesc = petDesc;
+}
+public Number getTotalLikes() {
+	return totalLikes;
+}
+public void setTotalLikes(Number totalLikes) {
+	this.totalLikes = totalLikes;
 }
 private Integer lattitudeInt;
 

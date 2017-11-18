@@ -1,6 +1,8 @@
 package com.dgree.actions;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,7 @@ public class LoadAjaxImage extends HttpServlet {
 			ServletOutputStream outputStream = response.getOutputStream();
 			outputStream.write(fileByte);            
 			outputStream.flush();
-			outputStream.close();
+			outputStream.close(); 
 			return;
 	
 	}

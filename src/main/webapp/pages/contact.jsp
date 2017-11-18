@@ -20,6 +20,9 @@
 	<div class="well" style="background-color:white">
    		<div class="row">
    		
+<c:if test="${loginUserDetails.login != true }">
+Please Login for more Info
+</c:if>
 <c:if test="${loginUserDetails.login == true }">
     		<div class="col-sm-6" >
     			<form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" action="Contact">
@@ -73,9 +76,8 @@
  					</div>
 				</form>
 	   		</div>
-	   		</c:if>
-
-    		<div class="col-sm-6">
+	   		
+	   		<div class="col-sm-6">
 	            <div>
     	            <div class="panel panel-default">
         	            <div class="text-center header" style="color: green;">
@@ -92,6 +94,10 @@
 	            	</div>
         		</div>
     		</div>
+    		
+	   		</c:if>
+ 
+    		
     		
     	</div>
 	</div>

@@ -199,6 +199,11 @@ function resizeImg(img){
 										<td><a href="ImageUpdateServlet?inputName=${user.id}"><b>${user.petname}</b></a></td>
 									</tr>
 									<tr>
+										<th>Total Likes :</th>
+										<td><b>${user.totalLikes}</b></td>
+									</tr>
+									
+									<tr>
 										<th>Pet Desc :</th>
 										<td><textarea placeholder="What are you doing right now?"
 												readonly="readonly">${user.petDesc}</textarea></td>
@@ -223,8 +228,8 @@ function resizeImg(img){
 								<button type="submit" class="btn btn-success btn-primary">BACK</button>
 						</form>	
 						</td>
-						<td class="col-sm-3">page Number:  ${dataModel.pageNumber}</td>
-						<td class="col-sm-3">TotalRecords : ${dataModel.totalpageNumber} </td>
+						<td class="col-sm-3">Page Number:  ${dataModel.pageNumber}</td>
+						<td class="col-sm-3">Total Pages : ${dataModel.totalpageNumber} </td>
 						<td class="col-sm-3">
 							<form action="HomeServlet">
 								<input type="hidden" id="pageNumberNext" name="pageNumberNext" readonly="readonly" value="${dataModel.pageNumber}">

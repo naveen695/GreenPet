@@ -69,6 +69,8 @@
         										</a></li>
         <li><a href="AboutServlet">About</a></li>
         <li><a href="contact">Contact</a></li>
+        <li><a href="help">Help</a></li>
+        
       </ul>
 <c:if test="${loginUserDetails.login != true }">
      <div class="btn-group btn-group-lg nav navbar-nav navbar-right" >

@@ -12,14 +12,21 @@ function loadimages(locations) {
 	         url : "LoadMultipleImages",
 	         data : dataRequestObject,
 	         success : function(responseText) {
-	        	 $('#msg1').html(responseText);
+	        	 $('#msg1').html(responseText.data);
+	        	 $('#msg').html(responseText.content);
 	         },
+		     beforeSend: function(){
+		        	 $(".modal1").show();
+			  },
+		 	  complete:function(data){
+		 		   $(".modal1").hide();
+			  },
 	         error : function(xhr, ajaxOptions, thrownError) {
 	             $('#msg1').html(" <div class='jumbotron'> ERROR Loading images. </div>");
+	             $('#msg').html("");
 	         }
 	    });
 }
-
 function showPosition(){
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(showMap, showError, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
@@ -79,6 +86,7 @@ var infowindow = new google.maps.InfoWindow();
       
 		google.maps.event.addListener(marker, 'click', (function (marker, i) {
 			return function () {
+				  	$('#msg').html("");
 					$('#msg1').html(" <div class='jumbotron'> click on load images .... </div>");
 					infowindow.setContent('<div class="panel panel-primary"><div class="panel-heading" style="padding-top: 3px; padding-bottom: 3px; padding-right: 3px; padding-left: 3px;"><h4 class="modal-title">	Pet Details</h4></div><div class="panel-body" style="padding-top: 5px; padding-left: 2px;padding-right: 2px;padding-bottom: 5px;"><div class="col-sm-12" style="padding-left: 2px;padding-right: 2px"><div class="col-sm-6" style="padding-left: 3px;padding-right: 3px"><a onclick=\"zoom(path);\"   data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"path\" src="LoadAjaxImage/'+locations[i][5]+'" alt="please wait loding image .." class="media-object" height="120px" width="120px"></a></div><div class="col-sm-6"><table class="table"><tbody><tr class="info"><th>TreeName</th><td>\''+locations[i][3]+'\'</td></tr></tbody></table><div class="title h5">  <button id="loadimages1" type="submit"  onclick="loadimages(\''+locations[i][5]+'\')" > Click for more Images </button></div></div></div></div></div>');
 					infowindow.open(map, marker);
@@ -94,6 +102,7 @@ var infowindow = new google.maps.InfoWindow();
 
       var bounds = new google.maps.LatLngBounds();
       var i, place;	
+   
       for (i = 0; place = places[i]; i++) {
         (function(place) {
           var marker = new google.maps.Marker({

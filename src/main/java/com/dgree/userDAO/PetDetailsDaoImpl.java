@@ -168,6 +168,8 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 					} catch (IOException e) {
 						logger.info("inside load images for user ."+imageForOutput);
 					}
+					details.setTotalLikes(new UploadMultipleImagesDAO().loadTotalLikes(mongoClient, id, loginUserDetails.getEmail()));
+					
 				list.add(details);
 				}
 		}finally {

@@ -3,7 +3,10 @@ package com.dgree.userDAO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +17,9 @@ import com.dgree.model.Image;
 import com.dgree.model.PetDetails;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -53,12 +59,15 @@ public class MapDao {
 		return list;
 	}
 	public Image loadImage( MongoClient mongoClient,String ID){
+		Image image=new Image();
+		 
 		DB db = new DB(mongoClient, "dgree-treepet");
+		
+		
 		GridFS gfsPhoto = new GridFS(db, "images");
 		BasicDBObject whereQueryImage = new BasicDBObject();
 		whereQueryImage.append("_id",new ObjectId(ID));
 		GridFSDBFile imageForOutput = gfsPhoto.findOne(whereQueryImage);
-		Image image=new Image();
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			imageForOutput.writeTo(baos);
@@ -72,5 +81,5 @@ public class MapDao {
 		
 	}
 	
-	
+	 
 }

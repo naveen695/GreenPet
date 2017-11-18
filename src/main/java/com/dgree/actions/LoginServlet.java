@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 	private static Logger logger = Logger.getLogger(DBConnectionImpl.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/home").forward(request, response);
+		request.getRequestDispatcher("/IndexServlet").forward(request, response);
 	}
 	
 	

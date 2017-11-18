@@ -44,6 +44,10 @@
   	<servlet-name>index</servlet-name>
   	<jsp-file>/pages/index.jsp</jsp-file>
   </servlet>
+    <servlet>
+  	<servlet-name>help</servlet-name>
+  	<jsp-file>/pages/help.jsp</jsp-file>
+  </servlet>
    <servlet>
   	<servlet-name>imageUpdate</servlet-name>
   	<jsp-file>/pages/imageUpdate.jsp</jsp-file>
@@ -151,6 +155,12 @@
   	<description></description>
   	<servlet-class>com.dgree.actions.Contact</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LikeControler</servlet-name>
+  	<display-name>LikeControler</display-name>
+  	<description></description>
+  	<servlet-class>com.dgree.actions.LikeControler</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -169,7 +179,10 @@
   	<servlet-name>index</servlet-name>
   	<url-pattern>/index</url-pattern>
   </servlet-mapping>
-  
+    <servlet-mapping>
+  	<servlet-name>help</servlet-name>
+  	<url-pattern>/help</url-pattern>
+  </servlet-mapping>
 
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -242,6 +255,10 @@
   <servlet-mapping>
   	<servlet-name>Contact</servlet-name>
   	<url-pattern>/Contact</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LikeControler</servlet-name>
+  	<url-pattern>/LikeControler</url-pattern>
   </servlet-mapping>
   
    <welcome-file-list>  
