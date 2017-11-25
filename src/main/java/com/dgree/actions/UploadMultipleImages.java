@@ -1,6 +1,8 @@
 package com.dgree.actions;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,6 +19,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.dgree.dbUtil.DBConnectionImpl;
+import com.dgree.detector.SkinToneDetector;
+import com.dgree.detector.SkinToneSpanningDetector;
 import com.dgree.model.Image;
 import com.dgree.model.PetDetails;
 import com.dgree.model.SignUpResponce;
@@ -86,9 +90,19 @@ public class UploadMultipleImages extends HttpServlet {
 	                   }
 	                   
 	                   petDetails.setImage(image);
-	                 
-	                	//insert into db
-	                   
+
+	                   if (isNotValidImage(image)) {
+	      	        	 SignUpResponce sresponce=new SignUpResponce();
+	      			    	sresponce.setStatuscode("0");
+	      				  	sresponce.setStatusMessage("Sorry ... ! we can't uploaded petdetails, Please upload tree imges ."); 
+	      				  	request.setAttribute("signupresponce", sresponce);
+	      				  	if("UploadPetDetails".equals(stringurl)){
+	      		        		request.getRequestDispatcher("/home").include(request, response);
+	      		        	return;
+	      		        	}
+	      		        	getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	      		        	return;
+	      			}                   
 	                   
 	                   UploadMultipleImagesDAO uploadMultipleImagesDAO=new UploadMultipleImagesDAO();
 	                   uploadMultipleImagesDAO.uploadMultImages(petDetails, mongoClient);
@@ -113,4 +127,18 @@ public class UploadMultipleImages extends HttpServlet {
 
 	         }
 	 }
+	private boolean isNotValidImage(Image image) {
+		byte[] fileByte = image.getFileByte();
+	    SkinToneDetector skinToneDetector = new SkinToneSpanningDetector();
+	    skinToneDetector.setIsDelta(5);
+	    InputStream arrayInputStream=new ByteArrayInputStream(fileByte);
+		try {
+			return skinToneDetector.isNotValid(arrayInputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }
