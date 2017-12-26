@@ -45,7 +45,7 @@
 </head>
 <body >
 
-<div class="navbar">
+<div class="navbar" style="border-bottom-color: green;" >
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle btn btn-info active btn-md" data-toggle="collapse" data-target="#myNavbar"> MENU
@@ -184,5 +184,5 @@
   <div class="row content">
     <div class="col-sm-1 sidenav">
     </div>
-   <div class="col-sm-7 text-left" > 
+   <div class="col-sm-7 text-left" style="height: 100%;padding-right: inherit;  padding-left: inherit; background-color: honeydew;" > 
     

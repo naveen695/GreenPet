@@ -43,7 +43,7 @@ public class LoadMultipleImages extends HttpServlet {
 		List<String> loadMultipleImage = new UploadMultipleImagesDAO().loadMultipleImage(id,mongoClient);
 			if (!loadMultipleImage.isEmpty()) {
 				StringBuilder outputResponce=new StringBuilder();
-				StringBuilder html= new StringBuilder("<div class='jumbotron'>");
+				StringBuilder html= new StringBuilder("<div class='jumbotron' style=\"padding-top: 10px;background-color: honeydew;margin-bottom: 0px;\">");
 				String pageIndex = request.getParameter("pageIndex");
 				Integer page=1;
 				if (StringUtils.isNotBlank(pageIndex)) {
@@ -80,11 +80,12 @@ public class LoadMultipleImages extends HttpServlet {
 						pageCount=page;
 					}
 					outputResponce.append(""
-					+ "<input type=\"submit\" class=\"glyphicon glyphicon-chevron-left\" value=\"back\" onclick=\"loadajaximages(\'"+id+"\','back')\"> "
-					+ "<a onclick=\"zoom1();\"   data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"image1\" src=\"LoadAjaxImage/"+loadingImageID+"\" style=\"width: 250px;height: 250px;padding-right:5px;\"></a>"
-					+ "<input type=\"submit\" value=\"next\" onclick=\"loadajaximages(\'"+id+"\','next')\">"
+					+ "<a onclick=\"zoom1();\" style=\"padding: 0px;\"  data-toggle=\"modal\" data-target=\"#myModal\"><img id=\"image1\" alt=\" loading ... \" src=\"LoadAjaxImage/"+loadingImageID+"\" style=\"height: 100%;width: 60%;\"></a>"
 					+ "<br/>"
-					+ "<br>"+pageCount+"/"+loadMultipleImage.size()+"<input type=\"hidden\" id=\"pageIndex\" value=\""+pageCount+"\"> </br>"
+					+ "<a href=\"#\" class=\"glyphicon glyphicon-triangle-left\"  onclick=\"loadajaximages(\'"+id+"\','back')\" ></a>"
+					+ ""+pageCount+"/"+loadMultipleImage.size()+"<input type=\"hidden\" id=\"pageIndex\" value=\""+pageCount+"\"> "
+					+ "<a href=\"#\" class=\"glyphicon glyphicon-triangle-right\" onclick=\"loadajaximages(\'"+id+"\','next')\"></a> "
+					+ "<br/>"
 					+ "</form>");
 			
 					Image image = new Image() ;
@@ -107,13 +108,39 @@ public class LoadMultipleImages extends HttpServlet {
 						
 					}
 					if (liked) {
-						str = "<a href=\"#\" class=\"dislike\" id=\"dislikes\"   onclick=\"send('dislikes', \'"+id+"\',\'"+loadingImageID+"\', \'"+imgLikes+"\',\'"+likes+"\')\">"
+						str = ""
+								+ "<div class=\"row\"  style=\"margin-right: -0px;margin-left: -0px;\"> "
+								+ "<div class=\"col-sm-6\" > "
+								+ "<a href=\"#\" class=\"dislike\" id=\"dislikes\"  style=\"padding-bottom: 0px;\"  onclick=\"send('dislikes', \'"+id+"\',\'"+loadingImageID+"\', \'"+imgLikes+"\',\'"+likes+"\')\">"
 								+ "<i class=\"fa fa-thumbs-o-up\"></i>DisLike  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
-								+ "</a>";
+								+ "</a>"
+								+ "</div>"
+								+ "<div class=\"col-sm-6\" class=\"dislike\"  >"
+								+ "<a onclick=\"myFunction()\"  class=\"like\" style=\"color: #2962ff;font-size: 12px;font-weight: normal;cursor: pointer;text-align: center;text-transform: uppercase;\">"
+								+ "<input type=\"hidden\" id=\"petID\" name=\"petID\" value=\'"+id+"\'>"
+								+"<input type=\"hidden\" id=\"imageID\" name=\"imageID\" value=\'"+loadingImageID+"\'>"
+								+ "See Comments </a>"
+								+ " </div>"
+								
+								+ "</div>"
+								;
 					}else{
-						str = "<a href=\"#\" class=\"like\" id=\"likes\"    onclick=\"send('likes', \'"+id+"\',\'"+loadingImageID+"\',\'"+imgLikes+"\',\'"+likes+"\')\">"
+						str = ""
+								+ " <div class=\"row\" style=\"margin-right: -0px;margin-left: -0px;\">"
+								+ "<div class=\"col-sm-6\"> "
+								+ "<a href=\"#\" class=\"like\" id=\"likes\"  style=\"padding-bottom: 0px;\"   onclick=\"send('likes', \'"+id+"\',\'"+loadingImageID+"\',\'"+imgLikes+"\',\'"+likes+"\')\">"
 								+ "<i class=\"fa fa-thumbs-o-up\"></i>Like  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
-								+ "</a>";
+								+ "</a>"
+								+ "</div>"
+								+ "<div class=\"col-sm-6\" >"
+								+ "<a onclick=\"myFunction()\" class=\"like\" style=\"color: #2962ff;font-size: 12px;font-weight: normal;cursor: pointer;text-align: center;text-transform: uppercase;\">"
+								+ "<input type=\"hidden\" id=\"petID\" name=\"petID\" value=\'"+id+"\'>"
+								+"<input type=\"hidden\" id=\"imageID\" name=\"imageID\" value=\'"+loadingImageID+"\'>"
+								+ "See Comments </a>"
+								+ "</div>"
+								
+								+ "</div>"
+								;
 					}
 			  	response.setContentType("application/json;charset=utf-8");
 		        JSONObject json = new JSONObject();

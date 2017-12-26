@@ -154,6 +154,9 @@
 .post .post-footer .comments-list .comment>.comments-list { 
 	margin-left: 50px;
 }
+.table{
+margin-bottom: 0px;
+}
 </style>
 
 
@@ -182,16 +185,38 @@ function resizeImg(img){
 
 <c:if test="${loginUserDetails.login == true }">
 
-	<div style="height: 500px; overflow: scroll;">
+	<div style="height: 100%; overflow: scroll;" class="table-responsive">
 
-		<table class="table">
+		
+			<%-- <c:forEach var="user" items="${petDeails}">
+			<div class="row">
+		 	 	<div class="col-sm-4" style="background-color:lavender;">
+						 <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
+							width="140px" style="padding-top: 10px;"></img></a>
+		  		</div>
+   				<div class="col-sm-8" style="background-color:lavenderblush;">
+   						 TreeName : 
+								 <a href="ImageUpdateServlet?inputName=${user.id}"><b>${user.petname}</b></a> 
+										 Total Likes : 
+										<b>${user.totalLikes}</b>
+									
+										 Pet Desc : 
+										<textarea placeholder="What are you doing right now?"
+												readonly="readonly">${user.petDesc}</textarea> 
+										 Upload More images: 
+							 <a href="ImageUpdateServlet?inputName=${user.id}"><img
+												style="width: 50px;" alt="" src="/GreenPet/images/edit.png"></a> 
+   				</div>
+   				</div>
+   			</c:forEach> --%>
+  	 <table class="table table-hover">
 			<tbody id="mytab1">
 				<c:forEach var="user" items="${petDeails}">
 					<tr>
-						<td><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
+						<td class="col-sm-4"><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
 							width="140px" style="padding-top: 10px;"></img></a>
-						<td>
-						<td>
+						</td>
+						<td class="col-sm-8">
 							<table class="table">
 								<tbody>
 									<tr>
@@ -240,7 +265,7 @@ function resizeImg(img){
 						</td>
 				</tr>
 			</tfoot>
-		</table>
+		</table> 
 		
 	</div>
 	

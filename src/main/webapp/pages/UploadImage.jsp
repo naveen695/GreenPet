@@ -9,14 +9,27 @@
     
    
 }
+.form-group{
+	margin-bottom: 4px;
+	text-align: start;
+}
+.panel-heading {
+    text-align: center;
+}
  .fixed-panel {
   min-height: 10px;
   max-height: 455px;
-  overflow-y: scroll;
-}</style>
+ /*  overflow-y: scroll; */
+}
+.help-block {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+</style>
 
-  <div class="jumbotron text-center fixed-panel">
-    <div class="panel-heading "><h4>Upload New Pet details </h4></div>
+  <div class="jumbotron text-center fixed-panel" style="padding-top: 0px;padding-bottom: 0px;">
+    <div class="panel-heading " style="padding: 0px;padding: 0px;"><h4>Upload New Pet details </h4></div>
     <div class="panel-body " style="    padding-top: 0px;  padding-right: 0px;    padding-left: 0px;    padding-bottom: 0px;">
 	
 	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" enctype="multipart/form-data" action="UplodePetDetails">
@@ -41,7 +54,7 @@
 		
 		<div class="form-group">
 			<div class="col-sm-5">
-			  			<label for="address11" class="control-label">Address1 (house/street)</label>
+			  			<label for="address11" class="control-label">Address1(Street/*)</label>
 			</div>
   			<div class="col-sm-6">
   				<input name="address11" class="form-control" id="address11" placeholder="Enter Address Name"  required>

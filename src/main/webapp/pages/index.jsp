@@ -24,6 +24,8 @@
 		         success : function(responseText) {
 		        	 $('#msg1').html(responseText.data);
 		        	 $('#msg').html(responseText.content);
+		        	 $('#imageID').val(responseText.imageID);
+		        	 $('#petID').val(responseText.petID);
 		         },
 		         beforeSend: function(){
 		        	 $(".modal1").show();
@@ -34,8 +36,11 @@
 		         error : function(xhr, ajaxOptions, thrownError) {
 		             $('#msg1').html(" <div class='jumbotron'> ERROR Loading images. </div>");
 		             $('#msg').html("");
+		             $('#imageID').val("");
+		        	 $('#petID').val("");
 		         }
 		    });
+		 	 return false;
 	}
  function send(action,id,loadingImageID,imagelikes,petlikes) {
 	 var name = '<%= session.getAttribute("loginUserDetails") %>';
@@ -69,6 +74,9 @@
 		   function(e){
 		       $("#tooltip").hide();
 		  });
+ 
+ 
+
  </script>
  
  <style>  
@@ -151,10 +159,17 @@
     	</div>
   	</div>
   </div>  
-		<div  class="col-sm-4 sidenav">
+		
+		
+		<div  class="col-sm-4 sidenav" style="padding-left: 0px;">
  			<div id="msg1"></div>
-			<div id="msg"></div>				
-			<div class="modal1" style="display: none">
+			<div id="msg" style="border-width: 3px;"></div>
+			<%@ include file="comments.jsp" %>
+			
+			
+<!-- 			loading spain for ajax				
+ -->	
+ 			<div class="modal1" style="display: none">
 		    	<div class="center">
 		        	<img alt="" src="images/loader.gif" />
 		    	</div>
