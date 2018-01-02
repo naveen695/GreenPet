@@ -17,7 +17,7 @@
  <H3>Welcome to ....</H3>
  <br/>
   	 
-	<div class="well" style="background-color:white">
+	<div class="well" style="background-color:honeydew;padding: 0px;">
    		<div class="row">
    		
 <c:if test="${loginUserDetails.login != true }">

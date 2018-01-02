@@ -146,7 +146,14 @@
 	margin-top: 0;
 	display: inline;
 }
+element {
+    padding: 10px;
+    border-color: lightgreen;
+    border-width: thin;
+    border-style: ridge;
+    margin-right: -0px;
 
+}
 .post .post-footer .comments-list .comment .comment-body {
 	margin-left: 50px;
 }
@@ -155,7 +162,13 @@
 	margin-left: 50px;
 }
 .table{
-margin-bottom: 0px;
+	margin-bottom: 0px;
+}
+ .table-responsive {
+    overflow-x: unset;
+} 
+.form-control{
+	height: auto;
 }
 </style>
 
@@ -185,31 +198,60 @@ function resizeImg(img){
 
 <c:if test="${loginUserDetails.login == true }">
 
-	<div style="height: 100%; overflow: scroll;" class="table-responsive">
+	<div style="height: 100%;" class="table-responsive">
 
 		
-			<%-- <c:forEach var="user" items="${petDeails}">
-			<div class="row">
-		 	 	<div class="col-sm-4" style="background-color:lavender;">
+		<c:forEach var="user" items="${petDeails}">
+			<div class="row" style="padding-bottom: 19px;">
+		 	 	<div class="col-sm-4">
 						 <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
 							width="140px" style="padding-top: 10px;"></img></a>
 		  		</div>
-   				<div class="col-sm-8" style="background-color:lavenderblush;">
-   						 TreeName : 
-								 <a href="ImageUpdateServlet?inputName=${user.id}"><b>${user.petname}</b></a> 
-										 Total Likes : 
+   				<div class="col-sm-8">
+   					<div class="row" style="padding: 10px;">
+   						<div class="col-sm-6" >
+   						 	TreeName : <a href="ImageUpdateServlet?inputName=${user.id}"><b>${user.petname}</b></a> 
+						</div>
+						<div class="col-sm-6" >
+   										 Total Likes : 
 										<b>${user.totalLikes}</b>
-									
+						</div>
+						<div class="col-sm-12" >
+							<div class="row">
+								<div class="col-sm-3" >
 										 Pet Desc : 
-										<textarea placeholder="What are you doing right now?"
-												readonly="readonly">${user.petDesc}</textarea> 
+								</div>
+								<div class="col-sm-9" >
+										<textarea placeholder="What are you doing right now?"     style="width: inherit;" readonly="readonly">${user.petDesc}</textarea> 
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6" >
 										 Upload More images: 
-							 <a href="ImageUpdateServlet?inputName=${user.id}"><img
-												style="width: 50px;" alt="" src="/GreenPet/images/edit.png"></a> 
+							 <a href="ImageUpdateServlet?inputName=${user.id}"><img	style="width: 50px;" alt="" src="/GreenPet/images/edit.png"></a> 
+						</div>
+   					</div>
    				</div>
    				</div>
-   			</c:forEach> --%>
-  	 <table class="table table-hover">
+   			</c:forEach>  
+   					<div class="col-sm-3">
+   						<form action="HomeServlet">
+								<input type="hidden" id="pageNumberBack" name="pageNumberBack" readonly="readonly" value="${dataModel.pageNumber}">
+								<button type="submit" class="btn btn-success btn-primary">BACK</button>
+						</form>	
+					</div>
+						<div class="col-sm-3">Page Number:  ${dataModel.pageNumber}</div>
+						<div class="col-sm-3">Total Pages : ${dataModel.totalpageNumber} </div>
+						<div class="col-sm-3">
+							<form action="HomeServlet">
+								<input type="hidden" id="pageNumberNext" name="pageNumberNext" readonly="readonly" value="${dataModel.pageNumber}">
+								<button type="submit" class="btn btn-success btn-primary">
+									NEXT
+								</button>
+							</form>
+							
+						</div>
+  	<%--  <table class="table table-hover">
 			<tbody id="mytab1">
 				<c:forEach var="user" items="${petDeails}">
 					<tr>
@@ -266,10 +308,10 @@ function resizeImg(img){
 				</tr>
 			</tfoot>
 		</table> 
-		
+		--%>
 	</div>
 	
-</c:if>
+</c:if> 
 
 
 

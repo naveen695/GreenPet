@@ -184,5 +184,5 @@
   <div class="row content">
     <div class="col-sm-1 sidenav">
     </div>
-   <div class="col-sm-7 text-left" style="height: 100%;padding-right: inherit;  padding-left: inherit; background-color: honeydew;" > 
+   <div class="col-sm-7 text-left" style="height: 100%;padding-right: inherit;  padding-left: inherit; background-color: honeydew;border-right-style: ridge;overflow-x: unset;border-right-color: lightgreen;border-right-width: 1px;" > 
     

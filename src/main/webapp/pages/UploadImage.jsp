@@ -6,7 +6,10 @@
     padding-left: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+    border-right-style: ridge;
+overflow-x: unset;
+border-right-color: lightgreen;
+border-right-width: 1px;
    
 }
 .form-group{
@@ -26,10 +29,11 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
 </style>
 
-  <div class="jumbotron text-center fixed-panel" style="padding-top: 0px;padding-bottom: 0px;">
-    <div class="panel-heading " style="padding: 0px;padding: 0px;"><h4>Upload New Pet details </h4></div>
+  <div class="jumbotron text-center fixed-panel" style="padding-top: 0px;padding-bottom: 0px;background-color: honeydew;">
+    <div class="panel-heading " style="padding: 0px;padding: 0px;"><h4 style="margin-top: 2px;margin-bottom: 2px;">Upload New Pet details </h4></div>
     <div class="panel-body " style="    padding-top: 0px;  padding-right: 0px;    padding-left: 0px;    padding-bottom: 0px;">
 	
 	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" enctype="multipart/form-data" action="UplodePetDetails">

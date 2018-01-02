@@ -1,3 +1,4 @@
+
 <%@ include file="/pages/header.jsp" %>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -23,12 +24,12 @@ $(document).ready(function () {
 please login for details
 </c:if>
 <c:if test="${loginUserDetails.login == true }">
-<div>
+<div >
   <div class="row">
     <div class="col-sm-12">
-		<div>
-        <h4>Your Details</h4>
-        <div class="table-responsive" style=" padding-bottom: 20px;">
+		<div >
+        <h5 style="color: blue;margin-top: 0px;margin-bottom: 0px;">Your Details</h5>
+        <div class="table-responsive" style=" padding-bottom: 2px;">
               <table id="mytable" class="table table-bordred table-striped">
                 <thead>
                 	<th>First Name</th>
@@ -60,9 +61,9 @@ please login for details
 <div class="row">
     <div class="col-sm-12">
     
-        <h4>Your  Pet Details </h4>
+        <h5 style="0px;margin-bottom: 0px;color: blue;">Your  Pet Details </h5>
         <div class="table-responsive">
-      <table id="mytable1" class="table table-striped table-bordered">
+      <table id="mytable1" class="table table-striped table-bordered" style="margin-bottom: 0px">
                <thead>
                <tr>
                 	<th>Name of Pet</th>
@@ -187,7 +188,14 @@ please login for details
  </div>
    </div>
    
-   
+   <style>
+  .pager {
+    padding-left: 0;
+    margin: 2px;
+    text-align: center;
+    list-style: none;
+}
+</style>
    
      
 <div class="modal fade data-form" id="editDetaila" tabindex="-1" role="dialog" aria-labelledby="editDetails" aria-hidden="true">
