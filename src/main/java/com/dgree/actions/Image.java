@@ -14,23 +14,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.dgree.model.PetDetails;
 
-/**
- * Servlet implementation class Image
- */
+ 
 public class Image extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+     
     public Image() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 
 	protected void doGet(HttpServletRequest request1, HttpServletResponse response) throws ServletException, IOException {
 		
 		String[] ids = request1.getPathInfo().substring(1).split("/");
@@ -41,11 +34,12 @@ public class Image extends HttpServlet {
 		
 		for (Iterator iterator = attribute.iterator(); iterator.hasNext();) {
 			PetDetails petDetails = (PetDetails) iterator.next();
-			if ((petDetails != null && petDetails.getPetname().equals(ids[0]))|| petDetails.getImage().getName().equalsIgnoreCase(ids[0])) {
+			if ((petDetails != null && petDetails.getPetname().equals(ids[0]))|| (petDetails.getImage().getName() != null && petDetails.getImage().getName().equalsIgnoreCase(ids[0]))) {
 				byte[] fileByte = petDetails.getImage().getFileByte();
 				response.setContentType("image/jpeg");
 				ServletOutputStream outputStream = response.getOutputStream();
-				outputStream.write(fileByte);            
+				if (fileByte != null) 
+					outputStream.write(fileByte);            
 				outputStream.flush();
 				outputStream.close();
 				return;
@@ -56,18 +50,11 @@ public class Image extends HttpServlet {
 		 
 		 
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-
-		 response.setContentType("image/jpeg");
+		response.setContentType("image/jpeg");
         byte[] imgData = null;
 		response.getOutputStream().write(imgData);            
-
 		doGet(request, response);
 	}
 

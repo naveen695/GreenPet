@@ -52,7 +52,10 @@
   	<servlet-name>imageUpdate</servlet-name>
   	<jsp-file>/pages/imageUpdate.jsp</jsp-file>
   </servlet>
-
+  <servlet>
+  	<servlet-name>admin</servlet-name>
+  	<jsp-file>/pages/admin.jsp</jsp-file>
+  </servlet>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -177,7 +180,39 @@
    </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
+  
+ <servlet>
+ 	<servlet-name>AdminControler</servlet-name>
+ 	<display-name>AdminControler</display-name>
+ 	<description></description>
+ 	<servlet-class>com.dgree.actions.AdminControler</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>LoadImagesForVerification</servlet-name>
+ 	<display-name>LoadImagesForVerification</display-name>
+ 	<description></description>
+ 	<servlet-class>com.dgree.actions.LoadImagesForVerification</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>LoadImage</servlet-name>
+ 	<display-name>LoadImage</display-name>
+ 	<description></description>
+ 	<servlet-class>com.dgree.actions.LoadImage</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>PetIdApprove</servlet-name>
+ 	<display-name>PetIdApprove</display-name>
+ 	<description></description>
+ 	<servlet-class>com.dgree.actions.PetIdApprove</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>PetIdDelete</servlet-name>
+ 	<display-name>PetIdDelete</display-name>
+ 	<description></description>
+ 	<servlet-class>com.dgree.actions.PetIdDelete</servlet-class>
+ </servlet>
+	
+	 
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
@@ -280,6 +315,31 @@
   	<servlet-name>LikeControler</servlet-name>
   	<url-pattern>/LikeControler</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminControler</servlet-name>
+  	<url-pattern>/AdminControler</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>admin</servlet-name>
+  	<url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoadImagesForVerification</servlet-name>
+  	<url-pattern>/loadImagesForVerification</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoadImage</servlet-name>
+  	<url-pattern>/LoadImage/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PetIdApprove</servlet-name>
+  	<url-pattern>/PetIdApprove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PetIdDelete</servlet-name>
+  	<url-pattern>/PetIdDelete</url-pattern>
+  </servlet-mapping>
+  
   
    <welcome-file-list>  
    <welcome-file>IndexServlet</welcome-file>  

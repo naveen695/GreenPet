@@ -84,11 +84,11 @@ public class UploadMultipleImages extends HttpServlet {
 	                		   image.setName(item.getName());
 	                		   image.setContentType(item.getContentType());
 	                		   image.setFileByte(item.get());
+	                		   image.setValidate(false);
 	                	   }else if("petId".equalsIgnoreCase(item.getFieldName().trim())){
 	                		   petDetails.setId(item.getString().trim());
 	                	   }
 	                   }
-	                   
 	                   petDetails.setImage(image);
 
 	                   if (isNotValidImage(image)) {
@@ -109,13 +109,13 @@ public class UploadMultipleImages extends HttpServlet {
 	                   
 	                SignUpResponce sresponce=new SignUpResponce();
 	   		    	sresponce.setStatuscode("0");
-	   			  	sresponce.setStatusMessage("Updated Sussesfully !");
+	   			  	sresponce.setStatusMessage("Uploaded Sussesfully !");
 	   			  	request.setAttribute("signupresponce", sresponce);
 	   			  	if("UploadPetDetails".equals(stringurl) || "UploadMultipleImages".equals(stringurl)){
-	   	        		request.getRequestDispatcher("/home").include(request, response);
+	   	        		request.getRequestDispatcher("/HomeServlet").include(request, response);
 	   	        	return;
 	   	        	}
-	   	        	getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	   	        	getServletContext().getRequestDispatcher("/HomeServlet").include(request, response);
 	   	        	return;
 	                   
 	                }catch (Exception e) {

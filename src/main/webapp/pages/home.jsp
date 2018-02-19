@@ -204,7 +204,7 @@ function resizeImg(img){
 		<c:forEach var="user" items="${petDeails}">
 			<div class="row" style="padding-bottom: 19px;">
 		 	 	<div class="col-sm-4">
-						 <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
+						 <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="Image Not Verified" height="150px"
 							width="140px" style="padding-top: 10px;"></img></a>
 		  		</div>
    				<div class="col-sm-8">
@@ -251,64 +251,7 @@ function resizeImg(img){
 							</form>
 							
 						</div>
-  	<%--  <table class="table table-hover">
-			<tbody id="mytab1">
-				<c:forEach var="user" items="${petDeails}">
-					<tr>
-						<td class="col-sm-4"><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><img src="Image/${user.petname}" onclick="resizeImg(this)" alt="test" height="150px"
-							width="140px" style="padding-top: 10px;"></img></a>
-						</td>
-						<td class="col-sm-8">
-							<table class="table">
-								<tbody>
-									<tr>
-										<th>TreeName :</th>
-										<td><a href="ImageUpdateServlet?inputName=${user.id}"><b>${user.petname}</b></a></td>
-									</tr>
-									<tr>
-										<th>Total Likes :</th>
-										<td><b>${user.totalLikes}</b></td>
-									</tr>
-									
-									<tr>
-										<th>Pet Desc :</th>
-										<td><textarea placeholder="What are you doing right now?"
-												readonly="readonly">${user.petDesc}</textarea></td>
-									</tr>
-									<tr>
-										<th>Upload More images:</th>
-										<td><a href="ImageUpdateServlet?inputName=${user.id}"><img
-												style="width: 50px;" alt="" src="/GreenPet/images/edit.png"></a></td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-			<tfoot>
-				<tr>
-				
-						<td class="col-sm-3">
-						<form action="HomeServlet">
-								<input type="hidden" id="pageNumberBack" name="pageNumberBack" readonly="readonly" value="${dataModel.pageNumber}">
-								<button type="submit" class="btn btn-success btn-primary">BACK</button>
-						</form>	
-						</td>
-						<td class="col-sm-3">Page Number:  ${dataModel.pageNumber}</td>
-						<td class="col-sm-3">Total Pages : ${dataModel.totalpageNumber} </td>
-						<td class="col-sm-3">
-							<form action="HomeServlet">
-								<input type="hidden" id="pageNumberNext" name="pageNumberNext" readonly="readonly" value="${dataModel.pageNumber}">
-								<button type="submit" class="btn btn-success btn-primary">
-									NEXT
-								</button>
-							</form>
-						</td>
-				</tr>
-			</tfoot>
-		</table> 
-		--%>
+   
 	</div>
 	
 </c:if> 

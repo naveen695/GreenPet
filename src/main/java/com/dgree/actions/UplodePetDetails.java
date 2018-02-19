@@ -105,6 +105,7 @@ public class UplodePetDetails extends HttpServlet {
 	                	   image.setName(item.getName());
 	                	   image.setContentType(item.getContentType());
 	                	   image.setFileByte(item.get());
+	                	   image.setValidate(false);
 	                   }else if("petname1".equalsIgnoreCase(item.getFieldName().trim())){
 	                	   petDetails.setPetname(item.getString().trim());
 	                   } else if("address11".equalsIgnoreCase(item.getFieldName().trim())){
@@ -133,7 +134,7 @@ public class UplodePetDetails extends HttpServlet {
 	        if (isNotValidImage(image)) {
 	        	 SignUpResponce sresponce=new SignUpResponce();
 			    	sresponce.setStatuscode("0");
-				  	sresponce.setStatusMessage("Sorry ... ! we can't uploaded petdetails, Please upload tree imges ."); 
+				  	sresponce.setStatusMessage("We can't uploaded PetDetails, Please upload tree images ."); 
 				  	request.setAttribute("signupresponce", sresponce);
 				  	if("UploadPetDetails".equals(stringurl)){
 		        		request.getRequestDispatcher("/home").include(request, response);
@@ -149,10 +150,12 @@ public class UplodePetDetails extends HttpServlet {
 	        goesLocationLatLong.setProp((Map<String, String>) getServletContext().getAttribute("prop"));
 	        PetDetails petDetailsWithLatLong = goesLocationLatLong.findLatitudeLongitude(petDetails);
 	        HttpSession session = request.getSession();
-	        if (session!=null) {
+	        if (session==null) {
+	        	request.getRequestDispatcher("/home").include(request, response);
+        	 	return;
+	        }
 	        	LoginUserDetails loginUserDetails = (LoginUserDetails)session.getAttribute("loginUserDetails");
 	        	petDetailsWithLatLong.setLoginUserDetails(loginUserDetails);
-			}
 	        String latitude = petDetailsWithLatLong.getLatitude();
 	        String longiute = petDetailsWithLatLong.getLongittude();
 	        
@@ -174,18 +177,18 @@ public class UplodePetDetails extends HttpServlet {
 	        	
 	        	SignUpResponce sresponce=new SignUpResponce();
 	        	sresponce.setStatuscode("0");
-	        	sresponce.setStatusMessage("updated sussesfully !"); 
+	        	sresponce.setStatusMessage("Uploaded sussesfully !"); 
 	        	request.setAttribute("signupresponce", sresponce);
 	        	if("GreenPet".equals(stringurl) || "UpdatePetDetails".equals(stringurl) || "UplodePetDetails".equals(stringurl)){
-	        		request.getRequestDispatcher("/home").include(request, response);
+	        		request.getRequestDispatcher("/HomeServlet").include(request, response);
 	        	return;
 	        	}
-	        	getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+	        	getServletContext().getRequestDispatcher("/HomeServlet").include(request, response);
 	        	return;
 	        }
 	        }else{
 	        	
-		        		request.getRequestDispatcher("/home").include(request, response);
+		        		request.getRequestDispatcher("/HomeServlet").include(request, response);
 		        	 	return;
 	        }
 	}

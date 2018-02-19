@@ -44,6 +44,8 @@ public class LoginUserDao implements User {
 					loginUserDetails.setUserFirstName((String)document.get("firstname"));
 					loginUserDetails.setUserLastName((String)document.get("lastname"));
 					loginUserDetails.setMobilenumber((String)document.get("mobile_number"));
+					loginUserDetails.setAdmin((String)document.get("admin"));
+					vs.setAdmin("yes".equalsIgnoreCase((String)document.get("admin")));
 					vs.setLoginUserDetails(loginUserDetails);
 				}else{
 					vs.setLoginStauts("not_active");

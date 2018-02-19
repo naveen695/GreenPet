@@ -94,8 +94,7 @@ public class LoadMultipleImages extends HttpServlet {
 					boolean liked = false ;
 					Integer imgLikes =0;
 					String str = "";
-					if (loginUserDetails!=null) {
-						PetDetails loadlikesandDislikes = new UploadMultipleImagesDAO().loadlikesandDislikes(mongoClient, id,loginUserDetails.getEmail());
+						PetDetails loadlikesandDislikes = new UploadMultipleImagesDAO().loadlikesandDislikes(mongoClient, id,loginUserDetails==null ? null :loginUserDetails.getEmail());
 						List<Image> imageList = loadlikesandDislikes.getImageList();
 						for (Iterator<Image> iterator = imageList.iterator(); iterator.hasNext();) {
 							image = iterator.next();
@@ -105,14 +104,12 @@ public class LoadMultipleImages extends HttpServlet {
 								imgLikes = image.getLikes();
 							}
 						}
-						
-					}
 					if (liked) {
 						str = ""
 								+ "<div class=\"row\"  style=\"margin-right: -0px;margin-left: -0px;\"> "
 								+ "<div class=\"col-sm-6\" > "
 								+ "<a href=\"#\" class=\"dislike\" id=\"dislikes\"  style=\"padding-bottom: 0px;\"  onclick=\"send('dislikes', \'"+id+"\',\'"+loadingImageID+"\', \'"+imgLikes+"\',\'"+likes+"\')\">"
-								+ "<i class=\"fa fa-thumbs-o-up\"></i>DisLike  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
+								+ "<i class=\"fa fa-thumbs-down\">  </i><input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
 								+ "</a>"
 								+ "</div>"
 								+ "<div class=\"col-sm-6\" class=\"dislike\"  >"
@@ -129,7 +126,7 @@ public class LoadMultipleImages extends HttpServlet {
 								+ " <div class=\"row\" style=\"margin-right: -0px;margin-left: -0px;\">"
 								+ "<div class=\"col-sm-6\"> "
 								+ "<a href=\"#\" class=\"like\" id=\"likes\"  style=\"padding-bottom: 0px;\"   onclick=\"send('likes', \'"+id+"\',\'"+loadingImageID+"\',\'"+imgLikes+"\',\'"+likes+"\')\">"
-								+ "<i class=\"fa fa-thumbs-o-up\"></i>Like  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
+								+ "<i class=\"fa fa-thumbs-o-up\">  </i><input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+likes+"\"/> "
 								+ "</a>"
 								+ "</div>"
 								+ "<div class=\"col-sm-6\" >"
@@ -150,6 +147,19 @@ public class LoadMultipleImages extends HttpServlet {
 		        json.put("likes",likes);
 		        json.put("content",str);
 		        json.put("data",html.append(outputResponce.toString()).append("</div>").toString());
+		        response.getWriter().write(json.toString());
+			}else{
+				response.setContentType("application/json;charset=utf-8");
+		        JSONObject json = new JSONObject();
+		        json.put("status","");
+		        json.put("petID", "");
+		        json.put("imageID","");
+		        json.put("likes","");
+		        String src= "<input type=\"hidden\" id=\"petID\" name=\"petID\" value=\'"+0+"\'>"
+						+"<input type=\"hidden\" id=\"imageID\" name=\"imageID\" value=\'"+0+"\'>";
+						
+		        json.put("content",src);
+		        json.put("data","Image not verified");
 		        response.getWriter().write(json.toString());
 			}
 	}

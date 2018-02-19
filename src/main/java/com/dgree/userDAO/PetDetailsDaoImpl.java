@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +78,7 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		dgreeImageMapObject.put("petId", id);
 		dgreeImageMapObject.put("imageId", id);
 		dgreeImageMapObject.put("homePage", 1);
+		dgreeImageMapObject.put("validate",false);
 		dgreeImageMap.insert(dgreeImageMapObject);
 	
 	}		
@@ -107,11 +109,27 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 		 
 			
 	}
+	public void approvePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase) {
+
+		MongoCollection<Document> collection = mongoDatabase.getCollection("dgree_ImageMap");
+		Bson filter = new Document("imageId",petDetails.getId());
+		Bson newValue = new Document("validate", true);
+		Bson updateOperationDocument = new Document("$set", newValue);
+		collection.updateOne(filter, updateOperationDocument);
+	}
 
 	@Override
-	public void deletePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase) {
-		// TODO Auto-generated method stub
-		
+	public void deletePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase,MongoClient client) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("dgree_ImageMap");
+		Bson filter = new Document("imageId",petDetails.getId());
+		collection.findOneAndDelete(filter);		
+		MongoCollection<Document> dgreePetDetails = mongoDatabase.getCollection("Dgree_PetDetails");
+		Bson id = new Document("_id",petDetails.getId());
+		dgreePetDetails.findOneAndDelete(id);		
+		DB db = new DB(client, "dgree-treepet");
+		GridFS gfsPhoto = new GridFS(db, "images");
+		BasicDBObject whereQueryImage = new BasicDBObject();
+ 		gfsPhoto.remove(new ObjectId(petDetails.getId()));
 	}
 
 	@Override
@@ -147,6 +165,17 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 					details.setLongittude((String) dbObject.get("longittude"));
 					//details.setInsertedDate((String) dbObject.get("insert_date"));
 					details.setPetDesc((String)dbObject.get("petDesc"));
+					
+						
+					
+					DBCollection collection2 = db.getCollection("dgree_ImageMap");
+					BasicDBObject whereQuery1 = new BasicDBObject();
+					whereQuery1.append("imageId",details.getId());
+					whereQuery1.append("validate",true);
+
+					DBCursor find = collection2.find(whereQuery1);
+
+				if (find.hasNext()) {
 					GridFS gfsPhoto = new GridFS(db, "images");
 					BasicDBObject whereQueryImage = new BasicDBObject();
 					whereQueryImage.append("_id",new ObjectId(id));
@@ -168,6 +197,9 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 					} catch (IOException e) {
 						logger.info("inside load images for user ."+imageForOutput);
 					}
+				}else{
+					details.setImage(image);
+				}
 					details.setTotalLikes(new UploadMultipleImagesDAO().loadTotalLikes(mongoClient, id, loginUserDetails.getEmail()));
 					
 				list.add(details);
@@ -231,4 +263,68 @@ public class PetDetailsDaoImpl implements PetDetailsDao {
 			
 	return list;
 	}
+	
+	 
+	public List<PetDetails> loadImagesForVerification( MongoDatabase mongoDatabase) {
+		List<PetDetails> list=new ArrayList<>();
+		MongoCollection<Document> collection = mongoDatabase.getCollection("dgree_ImageMap");
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.append("validate",false);
+		FindIterable<Document> limit = collection.find(whereQuery).limit(2);
+		MongoCursor<Document> iterator = limit.iterator();
+		PetDetails details = null;
+		while (iterator.hasNext()) {
+			Document document = (Document) iterator.next();
+			details=new PetDetails();
+			details.setId(document.getString("petId"));
+ 
+				logger.info("**** loadPetDeails user loadPetDeails ****");
+				MongoCollection<Document> collection1 = mongoDatabase.getCollection("Dgree_PetDetails");
+				BasicDBObject whereQuery1 = new BasicDBObject();
+				whereQuery1.append("_id",details.getId());
+				FindIterable<Document> find = collection1.find(whereQuery1);
+				MongoCursor<Document> iterator2 = find.iterator();
+				while (iterator2.hasNext()) {
+					 Document dbObject = iterator2.next();
+					details.setPetname((String) dbObject.get("petName"));
+					details.setAddress1((String) dbObject.get("address1"));
+					details.setAddress2((String) dbObject.get("address2"));
+					details.setCity((String) dbObject.get("city"));
+					details.setCounty((String) dbObject.get("county"));
+					details.setCountry((String) dbObject.get("country"));
+					details.setZip((String) dbObject.get("zip"));
+					details.setLatitude((String) dbObject.get("latitude"));
+					details.setLongittude((String) dbObject.get("longittude"));
+					details.setPetDesc((String)dbObject.get("petDesc"));
+				}
+	
+			Image image = new Image();
+			image.setIds(document.getString("imageId"));
+			details.setImage(image);
+			list.add(details);
+ 		}
+		return  list;
+	}
+	
+	public Image loadImage(MongoClient mongoClient,String id){
+		DB db = new DB(mongoClient, "dgree-treepet");
+		Image image = new Image();
+
+		GridFS gfsPhoto = new GridFS(db, "images");
+		BasicDBObject whereQueryImage = new BasicDBObject();
+		whereQueryImage.append("_id",new ObjectId(id));
+		GridFSDBFile imageForOutput = gfsPhoto.findOne(whereQueryImage);
+		try {
+ 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			imageForOutput.writeTo(baos);
+			byte[] bytes = baos.toByteArray();
+			image.setName(imageForOutput.getFilename());
+			image.setContentType(imageForOutput.getContentType());
+			image.setFileByte(bytes);
+		} catch (IOException e) {
+			logger.info("inside load images for user ."+imageForOutput);
+		}
+		return image;
+	}
+	
 }

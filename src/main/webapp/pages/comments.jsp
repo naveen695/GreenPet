@@ -3,7 +3,7 @@
 		width: 380px;
 		padding: 3px;
 		border: 1px solid #ececec;
-		text-align: start;
+		text-align: left;
 	}
 	.status{
 		background-color:#F0FFF0;
@@ -178,7 +178,7 @@ font-size: 12px;
 		        	<div id="combutton" class="col-md-12 " style="margin-top:10px;padding-left: 0px">
 		          	 	<div class="col-md-10 " style="padding-left: 0px">
 			          	  <fieldset class="form-group">
-			          	      <input type="text"  class="form-control"  id="comments"  placeholder="Add a comment">
+			          	      <input type="text"  class="form-control" style="padding-left: 20px;"  id="comments"  placeholder="Add a comment">
 			          	  </fieldset>
 		          	  	</div>
 		          		<div class="col-md-2 ">

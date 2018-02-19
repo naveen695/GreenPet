@@ -6,7 +6,7 @@ private String ids;
 private boolean liked;
 private String contentType;
 private byte[] fileByte ;
-
+private boolean validate ;
 private Integer likes;
 private Integer Dislikes;
 
@@ -51,6 +51,12 @@ public boolean isLiked() {
 }
 public void setLiked(boolean liked) {
 	this.liked = liked;
+}
+public boolean isValidate() {
+	return validate;
+}
+public void setValidate(boolean validate) {
+	this.validate = validate;
 }
 
 }

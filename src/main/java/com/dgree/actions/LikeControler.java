@@ -61,18 +61,41 @@ public class LikeControler extends HttpServlet {
 		if("likes".equalsIgnoreCase(type.trim())){
 			likes++;
 			petlikes++;
-			str = "<a href=\"#\" class=\"dislike\" id=\"dislikes\"   onclick=\"send('dislikes', \'"+id+"\',\'"+imageId+"\', \'"+likes+"\',\'"+likes+"\')\">"
-					+ "<i class=\"fa fa-thumbs-o-up\"></i>DisLike  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+petlikes+"\"/> "
-					+ "</a>";
+			str = "<div class=\"row\"  style=\"margin-right: -0px;margin-left: -0px;\"> "
+			+ "<div class=\"col-sm-6\" > "
+			+ "<a href=\"#\" class=\"dislike\" id=\"dislikes\"  style=\"padding-bottom: 0px;\"  onclick=\"send('dislikes', \'"+id+"\',\'"+imageId+"\', \'"+likes+"\',\'"+petlikes+"\')\">"
+			+ "<i class=\"fa fa-thumbs-down\">  </i>  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+petlikes+"\"/> "
+			+ "</a>"
+			+ "</div>"
+			+ "<div class=\"col-sm-6\" class=\"dislike\"  >"
+			+ "<a onclick=\"myFunction()\"  class=\"like\" style=\"color: #2962ff;font-size: 12px;font-weight: normal;cursor: pointer;text-align: center;text-transform: uppercase;\">"
+			+ "<input type=\"hidden\" id=\"petID\" name=\"petID\" value=\'"+id+"\'>"
+			+"<input type=\"hidden\" id=\"imageID\" name=\"imageID\" value=\'"+imageId+"\'>"
+			+ "See Comments </a>"
+			+ " </div>"
+			
+			+ "</div>"
+			;
 			if (loginUserDetails!=null) {	
 				dao.insertLikesDislikes(mongoClient,id,imageId,loginUserDetails.getEmail(),likes,"likes");
 			}
 		}else if("dislikes".equalsIgnoreCase(type.trim())){
 			likes--;
 			petlikes--;
-			str = "<a href=\"#\" class=\"like\" id=\"likes\"   onclick=\"send('likes', \'"+id+"\',\'"+imageId+"\',\'"+likes+"\',\'"+likes+"\')\">"
-					+ "<i class=\"fa fa-thumbs-o-up\"></i>Like  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+petlikes+"\"/> "
-					+ "</a>";
+			str = " <div class=\"row\" style=\"margin-right: -0px;margin-left: -0px;\">"
+			+ "<div class=\"col-sm-6\"> "
+			+ "<a href=\"#\" class=\"like\" id=\"likes\"  style=\"padding-bottom: 0px;\"   onclick=\"send('likes', \'"+id+"\',\'"+imageId+"\',\'"+likes+"\',\'"+petlikes+"\')\">"
+			+ "<i class=\"fa fa-thumbs-o-up\"></i>  <input class=\"qty1\" name=\"qty1\" readonly=\"readonly\" type=\"text\" value=\""+petlikes+"\"/> "
+			+ "</a>"
+			+ "</div>"
+			+ "<div class=\"col-sm-6\" >"
+			+ "<a onclick=\"myFunction()\" class=\"like\" style=\"color: #2962ff;font-size: 12px;font-weight: normal;cursor: pointer;text-align: center;text-transform: uppercase;\">"
+			+ "<input type=\"hidden\" id=\"petID\" name=\"petID\" value=\'"+id+"\'>"
+			+"<input type=\"hidden\" id=\"imageID\" name=\"imageID\" value=\'"+imageId+"\'>"
+			+ "See Comments </a>"
+			+ "</div>"
+			
+			+ "</div>";
 			if (loginUserDetails!=null) {
 				dao.insertLikesDislikes(mongoClient,id,imageId,loginUserDetails.getEmail(),likes,"dislikes");
 			}

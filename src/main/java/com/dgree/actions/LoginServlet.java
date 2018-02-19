@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 		   	loginUserDetails.setLogin(true);
 		  	loginUserDetails.setMessage("succes");
 		  	sresponce.setStatuscode("0");
-		  	sresponce.setStatusMessage("login success !"); 
+		  	sresponce.setStatusMessage("Successfully logged in to the GreenWorld "); 
 		  	
 		  	
 		  	
@@ -103,7 +103,7 @@ public class LoginServlet extends HttpServlet {
 		  loginUserDetails.setLogin(false);
 		  loginUserDetails.setMessage("not_match");
 		  sresponce.setStatuscode("1");
-		  sresponce.setStatusMessage("username/pasword not match or no user found .please sign up !");
+		  sresponce.setStatusMessage("Username/Password not match or no user found .Please SignUp ....");
   }
     
 	  	request.setAttribute("signupresponce", sresponce);
@@ -118,7 +118,7 @@ public class LoginServlet extends HttpServlet {
 	        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
 	        return;
         }
-        getServletContext().getRequestDispatcher("/".concat(stringurl)).include(request, response);
+        getServletContext().getRequestDispatcher("/index").include(request, response);
 
 	}
 

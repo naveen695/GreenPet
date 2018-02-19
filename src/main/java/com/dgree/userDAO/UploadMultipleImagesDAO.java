@@ -1,19 +1,14 @@
 package com.dgree.userDAO;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -26,11 +21,9 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.WriteResult;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.gridfs.GridFS;
-import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
 
 public class UploadMultipleImagesDAO {
@@ -53,6 +46,7 @@ public class UploadMultipleImagesDAO {
 		dgreeImageMapObject.put("petId", petDetails.getId());
 		dgreeImageMapObject.put("imageId", id);
 		dgreeImageMapObject.put("homePage", 0);
+		dgreeImageMapObject.put("validate", false);
 		dgreeImageMapCollection.insert(dgreeImageMapObject);
 		
 	}
@@ -67,6 +61,8 @@ public class UploadMultipleImagesDAO {
 
 		BasicDBObject imageMap = new BasicDBObject();
 		imageMap.append("petId",id);
+		imageMap.append("validate", true);
+		
 		List<String> listImageIds =new ArrayList<>();
 		DBCursor dbCursor = null;
 		try{
@@ -127,7 +123,8 @@ public class UploadMultipleImagesDAO {
 					Integer integer = Integer.parseInt(object.toString());
 					image.setLikes(integer);
 					BasicDBList users = (BasicDBList) dbObject.get("users");
-					if (users != null) {
+					
+					if (uid!= null && users != null) {
 						image.setLiked(users.contains(uid));
 					}else{
 						image.setLiked(false);

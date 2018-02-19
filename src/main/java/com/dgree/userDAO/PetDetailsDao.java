@@ -12,7 +12,7 @@ public interface PetDetailsDao {
 
 public void updatePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase);
 
-public void deletePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase);
+public void deletePetDeails(PetDetails petDetails, MongoDatabase mongoDatabase, MongoClient mongoClient);
 
 public void insertPetDeails(PetDetails petDetails, MongoClient mongoClient);
 

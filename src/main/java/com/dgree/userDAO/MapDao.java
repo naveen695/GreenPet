@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -63,21 +64,40 @@ public class MapDao {
 		 
 		DB db = new DB(mongoClient, "dgree-treepet");
 		
+//validate image
+		BasicDBObject imageMap = new BasicDBObject();
+		imageMap.append("imageId",ID);
+		imageMap.append("validate", true);
 		
-		GridFS gfsPhoto = new GridFS(db, "images");
-		BasicDBObject whereQueryImage = new BasicDBObject();
-		whereQueryImage.append("_id",new ObjectId(ID));
-		GridFSDBFile imageForOutput = gfsPhoto.findOne(whereQueryImage);
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			imageForOutput.writeTo(baos);
-			byte[] bytes = baos.toByteArray();
-			image.setName(imageForOutput.getFilename());
-			image.setContentType(imageForOutput.getContentType());
-			image.setFileByte(bytes);
-		} catch (IOException e) {
-			logger.info("inside load images for user ."+imageForOutput);
-		}		return image;
+		List<String> listImageIds =new ArrayList<>();
+		DBCursor dbCursor = null;
+		try{
+			DBCollection dgreeImageMapCollection = db.getCollection("dgree_ImageMap");
+			dbCursor = dgreeImageMapCollection.find(imageMap);
+			Iterator<DBObject> find = dbCursor.iterator();
+			while (find.hasNext()) {
+				DBObject next = find.next();
+				GridFS gfsPhoto = new GridFS(db, "images");
+				BasicDBObject whereQueryImage = new BasicDBObject();
+				whereQueryImage.append("_id",new ObjectId(ID));
+				GridFSDBFile imageForOutput = gfsPhoto.findOne(whereQueryImage);
+				try {
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					imageForOutput.writeTo(baos);
+					byte[] bytes = baos.toByteArray();
+					image.setName(imageForOutput.getFilename());
+					image.setContentType(imageForOutput.getContentType());
+					image.setFileByte(bytes);
+				} catch (IOException e) {
+					logger.info("inside load images for user ."+imageForOutput);
+				}
+			}
+		}finally{
+			if (dbCursor!= null) {
+				dbCursor.close();
+			}
+		}
+				return image;
 		
 	}
 	

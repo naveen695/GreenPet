@@ -14,7 +14,7 @@ border-right-width: 1px;
 }
 .form-group{
 	margin-bottom: 4px;
-	text-align: start;
+	text-align: left;
 }
 .panel-heading {
     text-align: center;
@@ -33,7 +33,7 @@ border-right-width: 1px;
 </style>
 
   <div class="jumbotron text-center fixed-panel" style="padding-top: 0px;padding-bottom: 0px;background-color: honeydew;">
-    <div class="panel-heading " style="padding: 0px;padding: 0px;"><h4 style="margin-top: 2px;margin-bottom: 2px;">Upload New Pet details </h4></div>
+    <div class="panel-heading " style="padding: 0px;padding: 0px;padding-bottom:  5px;"><h4 style="margin-top: 2px;margin-bottom: 2px;">Upload New Pet details </h4></div>
     <div class="panel-body " style="    padding-top: 0px;  padding-right: 0px;    padding-left: 0px;    padding-bottom: 0px;">
 	
 	 <form class="form-horizontal" id="formRegister" data-toggle="validator" method="post" role="form" enctype="multipart/form-data" action="UplodePetDetails">

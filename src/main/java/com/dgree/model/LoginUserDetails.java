@@ -11,7 +11,7 @@ public class LoginUserDetails {
 	private long userid;
 	private boolean login;
 	private String message;
-	
+	private String admin;
 	public String getUserFirstName() {
 		return userFirstName;
 	}
@@ -71,6 +71,12 @@ public class LoginUserDetails {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 	
 }

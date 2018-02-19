@@ -29,11 +29,13 @@ public class LoadAjaxImage extends HttpServlet {
 			MapDao mapDao=new MapDao();
 			Image loadImage = mapDao.loadImage(mongoClient,ids[0]);
 			byte[] fileByte = loadImage.getFileByte();
-			response.setContentType(loadImage.getContentType());
-			ServletOutputStream outputStream = response.getOutputStream();
-			outputStream.write(fileByte);            
-			outputStream.flush();
-			outputStream.close(); 
+			if (fileByte != null) {
+				response.setContentType(loadImage.getContentType());
+				ServletOutputStream outputStream = response.getOutputStream();
+				outputStream.write(fileByte);            
+				outputStream.flush();
+				outputStream.close(); 
+			}
 			return;
 	
 	}
