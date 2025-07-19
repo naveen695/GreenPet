@@ -1,9 +1,7 @@
  "# GreenPet" 
  
- 
- 
  Steps for deploy
- 
+
  1) DB configuration .
     
     Verify DB Connection ->   we have  file to configure db url and username and password.
