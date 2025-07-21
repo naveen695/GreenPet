@@ -15,7 +15,8 @@
   tomacat -> install tomact 8.xxxx 
   java ->    java 8 
   
-  4) testing 
+  4) testing
+  5) testing_1
  
  
 
