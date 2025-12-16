@@ -1,0 +1,27 @@
+spring:
+  data:
+    mongodb:
+      uri: "${MONGODB_URI:mongodb://localhost:27017/greenpet}"
+  mail:
+    host: "${MAIL_HOST:smtp.example.com}"
+    port: "${MAIL_PORT:587}"
+    username: "${MAIL_USERNAME:}"
+    password: "${MAIL_PASSWORD:}"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: "${JWT_SECRET:change-this-secret-to-a-very-long-random-value}"
+    expiration-ms: 3600000
+
+logging:
+  level:
+    root: INFO
